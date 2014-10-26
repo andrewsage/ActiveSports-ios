@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "XASConnector.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    XASConnector *connector = [XASConnector sharedInstance];
+    connector.debugMode = YES;
+    connector.serverAPIBaseURL = @"http://localhost:3000";
+    //connector.serverAPIBaseURL = @"http://matchthecity.org";
+    //connector.serverAPIBaseURL = @"http://192.168.1.128:3000";
+
     return YES;
 }
 
