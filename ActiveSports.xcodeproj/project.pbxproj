@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
+		49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
 		49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F1D19E2EF2700BB3686 /* XASBaseObject.m */; };
 		49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F1D19E2EF2700BB3686 /* XASBaseObject.m */; };
 		49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */; };
@@ -29,6 +31,10 @@
 		4946831619E29E9C00437B63 /* XASConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831419E29E9C00437B63 /* XASConnector.m */; };
 		4946831919E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
 		4946831A19E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
+		497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
+		497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
+		497B8C8B19FD25B500734629 /* XASMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */; };
+		497B8C8C19FD25B500734629 /* XASMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */; };
 		497CA73819F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */; };
 		497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */; };
 		497CA73C19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */; };
@@ -49,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileTableViewController.h; sourceTree = "<group>"; };
+		49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileTableViewController.m; sourceTree = "<group>"; };
 		49358F1C19E2EF2700BB3686 /* XASBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASBaseObject.h; sourceTree = "<group>"; };
 		49358F1D19E2EF2700BB3686 /* XASBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASBaseObject.m; sourceTree = "<group>"; };
 		49358F2019E2FA4F00BB3686 /* XASCollectionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASCollectionsTableViewController.h; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 		4946831419E29E9C00437B63 /* XASConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASConnector.m; sourceTree = "<group>"; };
 		4946831719E2A38C00437B63 /* XASVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenue.h; sourceTree = "<group>"; };
 		4946831819E2A38C00437B63 /* XASVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenue.m; sourceTree = "<group>"; };
+		497B8C8519FD1A4E00734629 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		497B8C8619FD1A4E00734629 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		497B8C8919FD25B500734629 /* XASMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMenuTableViewController.h; sourceTree = "<group>"; };
+		497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMenuTableViewController.m; sourceTree = "<group>"; };
 		497CA73619F2E557003F5F0A /* XASOpportunitiesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunitiesTableViewController.h; sourceTree = "<group>"; };
 		497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunitiesTableViewController.m; sourceTree = "<group>"; };
 		497CA73A19F2EC43003F5F0A /* XASOpportunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityTableViewCell.h; sourceTree = "<group>"; };
@@ -127,6 +139,7 @@
 		494682E519E29C4800437B63 /* ActiveSports */ = {
 			isa = PBXGroup;
 			children = (
+				497B8C8419FD181000734629 /* Library */,
 				494682EA19E29C4800437B63 /* AppDelegate.h */,
 				494682EB19E29C4800437B63 /* AppDelegate.m */,
 				494682F019E29C4800437B63 /* ViewController.h */,
@@ -156,6 +169,10 @@
 				497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */,
 				497CA73E19F3B914003F5F0A /* XASOpportunityDetailsViewController.h */,
 				497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */,
+				497B8C8919FD25B500734629 /* XASMenuTableViewController.h */,
+				497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */,
+				49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */,
+				49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -184,6 +201,15 @@
 				4946830419E29C4800437B63 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		497B8C8419FD181000734629 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				497B8C8519FD1A4E00734629 /* SWRevealViewController.h */,
+				497B8C8619FD1A4E00734629 /* SWRevealViewController.m */,
+			);
+			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +261,7 @@
 				TargetAttributes = {
 					494682E219E29C4800437B63 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 33W58W5MZ2;
 					};
 					494682FE19E29C4800437B63 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -288,6 +315,7 @@
 			files = (
 				49358F2619E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
 				49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
+				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */,
 				494682EC19E29C4800437B63 /* AppDelegate.m in Sources */,
@@ -298,8 +326,10 @@
 				497CA73C19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
 				4946831919E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831519E29E9C00437B63 /* XASConnector.m in Sources */,
+				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				4946831119E29D6D00437B63 /* XASRegion.m in Sources */,
+				497B8C8B19FD25B500734629 /* XASMenuTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497B8C8C19FD25B500734629 /* XASMenuTableViewController.m in Sources */,
 				49358F2319E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
+				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				4946831A19E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831219E29D6D00437B63 /* XASRegion.m in Sources */,
@@ -318,6 +350,7 @@
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
 				497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
+				497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +442,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -431,6 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -442,6 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
