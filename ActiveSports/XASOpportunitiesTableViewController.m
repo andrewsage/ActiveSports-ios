@@ -11,6 +11,7 @@
 #import "XASRegion.h"
 #import "XASOpportunityTableViewCell.h"
 #import "XASOpportunityDetailsViewController.h"
+#import "XASOpportunityViewController.h"
 
 #import "SWRevealViewController.h"
 
@@ -172,7 +173,7 @@
         self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
         
-        XASOpportunityDetailsViewController *controller = (XASOpportunityDetailsViewController*)[segue destinationViewController];
+        XASOpportunityViewController *controller = (XASOpportunityViewController*)[segue destinationViewController];
         
         NSIndexPath *currentSelection = [self.tableView indexPathForSelectedRow];
         
