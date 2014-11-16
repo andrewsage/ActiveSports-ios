@@ -18,6 +18,8 @@
 
 @interface XASOpportunitiesTableViewController () {
     NSMutableArray *objectsArray;
+    CLLocationManager *locationManager;
+    CLLocation *mCurrentLocation;
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
@@ -45,6 +47,15 @@
     }
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
+    
+    
+    locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [locationManager startUpdatingLocation];
     
     objectsArray = [NSMutableArray array];
     
@@ -127,6 +138,8 @@
     cell.ratingView.editable = NO;
     cell.ratingView.padding = 0.0f;
     cell.ratingView.rate = opportunity.effortRating.floatValue;
+    double distanceInMiles = opportunity.distanceInMeters.doubleValue / 1609.344;
+    cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
     
     cell.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     
@@ -258,6 +271,35 @@
 
         
     }];
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    mCurrentLocation = newLocation;
+    
+    // Re-calculate distances
+    for(XASOpportunity *opportunity in objectsArray) {
+        
+        CLLocationCoordinate2D venueCoord = CLLocationCoordinate2DMake(opportunity.venue.locationLat.doubleValue, opportunity.venue.locationLong.doubleValue);
+        
+        CLLocation *venueLocation = [[CLLocation alloc] initWithLatitude:venueCoord.latitude
+                                                                 longitude:venueCoord.longitude];
+        
+        CLLocationDistance distance = [mCurrentLocation distanceFromLocation:venueLocation];
+        opportunity.distanceInMeters = [NSNumber numberWithInt:distance];
+    }
+    
+    [self.tableView reloadData];
 }
 
 

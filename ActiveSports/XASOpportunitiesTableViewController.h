@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface XASOpportunitiesTableViewController : UITableViewController
+
+@interface XASOpportunitiesTableViewController : UITableViewController <CLLocationManagerDelegate>
 
 @end

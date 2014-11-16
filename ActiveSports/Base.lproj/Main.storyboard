@@ -129,7 +129,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-9y-Slz" customClass="XASRateView">
-                                            <rect key="frame" x="499" y="53" width="50" height="20"/>
+                                            <rect key="frame" x="509" y="53" width="50" height="20"/>
                                             <color key="backgroundColor" red="1" green="0.36669678459999999" blue="0.28874138150000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="6if-HG-l13"/>
@@ -137,7 +137,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.2m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zd1-45-5rY">
-                                            <rect key="frame" x="507" y="32" width="42" height="15"/>
+                                            <rect key="frame" x="507" y="32" width="52" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -150,10 +150,10 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="SW7-rC-cf0" secondAttribute="trailing" constant="10" id="JEz-72-fu9"/>
                                         <constraint firstItem="SW7-rC-cf0" firstAttribute="trailing" secondItem="rGN-ye-EeC" secondAttribute="trailing" constant="56" id="aP4-2d-jg7"/>
                                         <constraint firstItem="13F-W7-7KI" firstAttribute="top" secondItem="wCZ-9y-Slz" secondAttribute="top" constant="-1" id="afK-yl-7pA"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Zd1-45-5rY" secondAttribute="trailing" constant="10" id="cJk-yE-96d"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Zd1-45-5rY" secondAttribute="trailing" id="cJk-yE-96d"/>
                                         <constraint firstItem="13F-W7-7KI" firstAttribute="bottom" secondItem="wCZ-9y-Slz" secondAttribute="bottom" id="cVf-VJ-8Wv"/>
                                         <constraint firstItem="rGN-ye-EeC" firstAttribute="top" secondItem="Zd1-45-5rY" secondAttribute="top" constant="-1" id="fBz-yo-vqx"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="wCZ-9y-Slz" secondAttribute="trailing" constant="10" id="i0a-9b-v39"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wCZ-9y-Slz" secondAttribute="trailing" id="i0a-9b-v39"/>
                                         <constraint firstItem="Zd1-45-5rY" firstAttribute="leading" secondItem="rGN-ye-EeC" secondAttribute="trailing" constant="14" id="jrk-Np-r6i"/>
                                         <constraint firstItem="13F-W7-7KI" firstAttribute="leading" secondItem="OiY-u0-Xlv" secondAttribute="leadingMargin" id="qed-yf-A5R"/>
                                         <constraint firstItem="SW7-rC-cf0" firstAttribute="top" secondItem="OiY-u0-Xlv" secondAttribute="topMargin" constant="1" id="rN9-K9-ccr"/>
