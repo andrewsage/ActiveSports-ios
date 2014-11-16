@@ -90,6 +90,71 @@
             </objects>
             <point key="canvasLocation" x="2723" y="249"/>
         </scene>
+        <!--Venues-->
+        <scene sceneID="mne-F8-0JC">
+            <objects>
+                <tableViewController id="Wg8-DQ-mEK" customClass="XASVenuesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LNy-CV-cl2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="venue" textLabel="hvq-sl-dTa" detailTextLabel="Oii-LV-Nt1" style="IBUITableViewCellStyleValue1" id="W8u-Wk-DOM">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W8u-Wk-DOM" id="G2H-dr-3Gn">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hvq-sl-dTa">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oii-LV-Nt1">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="venue" id="qru-Xa-JSo"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Wg8-DQ-mEK" id="EBv-Xo-ini"/>
+                            <outlet property="delegate" destination="Wg8-DQ-mEK" id="9xb-4m-jYe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Venues" id="H97-Oj-54k">
+                        <barButtonItem key="leftBarButtonItem" image="reveal-icon" id="1Dz-Fl-fRe"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="revealButtonItem" destination="1Dz-Fl-fRe" id="Lla-Ha-WSQ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVm-6n-QcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="259" y="1036"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="q7h-6Z-FYO">
+            <objects>
+                <navigationController id="bOF-vI-xnY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="grs-zK-Kk1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Wg8-DQ-mEK" kind="relationship" relationship="rootViewController" id="LeZ-OT-BHf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rrT-sG-AU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="608" y="-898"/>
+        </scene>
         <!--What's on today-->
         <scene sceneID="koh-vJ-hQD">
             <objects>
@@ -1018,6 +1083,25 @@
                                     <segue destination="Ohj-a8-biE" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="isJ-zb-Ta7"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="venues" textLabel="cPA-z0-eEz" style="IBUITableViewCellStyleDefault" id="8Qk-vT-flE">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Qk-vT-flE" id="AlL-7o-Xg0">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Venues" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cPA-z0-eEz">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="bOF-vI-xnY" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="EL1-Sb-jXn"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="8UJ-nk-sPw" id="iZa-Y3-ByZ"/>
@@ -1138,6 +1222,7 @@
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OHI-M7-vI0"/>
+        <segue reference="isJ-zb-Ta7"/>
+        <segue reference="qru-Xa-JSo"/>
     </inferredMetricsTieBreakers>
 </document>

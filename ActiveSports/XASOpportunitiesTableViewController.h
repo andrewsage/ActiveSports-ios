@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "XASVenue.h"
 
 
 @interface XASOpportunitiesTableViewController : UITableViewController <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) XASVenue *venue;
+
 
 @end

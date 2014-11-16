@@ -86,7 +86,14 @@
     for(NSString *key in dictionary.allKeys) {
         XASOpportunity *opportunity = [dictionary objectForKey:key];
         if([opportunity.dayOfWeek isEqualToString:todayName]) {
-            [objectsArray addObject:opportunity];
+            if(self.venue) {
+                if([self.venue.remoteID isEqual:opportunity.venue.remoteID]) {
+                    [objectsArray addObject:opportunity];
+                }
+                
+            } else {
+                [objectsArray addObject:opportunity];
+            }
         }
     }
     

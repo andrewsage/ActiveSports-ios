@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSNumber * locationLong;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *postCode;
+@property (nonatomic, retain) NSNumber * distanceInMeters;
+
 
 
 + (NSMutableDictionary *) dictionary;
