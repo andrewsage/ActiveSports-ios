@@ -7,8 +7,10 @@
 //
 
 #import "XASRateViewController.h"
+#import "XASRateView.h"
 
-@interface XASRateViewController ()
+@interface XASRateViewController () <XASRateViewDelegate>
+@property (weak, nonatomic) IBOutlet XASRateView *rateView;
 
 @end
 
@@ -24,7 +26,27 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.title = [NSString stringWithFormat:@"Rate %@", self.opportunity.name];
+    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.914 green:0.204 blue:0.220 alpha:1];
+    
+    self.opportunityNameLabel.text = self.opportunity.name;
+
+    
+    NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
+    // Hide the sweat drops if required
+    for(NSInteger loop = 0; loop < 5; loop++) {
+        UIView *effortIconView = effortIconViews[loop];
+        effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
+    }
+    
+    self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
+    
+    self.rateView.starImage = [UIImage imageNamed:@"drop"];
+
+    self.rateView.padding = 10;
+    self.rateView.alignment = XASRateViewAlignmentCenter;
+    self.rateView.editable = YES;
+    self.rateView.delegate = self;
 
 }
 
@@ -41,9 +63,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0f;
 }
 
 /*
@@ -99,5 +128,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+#pragma mark - XASRateViewDelegate
+
+- (void)rateView:(XASRateView *)rateView changedToNewRate:(NSNumber *)rate {
+    NSLog(@"%@", [NSString stringWithFormat:@"Rate: %d", rate.intValue]);
+    
+    [self.opportunity rateInBackground:rate.intValue
+                             withBlock:^(BOOL succeeded, NSError *error) {
+                                 if(error) {
+                                     NSLog(@"Error rating: %@", error.localizedDescription);
+                                 }
+                                 
+                                 [self.navigationController popViewControllerAnimated:YES];
+                             }];
+}
 
 @end

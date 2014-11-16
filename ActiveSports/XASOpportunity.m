@@ -128,10 +128,137 @@
     self.effortRating = [objectDictionary valueForKey:@"effort_rating"];
     
     NSDictionary *venueDictionary = [objectDictionary objectForKey:@"venue"];
-    self.venue = [[XASVenue alloc] initWithDictionary:venueDictionary];
-    [[XASVenue dictionary] setObject:self.venue forKey:self.venue.remoteID];
-    [XASVenue saveDictionary];
+    if(venueDictionary) {
+        self.venue = [[XASVenue alloc] initWithDictionary:venueDictionary];
+        [[XASVenue dictionary] setObject:self.venue forKey:self.venue.remoteID];
+        [XASVenue saveDictionary];
+    }
     
 }
+
+- (void)rateInBackground:(NSInteger)rating withBlock:(XASBooleanResultBlock)block {
+    
+    XASConnector *connector = [XASConnector sharedInstance];
+    
+    NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
+    [dataDictionary setObject:[NSNumber numberWithInteger:rating] forKey:@"effort_rating[rating]"];
+    
+    NSMutableString *requestString = [NSMutableString stringWithString:@""];
+    for(NSString *key in dataDictionary) {
+        [requestString appendFormat:@"%@=%@&", key, [dataDictionary objectForKey:key]];
+    }
+    
+    NSData *requestData = [NSData dataWithBytes: [requestString UTF8String] length:[requestString length]];
+    
+    // POST /opportunities/:id/effort_ratings
+    NSString *postUrlString = [NSString stringWithFormat:@"%@/opportunities/%@/effort_ratings.json",
+                               connector.serverAPIBaseURL,
+                               self.remoteID];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:postUrlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:kTimeoutInterval];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestData];
+    
+    request.timeoutInterval = 240;
+    
+    [connector startNetworkTraffic];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               
+                               [connector stopNetworkTraffic];
+                               
+                               NSLog(@"We sent %@ to: %@",
+                                     request.HTTPMethod,
+                                     response.URL);
+                               
+                               if(error) {
+                                   NSLog(@"Connection failed: %@", error.localizedDescription);
+                                   block(NO, error);
+                               } else {
+                                   
+                                   NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                   NSInteger responseStatusCode = [httpResponse statusCode];
+                                   
+                                   NSLog(@"Response status code: %ld", (long)responseStatusCode);
+                                   NSLog(@"%@", [NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]);
+                                   switch (responseStatusCode) {
+                                           
+                                       case 201: {
+                                           NSString* dataAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                           
+                                           NSLog(@"Data received: %@", dataAsString);
+                                           
+                                           NSError *jsonError;
+                                           NSDictionary *jsonDictionary = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+                                           NSDictionary *opportunityDictionary = [jsonDictionary objectForKey:@"opportunity"];
+                                           [self updateInformation:opportunityDictionary];
+                                           [[XASOpportunity dictionary] setObject:self forKey:self.remoteID];
+                                           [XASOpportunity saveDictionary];
+                                           
+                                           block(YES, nil);
+                                           
+                                       }
+                                           break;
+                                           
+                                       case 400: {
+                                           NSError *error;
+                                           
+                                           NSString* dataAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                           
+                                           NSLog(@"Data received: %@", dataAsString);
+                                           
+                                           NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                                           [details setValue:[NSString stringWithFormat:@"Bad request - %@", dataAsString]forKey:NSLocalizedDescriptionKey];
+                                           error = [NSError errorWithDomain:@"SZAPI" code:400 userInfo:details];
+                                           
+                                           block(NO, error);
+                                       }
+                                           break;
+                                           
+                                       case 404: {
+                                           NSError *error;
+                                           
+                                           NSString* dataAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                           
+                                           NSLog(@"Data received: %@", dataAsString);
+                                           
+                                           NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                                           [details setValue:[NSString stringWithFormat:@"Not found - %@", dataAsString]forKey:NSLocalizedDescriptionKey];
+                                           error = [NSError errorWithDomain:@"SZAPI" code:404 userInfo:details];
+                                           
+                                           block(NO, error);
+                                       }
+                                           break;
+                                           
+                                           
+                                       case 500: {
+                                           NSError *error;
+                                           
+                                           NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                                           [details setValue:@"Internal Server error: response 500"
+                                                      forKey:NSLocalizedDescriptionKey];
+                                           error = [NSError errorWithDomain:@"SZAPI" code:500 userInfo:details];
+                                           
+                                           block(NO, error);
+                                       }
+                                           
+                                           break;
+                                           
+                                       default:
+                                           NSLog(@"Connection did receive response: %@", response);
+                                           
+                                           block(NO, nil);
+                                           
+                                           break;
+                                   }
+                               }
+                           }];
+}
+
+
 
 @end

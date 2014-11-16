@@ -78,6 +78,21 @@
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    
+    NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
+    // Hide the sweat drops if required
+    for(NSInteger loop = 0; loop < 5; loop++) {
+        UIView *effortIconView = effortIconViews[loop];
+        effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
+    }
+    
+    self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
+    
+    
+    if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
+        self.imageHeightConstraint.constant = 0.0f;
+    }
+
 
 }
 

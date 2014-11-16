@@ -13,6 +13,15 @@
 
 @interface XASRateViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *effortIconView1;
+@property (weak, nonatomic) IBOutlet UIImageView *effortIconView2;
+@property (weak, nonatomic) IBOutlet UIImageView *effortIconView3;
+@property (weak, nonatomic) IBOutlet UIImageView *effortIconView4;
+@property (weak, nonatomic) IBOutlet UIImageView *effortIconView5;
+@property (weak, nonatomic) IBOutlet UILabel *opportunityNameLabel;
+
+
 @property (nonatomic, strong) XASOpportunity *opportunity;
 
 @end

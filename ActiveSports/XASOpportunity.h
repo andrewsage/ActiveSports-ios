@@ -24,5 +24,7 @@
 + (NSString *)dictionaryPath;
 + (void)saveDictionary;
 
+- (void)rateInBackground:(NSInteger)rating withBlock:(XASBooleanResultBlock)block;
+
 
 @end

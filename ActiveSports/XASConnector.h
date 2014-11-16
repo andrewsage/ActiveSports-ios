@@ -15,6 +15,8 @@
 static const int kTimeoutInterval = 20; // 20 seconds
 typedef void (^XASArrayResultBlock)(NSArray *array, NSError *error);
 typedef void (^XASBaseObjectResultBlock)(XASBaseObject *object, NSError *error);
+typedef void (^XASBooleanResultBlock)(BOOL succeeded, NSError *error);
+
 
 
 @interface XASConnector : NSObject
