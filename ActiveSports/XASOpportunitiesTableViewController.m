@@ -44,6 +44,8 @@
         [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     }
     
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
+    
     objectsArray = [NSMutableArray array];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -118,10 +120,15 @@
     // Configure the cell...
     
     cell.titleLabel.text = opportunity.name;
-    cell.detailsLabel.text = [NSString stringWithFormat:@"%@ %@-%@",
-                              opportunity.venue.name,
+    cell.venueLabel.text = opportunity.venue.name;
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@-%@",
                               opportunity.startTime,
                               opportunity.endTime];
+    cell.ratingView.editable = NO;
+    cell.ratingView.padding = 0.0f;
+    cell.ratingView.rate = opportunity.effortRating.floatValue;
+    
+    cell.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     
     return cell;
 }

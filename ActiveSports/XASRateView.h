@@ -15,6 +15,11 @@ typedef enum {
     XASRateViewAlignmentRight
 } XASRateViewAlignment;
 
+typedef enum {
+    XASRateViewDirectionLeftToRight,
+    XASRateViewDirectionRightToLeft
+} XASRateViewDirection;
+
 
 @interface XASRateView : UIView {
     CGPoint _origin;
@@ -22,10 +27,12 @@ typedef enum {
 }
 
 @property(nonatomic, assign) XASRateViewAlignment alignment;
+@property(nonatomic, assign) XASRateViewDirection direction;
 @property(nonatomic, assign) CGFloat rate;
 @property(nonatomic, assign) CGFloat padding;
 @property(nonatomic, assign) BOOL editable;
 @property(nonatomic, retain) UIImage *starImage;
+@property(nonatomic, assign) CGFloat emptyAlpha;
 @property(nonatomic, assign) NSObject<XASRateViewDelegate> *delegate;
 
 - (XASRateView *)initWithFrame:(CGRect)frame;

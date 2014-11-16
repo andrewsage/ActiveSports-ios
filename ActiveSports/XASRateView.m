@@ -51,8 +51,10 @@ static NSString *defaulStarImageFilename = @"drop.png";
 - (void)commonSetup {
     _padding = 4;
     _numOfStars = 5;
+    self.emptyAlpha = 0.5f;
     self.alignment = XASRateViewAlignmentLeft;
     self.editable = NO;
+    self.direction = XASRateViewDirectionLeftToRight;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -75,17 +77,31 @@ static NSString *defaulStarImageFilename = @"drop.png";
     }
     
     float x = _origin.x;
-    for(int i = 0; i < _numOfStars; i++) {
-        [_starImage drawAtPoint:CGPointMake(x, _origin.y) blendMode:kCGBlendModeNormal alpha:0.5f];
-        x += _starImage.size.width + _padding;
-    }
-    
-    
     float floor = floorf(_rate);
-    x = _origin.x;
-    for (int i = 0; i < floor; i++) {
-        [_starImage drawAtPoint:CGPointMake(x, _origin.y)];
-        x += _starImage.size.width + _padding;
+
+    if(_direction == XASRateViewDirectionLeftToRight) {
+        for(int i = 0; i < _numOfStars; i++) {
+            [_starImage drawAtPoint:CGPointMake(x, _origin.y) blendMode:kCGBlendModeNormal alpha:_emptyAlpha];
+            x += _starImage.size.width + _padding;
+        }
+        
+        x = _origin.x;
+        for (int i = 0; i < floor; i++) {
+            [_starImage drawAtPoint:CGPointMake(x, _origin.y)];
+            x += _starImage.size.width + _padding;
+        }
+    } else {
+        for(int i = 0; i < _numOfStars; i++) {
+            [_starImage drawAtPoint:CGPointMake(x, _origin.y) blendMode:kCGBlendModeNormal alpha:_emptyAlpha];
+            x += _starImage.size.width + _padding;
+        }
+        
+        x = _origin.x;
+        for (int i = 0; i < floor; i++) {
+            x = (_starImage.size.width + _padding) * (_numOfStars - i - 1);
+            [_starImage drawAtPoint:CGPointMake(x, _origin.y)];
+            
+        }
     }
     
     if (_numOfStars - floor > 0.01) {
@@ -93,6 +109,7 @@ static NSString *defaulStarImageFilename = @"drop.png";
         [_starImage drawAtPoint:CGPointMake(x, _origin.y)];
     }
 }
+
 
 - (void)setRate:(CGFloat)rate {
     _rate = rate;
@@ -116,6 +133,11 @@ static NSString *defaulStarImageFilename = @"drop.png";
         _starImage = starImage;
         [self setNeedsDisplay];
     }
+}
+
+- (void)setEmptyAlpha:(CGFloat)emptyAlpha {
+    _emptyAlpha = emptyAlpha;
+    [self setNeedsDisplay];
 }
 
 

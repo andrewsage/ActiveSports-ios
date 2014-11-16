@@ -12,6 +12,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.ratingView.padding = 0.0f;
+    self.ratingView.editable = NO;
+    self.ratingView.starImage = [UIImage imageNamed:@"drop_small"];
+    self.ratingView.backgroundColor = [UIColor clearColor];
+    self.ratingView.alignment = XASRateViewAlignmentRight;
+    self.ratingView.direction = XASRateViewDirectionRightToLeft;
+    self.ratingView.emptyAlpha = 0.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
