@@ -129,7 +129,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Venues" id="H97-Oj-54k">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon" id="1Dz-Fl-fRe"/>
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="1Dz-Fl-fRe"/>
                     </navigationItem>
                     <connections>
                         <outlet property="revealButtonItem" destination="1Dz-Fl-fRe" id="Lla-Ha-WSQ"/>
@@ -242,7 +242,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="What's on today" id="BZd-Pb-0ML">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon" id="RcI-nV-6wc"/>
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="RcI-nV-6wc"/>
                     </navigationItem>
                     <connections>
                         <outlet property="revealButtonItem" destination="RcI-nV-6wc" id="L99-J6-fvc"/>
@@ -1118,7 +1118,7 @@
             <objects>
                 <viewController restorationIdentifier="SWRevealViewController" storyboardIdentifier="SWRevealViewController" id="CQk-xA-xgJ" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="8UJ-nk-sPw" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Dzn-fh-5VU"/>
+                        <segue destination="8UJ-nk-sPw" kind="custom" identifier="sw_right" customClass="SWRevealViewControllerSegueSetController" id="Dzn-fh-5VU"/>
                         <segue destination="Ohj-a8-biE" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="OHI-M7-vI0"/>
                     </connections>
                 </viewController>
@@ -1167,7 +1167,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Profile" id="nVL-yO-xwd">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon" id="Pd6-CB-SYk"/>
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="Pd6-CB-SYk"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1222,7 +1222,7 @@
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="isJ-zb-Ta7"/>
+        <segue reference="OHI-M7-vI0"/>
         <segue reference="qru-Xa-JSo"/>
     </inferredMetricsTieBreakers>
 </document>

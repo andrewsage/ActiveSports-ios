@@ -31,7 +31,7 @@
     if ( revealViewController )
     {
         [self.revealButtonItem setTarget: revealViewController];
-        [self.revealButtonItem setAction: @selector( revealToggle: )];
+        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
         [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
     }
 

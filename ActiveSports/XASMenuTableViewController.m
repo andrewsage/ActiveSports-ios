@@ -57,6 +57,8 @@
     
     
     cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textAlignment = NSTextAlignmentRight;
+
     
     if(self.selectedMenuItem == indexPath.row) {
         cell.backgroundColor = [UIColor redColor];
