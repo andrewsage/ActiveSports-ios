@@ -8,9 +8,13 @@
 
 #import "XASProfileTableViewController.h"
 #import "SWRevealViewController.h"
+#import "XASActivity.h"
 
 
-@interface XASProfileTableViewController ()
+@interface XASProfileTableViewController () {
+    NSMutableArray *_objectsArray;
+    NSDictionary *_preferencesDictionary;
+}
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 
@@ -35,6 +39,40 @@
         [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
     }
 
+    _objectsArray = [NSMutableArray arrayWithCapacity:0];
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSDictionary dictionary];
+    }
+    NSDictionary *activitiesDictionary = [XASActivity dictionary];
+    for(NSString *key in activitiesDictionary.allKeys) {
+        XASActivity *activity = [activitiesDictionary objectForKey:key];
+        [_objectsArray addObject:activity];
+    }
+    
+    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
+                                        XASActivity *activity2){
+        
+        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
+    }];
+
+    if(_preferencesDictionary.count != _objectsArray.count) {
+        [self performSegueWithIdentifier:@"build" sender:self];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSDictionary dictionary];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,26 +83,28 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return _objectsArray.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
     
+    XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
+    NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
     // Configure the cell...
+    cell.textLabel.text = activity.title;
+    if(included.boolValue) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -109,5 +149,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
+}
 
 @end

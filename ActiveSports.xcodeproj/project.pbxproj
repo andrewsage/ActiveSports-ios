@@ -11,6 +11,10 @@
 		49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49081A931A05500D00941AC1 /* XASOpportunityViewController.m */; };
 		49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
 		49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
+		492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
+		492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
+		492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFBC1A1A3A8E0067C4D9 /* XASActivity.m */; };
+		492FFFBE1A1A3A8E0067C4D9 /* XASActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFBC1A1A3A8E0067C4D9 /* XASActivity.m */; };
 		493131661A19128A00B1365A /* XASRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493131651A19128A00B1365A /* XASRoundedView.m */; };
 		493131671A19128A00B1365A /* XASRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493131651A19128A00B1365A /* XASRoundedView.m */; };
 		4931316A1A19270700B1365A /* XASRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493131691A19270700B1365A /* XASRateView.m */; };
@@ -69,6 +73,10 @@
 		49081A931A05500D00941AC1 /* XASOpportunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityViewController.m; sourceTree = "<group>"; };
 		49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileTableViewController.h; sourceTree = "<group>"; };
 		49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileTableViewController.m; sourceTree = "<group>"; };
+		492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileBuiderViewController.h; sourceTree = "<group>"; };
+		492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileBuiderViewController.m; sourceTree = "<group>"; };
+		492FFFBB1A1A3A8E0067C4D9 /* XASActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASActivity.h; sourceTree = "<group>"; };
+		492FFFBC1A1A3A8E0067C4D9 /* XASActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASActivity.m; sourceTree = "<group>"; };
 		493131641A19128A00B1365A /* XASRoundedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRoundedView.h; sourceTree = "<group>"; };
 		493131651A19128A00B1365A /* XASRoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASRoundedView.m; sourceTree = "<group>"; };
 		493131681A19270700B1365A /* XASRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRateView.h; sourceTree = "<group>"; };
@@ -137,6 +145,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		492FFFBF1A1A5B070067C4D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4946830F19E29D6D00437B63 /* XASRegion.h */,
+				4946831019E29D6D00437B63 /* XASRegion.m */,
+				4946831719E2A38C00437B63 /* XASVenue.h */,
+				4946831819E2A38C00437B63 /* XASVenue.m */,
+				492FFFBB1A1A3A8E0067C4D9 /* XASActivity.h */,
+				492FFFBC1A1A3A8E0067C4D9 /* XASActivity.m */,
+				49358F2819E3048900BB3686 /* XASOpportunity.h */,
+				49358F2919E3048900BB3686 /* XASOpportunity.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		494682DA19E29C4800437B63 = {
 			isa = PBXGroup;
 			children = (
@@ -173,12 +196,7 @@
 				4946831419E29E9C00437B63 /* XASConnector.m */,
 				49358F1C19E2EF2700BB3686 /* XASBaseObject.h */,
 				49358F1D19E2EF2700BB3686 /* XASBaseObject.m */,
-				4946830F19E29D6D00437B63 /* XASRegion.h */,
-				4946831019E29D6D00437B63 /* XASRegion.m */,
-				4946831719E2A38C00437B63 /* XASVenue.h */,
-				4946831819E2A38C00437B63 /* XASVenue.m */,
-				49358F2819E3048900BB3686 /* XASOpportunity.h */,
-				49358F2919E3048900BB3686 /* XASOpportunity.m */,
+				492FFFBF1A1A5B070067C4D9 /* Models */,
 				49358F2019E2FA4F00BB3686 /* XASCollectionsTableViewController.h */,
 				49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */,
 				49358F2419E2FD9400BB3686 /* XASCollectionTableViewController.h */,
@@ -203,6 +221,8 @@
 				493131691A19270700B1365A /* XASRateView.m */,
 				4931316C1A19660100B1365A /* XASVenuesTableViewController.h */,
 				4931316D1A19660100B1365A /* XASVenuesTableViewController.m */,
+				492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */,
+				492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -348,6 +368,7 @@
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */,
+				492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				494682EC19E29C4800437B63 /* AppDelegate.m in Sources */,
 				494682E919E29C4800437B63 /* main.m in Sources */,
 				494682F219E29C4800437B63 /* ViewController.m in Sources */,
@@ -359,6 +380,7 @@
 				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				493131661A19128A00B1365A /* XASRoundedView.m in Sources */,
+				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				49081A941A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				4946831119E29D6D00437B63 /* XASRegion.m in Sources */,
@@ -374,6 +396,7 @@
 			files = (
 				4931316F1A19660100B1365A /* XASVenuesTableViewController.m in Sources */,
 				497B8C8C19FD25B500734629 /* XASMenuTableViewController.m in Sources */,
+				492FFFBE1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				49358F2319E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
@@ -388,6 +411,7 @@
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
 				493131671A19128A00B1365A /* XASRoundedView.m in Sources */,
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
+				492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
 				497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */,
