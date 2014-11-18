@@ -155,6 +155,13 @@
         
         return [opportunity1.name compare:opportunity2.name options:NSCaseInsensitiveSearch];
     }];
+    
+    
+    [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
+                                        XASOpportunity *opportunity2){
+        
+        return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
+    }];
 
     
     //[self refreshContent];
