@@ -849,6 +849,25 @@
                                     <segue destination="bOF-vI-xnY" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="EL1-Sb-jXn"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="likes" textLabel="iBw-92-c6C" style="IBUITableViewCellStyleDefault" id="cDi-cP-mHd">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cDi-cP-mHd" id="GFM-3u-2s7">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Your likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iBw-92-c6C">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Ohj-a8-biE" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="UqF-od-3k7"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="8UJ-nk-sPw" id="iZa-Y3-ByZ"/>
@@ -1089,7 +1108,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GxS-I2-lqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744" y="61"/>
+            <point key="canvasLocation" x="640" y="-288"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wI7-h3-dSt">
@@ -1120,7 +1139,8 @@
         <image name="yes" width="91" height="91"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qru-Xa-JSo"/>
-        <segue reference="gzY-zG-tOe"/>
+        <segue reference="kHp-im-QsG"/>
+        <segue reference="UqF-od-3k7"/>
+        <segue reference="lO0-dr-Zqc"/>
     </inferredMetricsTieBreakers>
 </document>

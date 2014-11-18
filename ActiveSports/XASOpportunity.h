@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSString *opportunityDescription;
 @property (nonatomic, copy) NSNumber *effortRating;
 @property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSString *activityID;
+
 @property (nonatomic, retain) NSNumber * distanceInMeters;
 
 + (NSMutableDictionary *) dictionary;

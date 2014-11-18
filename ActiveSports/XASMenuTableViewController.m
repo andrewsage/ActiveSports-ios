@@ -8,6 +8,7 @@
 
 #import "XASMenuTableViewController.h"
 #import "SWRevealViewController.h"
+#import "XASOpportunitiesTableViewController.h"
 
 @interface XASMenuTableViewController ()
 
@@ -30,8 +31,9 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     self.tableView.separatorColor = [UIColor colorWithWhite:0.15f alpha:0.2f];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _menuItems = @[@"profile", @"today", @"venues"];
+    _menuItems = @[@"profile", @"today", @"venues", @"likes"];
     _selectedMenuItem = 1;
 
 }
@@ -61,7 +63,7 @@
 
     
     if(self.selectedMenuItem == indexPath.row) {
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1];
     } else {
         cell.backgroundColor = [UIColor clearColor];
     }
@@ -112,14 +114,26 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    
+    self.selectedMenuItem = self.tableView.indexPathForSelectedRow.row;
+
+    // configure the destination view controller:
+    if ( [sender isKindOfClass:[UITableViewCell class]] )
+    {
+        UINavigationController *navController = segue.destinationViewController;
+        UIViewController* controller = [navController childViewControllers].firstObject;
+        if([controller isKindOfClass:[XASOpportunitiesTableViewController class]]) {
+            XASOpportunitiesTableViewController *opportunitiesController = (XASOpportunitiesTableViewController*)controller;
+            if(self.selectedMenuItem == 3) {
+                opportunitiesController.viewType = XASOpportunitiesViewLikes;
+            }
+        }
+    }
 }
-*/
 
 @end

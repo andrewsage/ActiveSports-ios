@@ -97,6 +97,7 @@
     [encoder encodeObject:_opportunityDescription forKey:@"description"];
     [encoder encodeObject:_effortRating forKey:@"effortRating"];
     [encoder encodeObject:_imageURL forKey:@"imageURL"];
+    [encoder encodeObject:_activityID forKey:@"activityID"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -110,6 +111,7 @@
         _opportunityDescription = [decoder decodeObjectForKey:@"description"];
         _effortRating = [decoder decodeObjectForKey:@"effortRating"];
         _imageURL = [decoder decodeObjectForKey:@"imageURL"];
+        _activityID = [decoder decodeObjectForKey:@"activityID"];
     }
     return self;
 }
@@ -124,6 +126,7 @@
     self.dayOfWeek = [objectDictionary valueForKey:@"day_of_week"];
     self.opportunityDescription = [objectDictionary valueForKey:@"description"];
     self.imageURL = [objectDictionary valueForKey:@"image_url"];
+    self.activityID = [objectDictionary valueForKey:@"activity_id"];
     
     self.effortRating = [objectDictionary valueForKey:@"effort_rating"];
     

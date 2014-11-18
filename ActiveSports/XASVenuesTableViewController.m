@@ -148,7 +148,7 @@
         XASVenue *venue = [objectsArray objectAtIndex:currentSelection.row];
         
         controller.venue = venue;
-        
+        controller.viewType = XASOpportunitiesViewVenue;
     }
 
 }

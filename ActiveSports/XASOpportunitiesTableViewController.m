@@ -28,9 +28,20 @@
 
 @implementation XASOpportunitiesTableViewController
 
+- (id) initWithCoder:(NSCoder *) coder {
+    self = [super initWithCoder:coder];
+    if(self) {
+        
+        _viewType = XASOpportunitiesViewAll;
+
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -76,6 +87,23 @@
     
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
+    switch (self.viewType) {
+        case XASOpportunitiesViewAll:
+            self.title = @"What's on today";
+            break;
+            
+        case XASOpportunitiesViewVenue:
+            self.title = @"What's on today";
+            break;
+            
+        case XASOpportunitiesViewLikes:
+            self.title = @"What's on today that you like";
+            break;
+            
+        default:
+            break;
+    }
+    
     NSDate *now = [NSDate date];
     NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
     [weekday setDateFormat: @"EEEE"];
@@ -85,14 +113,39 @@
     NSDictionary *dictionary = [XASOpportunity dictionary];
     for(NSString *key in dictionary.allKeys) {
         XASOpportunity *opportunity = [dictionary objectForKey:key];
+        
         if([opportunity.dayOfWeek isEqualToString:todayName]) {
-            if(self.venue) {
-                if([self.venue.remoteID isEqual:opportunity.venue.remoteID]) {
+            
+            switch (self.viewType) {
+                case XASOpportunitiesViewAll:
                     [objectsArray addObject:opportunity];
+                    break;
+                    
+                case XASOpportunitiesViewVenue:
+                    if([self.venue.remoteID isEqual:opportunity.venue.remoteID]) {
+                        [objectsArray addObject:opportunity];
+                    }
+                    break;
+                    
+                case XASOpportunitiesViewLikes: {
+                    
+                    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+                    
+                    if(preferencesDictionary == nil) {
+                        preferencesDictionary = [NSDictionary dictionary];
+                    }
+                    
+                    NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
+                    if(likes) {
+                        if(likes.boolValue) {
+                            [objectsArray addObject:opportunity];
+                        }
+                    }
                 }
-                
-            } else {
-                [objectsArray addObject:opportunity];
+                    break;
+                    
+                default:
+                    break;
             }
         }
     }
@@ -307,6 +360,16 @@
     }
     
     [self.tableView reloadData];
+}
+
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
 }
 
 

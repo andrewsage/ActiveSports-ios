@@ -11,9 +11,18 @@
 #import "XASVenue.h"
 
 
+typedef enum {
+    XASOpportunitiesViewAll,
+    XASOpportunitiesViewVenue,
+    XASOpportunitiesViewLikes,
+    XASOpportunitiesViewFavourites
+} XASOpportunitiesView;
+
+
 @interface XASOpportunitiesTableViewController : UITableViewController <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) XASVenue *venue;
+@property(nonatomic, assign) XASOpportunitiesView viewType;
 
 
 @end
