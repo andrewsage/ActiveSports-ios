@@ -54,6 +54,8 @@
 		497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
 		497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
 		497CA74319F3CA0E003F5F0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CA74219F3CA0E003F5F0A /* MapKit.framework */; };
+		49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
+		49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
 		49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,8 @@
 		497CA73E19F3B914003F5F0A /* XASOpportunityDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityDetailsViewController.h; sourceTree = "<group>"; };
 		497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityDetailsViewController.m; sourceTree = "<group>"; };
 		497CA74219F3CA0E003F5F0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		49D607F81A1FA5D100D33961 /* XASSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSearchViewController.h; sourceTree = "<group>"; };
+		49D607F91A1FA5D100D33961 /* XASSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASSearchViewController.m; sourceTree = "<group>"; };
 		49D9317F1A0CE90800B17587 /* XASRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRateViewController.h; sourceTree = "<group>"; };
 		49D931801A0CE90800B17587 /* XASRateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASRateViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +227,8 @@
 				4931316D1A19660100B1365A /* XASVenuesTableViewController.m */,
 				492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */,
 				492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */,
+				49D607F81A1FA5D100D33961 /* XASSearchViewController.h */,
+				49D607F91A1FA5D100D33961 /* XASSearchViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -363,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				49358F2619E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
 				49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
@@ -405,6 +412,7 @@
 				4946831A19E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831219E29D6D00437B63 /* XASRegion.m in Sources */,
 				49358F2B19E3048900BB3686 /* XASOpportunity.m in Sources */,
+				49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				4946831619E29E9C00437B63 /* XASConnector.m in Sources */,
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				49358F2719E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
@@ -532,7 +540,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -546,7 +554,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5cf07c07-82b7-4aa5-8562-c9f737daa0ed";

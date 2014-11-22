@@ -33,7 +33,7 @@
     self.tableView.separatorColor = [UIColor colorWithWhite:0.15f alpha:0.2f];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _menuItems = @[@"profile", @"today", @"venues", @"likes"];
+    _menuItems = @[@"profile", @"today", @"venues", @"likes", @"search"];
     _selectedMenuItem = 1;
 
 }

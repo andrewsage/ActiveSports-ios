@@ -100,6 +100,10 @@
             self.title = @"What's on today that you like";
             break;
             
+        case XASOpportunitiesViewSearch:
+            self.title = @"Search Results";
+            break;
+            
         default:
             break;
     }
@@ -114,7 +118,8 @@
     for(NSString *key in dictionary.allKeys) {
         XASOpportunity *opportunity = [dictionary objectForKey:key];
         
-        if([opportunity.dayOfWeek isEqualToString:todayName]) {
+        if([opportunity.dayOfWeek isEqualToString:todayName]
+           || self.viewType == XASOpportunitiesViewSearch) {
             
             switch (self.viewType) {
                 case XASOpportunitiesViewAll:
@@ -143,6 +148,64 @@
                     }
                 }
                     break;
+                    
+                case XASOpportunitiesViewSearch: {
+                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
+                    NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
+                    NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
+                    NSNumber *timeOfDayNumber = [self.searchDictionary objectForKey:@"timeOfDay"];
+                    
+                    NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
+                    NSInteger starHour = [[startTimeComponents objectAtIndex:0] integerValue];
+                    
+                    NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
+                    NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
+
+
+                    
+                    BOOL include = YES;
+                    
+                    if(opportunity.effortRating < minimumExertion) {
+                        include = NO;
+                    }
+                    
+                    if(opportunity.effortRating > maximumExertion) {
+                        include = NO;
+                    }
+                    
+                    switch (timeOfDayNumber.integerValue) {
+                        case 0: // Morning 00:00 - 11:59
+                            if(starHour >= 12) {
+                                include = NO;
+                            }
+                            break;
+                            
+                        case 1: // Afternoon 12:00 - 16:59
+                            if(starHour < 12 || starHour >= 17) {
+                                include = NO;
+                            }
+                            break;
+                            
+                        case 2: // Evening 17:00 - 23:59
+                            if(starHour < 17) {
+                                include = NO;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
+                    if([opportunity.dayOfWeek isEqualToString:dayName] == NO) {
+                        include = NO;
+                    }
+                    
+                    if(include) {
+                        [objectsArray addObject:opportunity];
+                    }
+                }
+                    break;
+                    
                     
                 default:
                     break;
@@ -199,9 +262,16 @@
     
     cell.titleLabel.text = opportunity.name;
     cell.venueLabel.text = opportunity.venue.name;
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@-%@",
-                              opportunity.startTime,
-                              opportunity.endTime];
+    if(self.viewType == XASOpportunitiesViewSearch) {
+        cell.timeLabel.text = [NSString stringWithFormat:@"%@ %@-%@",
+                               opportunity.dayOfWeek,
+                               opportunity.startTime,
+                               opportunity.endTime];
+    } else {
+        cell.timeLabel.text = [NSString stringWithFormat:@"%@-%@",
+                               opportunity.startTime,
+                               opportunity.endTime];
+    }
     cell.ratingView.editable = NO;
     cell.ratingView.padding = 0.0f;
     cell.ratingView.rate = opportunity.effortRating.floatValue;
