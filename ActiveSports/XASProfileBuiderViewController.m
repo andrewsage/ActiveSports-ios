@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *activityLabel;
 @property (weak, nonatomic) IBOutlet XASProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
+@property (weak, nonatomic) IBOutlet UIView *detailsBackgroundView;
 
 @end
 
@@ -27,6 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.skipButton.layer.cornerRadius = 5.0f;
+    self.skipButton.layer.masksToBounds = YES;
+    self.detailsBackgroundView.layer.cornerRadius = 5.0f;
+    self.detailsBackgroundView.layer.masksToBounds = YES;
+    
+    [self.skipButton setTitleColor:[UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1] forState:UIControlStateNormal];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1];
     
