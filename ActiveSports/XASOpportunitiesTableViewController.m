@@ -39,6 +39,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -108,6 +109,26 @@
             break;
     }
     
+    [self rebuildContent];
+
+    
+    //[self refreshContent];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+
+- (void)rebuildContent {
     NSDate *now = [NSDate date];
     NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
     [weekday setDateFormat: @"EEEE"];
@@ -160,8 +181,6 @@
                     
                     NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
-
-
                     
                     BOOL include = YES;
                     
@@ -225,21 +244,8 @@
         
         return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
     }];
-
-    
-    //[self refreshContent];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -369,24 +375,7 @@
         if(error) {
             NSLog(@"error: %@", error.localizedDescription);
         } else {
-            NSDate *now = [NSDate date];
-            NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
-            [weekday setDateFormat: @"EEEE"];
-            NSString *todayName = [weekday stringFromDate:now];
-            
-            objectsArray = [NSMutableArray array];
-            for(XASOpportunity *opportunity in objects) {
-                if([opportunity.dayOfWeek isEqualToString:todayName]) {
-                    [objectsArray addObject:opportunity];
-                }
-            }
-            
-            [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
-                                                XASOpportunity *opportunity2){
-                
-                return [opportunity1.name compare:opportunity2.name];
-            }];
-            
+            [self rebuildContent];            
             [self.tableView reloadData];
         }
         

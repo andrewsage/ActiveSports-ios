@@ -22,6 +22,30 @@
 
 @implementation XASProfileTableViewController
 
+- (void)dataLoaded {
+    _objectsArray = [NSMutableArray arrayWithCapacity:0];
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSDictionary dictionary];
+    }
+    NSDictionary *activitiesDictionary = [XASActivity dictionary];
+    for(NSString *key in activitiesDictionary.allKeys) {
+        XASActivity *activity = [activitiesDictionary objectForKey:key];
+        [_objectsArray addObject:activity];
+    }
+    
+    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
+                                         XASActivity *activity2){
+        
+        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
+    }];
+    
+    if(_preferencesDictionary.count != _objectsArray.count) {
+        [self performSegueWithIdentifier:@"build" sender:self];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -38,28 +62,16 @@
         [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
         [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
     }
-
-    _objectsArray = [NSMutableArray arrayWithCapacity:0];
-    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
     
-    if(_preferencesDictionary == nil) {
-        _preferencesDictionary = [NSDictionary dictionary];
-    }
-    NSDictionary *activitiesDictionary = [XASActivity dictionary];
-    for(NSString *key in activitiesDictionary.allKeys) {
-        XASActivity *activity = [activitiesDictionary objectForKey:key];
-        [_objectsArray addObject:activity];
-    }
-    
-    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
-                                        XASActivity *activity2){
-        
-        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
+    [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        if(error) {
+            NSLog(@"Error downloading activitiy list %@", error);
+        } else {
+            [self dataLoaded];
+        }
     }];
 
-    if(_preferencesDictionary.count != _objectsArray.count) {
-        [self performSegueWithIdentifier:@"build" sender:self];
-    }
+    [self dataLoaded];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
