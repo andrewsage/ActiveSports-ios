@@ -965,7 +965,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Profile" id="nVL-yO-xwd">
-                        <barButtonItem key="leftBarButtonItem" title="Build" id="UBu-bf-xs0">
+                        <barButtonItem key="leftBarButtonItem" title="Questionnaire" id="UBu-bf-xs0">
                             <connections>
                                 <segue destination="yUZ-2t-ygQ" kind="presentation" identifier="build" id="Wgu-Iz-Yd7"/>
                             </connections>

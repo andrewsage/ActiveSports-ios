@@ -13,7 +13,7 @@
 
 @interface XASProfileTableViewController () {
     NSMutableArray *_objectsArray;
-    NSDictionary *_preferencesDictionary;
+    NSMutableDictionary *_preferencesDictionary;
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
@@ -27,7 +27,7 @@
     _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
     
     if(_preferencesDictionary == nil) {
-        _preferencesDictionary = [NSDictionary dictionary];
+        _preferencesDictionary = [NSMutableDictionary dictionary];
     }
     NSDictionary *activitiesDictionary = [XASActivity dictionary];
     for(NSString *key in activitiesDictionary.allKeys) {
@@ -81,7 +81,7 @@
     _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
     
     if(_preferencesDictionary == nil) {
-        _preferencesDictionary = [NSDictionary dictionary];
+        _preferencesDictionary = [NSMutableDictionary dictionary];
     }
     
     [self.tableView reloadData];
@@ -118,39 +118,22 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
+    NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
+    if(included.boolValue) {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:NO] forKey:activity.remoteID];
+    } else {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:YES] forKey:activity.remoteID];
+    }
+    
+    if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
+    } else {
+        NSLog(@"Failed to save dictionary");
+    }
+    [self.tableView reloadData];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
