@@ -8,6 +8,7 @@
 
 #import "XASProfileBuiderViewController.h"
 #import "XASActivity.h"
+#import "XASProgressView.h"
 
 @interface XASProfileBuiderViewController () {
     NSInteger _currentActivityIndex;
@@ -17,6 +18,7 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *activityLabel;
+@property (weak, nonatomic) IBOutlet XASProgressView *progressView;
 
 @end
 
@@ -89,6 +91,7 @@
                 self.activityLabel.text = [NSString stringWithFormat:@"%@?", activity.title];
                 self.progressLabel.text = [NSString stringWithFormat:@"%ld%% complete",
                                            (long)progress];
+                self.progressView.percentage = progress;
             }
         }
     }

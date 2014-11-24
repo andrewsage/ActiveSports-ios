@@ -1003,14 +1003,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYh-Jp-VIP">
                                 <rect key="frame" x="16" y="275" width="288" height="234"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Are you interested in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hY2-VC-l8c">
-                                        <rect key="frame" x="65" y="8" width="158" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you interested in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hY2-VC-l8c">
+                                        <rect key="frame" x="65" y="8" width="157.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Swimming?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AF5-V3-dpr">
-                                        <rect key="frame" x="20" y="54" width="248" height="32"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Swimming?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AF5-V3-dpr">
+                                        <rect key="frame" x="20" y="53" width="248" height="32.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1084,18 +1084,25 @@
                                     <action selector="skipTapped:" destination="yUZ-2t-ygQ" eventType="touchUpInside" id="KIg-cL-JHN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your preferences are" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-1e-ico">
-                                <rect key="frame" x="81" y="123" width="158" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Your preferences are" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-1e-ico">
+                                <rect key="frame" x="81" y="123" width="158" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50% complete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUt-Dp-Jod">
-                                <rect key="frame" x="93" y="159" width="134" height="24"/>
+                                <rect key="frame" x="93" y="163" width="134" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-VN-YrR" customClass="XASProgressView">
+                                <rect key="frame" x="24" y="205" width="272" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="3WX-BY-BIJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.059878920120271517" green="0.090293408138031328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1109,11 +1116,15 @@
                             <constraint firstItem="5l1-Fk-dX6" firstAttribute="bottom" secondItem="HYh-Jp-VIP" secondAttribute="bottom" id="JNm-jh-7ra"/>
                             <constraint firstItem="aVe-1e-ico" firstAttribute="centerX" secondItem="UUt-Dp-Jod" secondAttribute="centerX" id="L55-2X-w1F"/>
                             <constraint firstItem="5l1-Fk-dX6" firstAttribute="trailing" secondItem="HYh-Jp-VIP" secondAttribute="trailing" id="Q2u-fF-1hl"/>
+                            <constraint firstItem="HYh-Jp-VIP" firstAttribute="top" secondItem="Vua-VN-YrR" secondAttribute="bottom" constant="50" id="RJs-HG-uvT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5l1-Fk-dX6" secondAttribute="trailing" constant="-16" id="RgJ-1N-fMZ"/>
+                            <constraint firstItem="Vua-VN-YrR" firstAttribute="top" secondItem="UUt-Dp-Jod" secondAttribute="bottom" constant="18" id="WnE-6r-BHk"/>
+                            <constraint firstItem="Vua-VN-YrR" firstAttribute="leading" secondItem="Qfk-0J-kxq" secondAttribute="leadingMargin" constant="8" id="bii-dE-eFx"/>
                             <constraint firstItem="5l1-Fk-dX6" firstAttribute="top" secondItem="HYh-Jp-VIP" secondAttribute="top" id="czK-oT-U2n"/>
                             <constraint firstItem="HYh-Jp-VIP" firstAttribute="leading" secondItem="Qfk-0J-kxq" secondAttribute="leadingMargin" id="d8D-Br-CWv"/>
                             <constraint firstItem="qlr-DD-jIE" firstAttribute="leading" secondItem="Qfk-0J-kxq" secondAttribute="leadingMargin" id="h58-J8-LHo"/>
                             <constraint firstAttribute="centerX" secondItem="aVe-1e-ico" secondAttribute="centerX" id="s7c-s5-6m2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vua-VN-YrR" secondAttribute="trailing" constant="8" id="tSJ-2X-rlR"/>
                             <constraint firstItem="5l1-Fk-dX6" firstAttribute="top" secondItem="Qfk-0J-kxq" secondAttribute="top" id="tuW-Fm-o6a"/>
                             <constraint firstItem="qlr-DD-jIE" firstAttribute="trailing" secondItem="Qfk-0J-kxq" secondAttribute="trailingMargin" id="v1X-gU-DKl"/>
                             <constraint firstItem="baT-Tw-Gex" firstAttribute="top" secondItem="qlr-DD-jIE" secondAttribute="bottom" constant="21" id="zE3-KQ-LHF"/>
@@ -1130,6 +1141,7 @@
                     <connections>
                         <outlet property="activityLabel" destination="AF5-V3-dpr" id="mdQ-PO-EuK"/>
                         <outlet property="progressLabel" destination="UUt-Dp-Jod" id="B3f-ma-GfO"/>
+                        <outlet property="progressView" destination="Vua-VN-YrR" id="zDu-Qj-vM0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKj-rR-j3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
