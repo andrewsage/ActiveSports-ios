@@ -17,9 +17,11 @@
 
 
 @interface XASOpportunitiesTableViewController () {
-    NSMutableArray *objectsArray;
     CLLocationManager *locationManager;
     CLLocation *mCurrentLocation;
+    
+    NSMutableDictionary *_collectionNamesDictionary;
+    NSMutableDictionary *_collectionsDictionary;
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
@@ -43,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _collectionsDictionary = [NSMutableDictionary dictionary];
     
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -68,8 +71,6 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     [locationManager startUpdatingLocation];
-    
-    objectsArray = [NSMutableArray array];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     
@@ -134,7 +135,7 @@
     [weekday setDateFormat: @"EEEE"];
     NSString *todayName = [weekday stringFromDate:now];
     
-    objectsArray = [NSMutableArray array];
+    
     NSDictionary *dictionary = [XASOpportunity dictionary];
     for(NSString *key in dictionary.allKeys) {
         XASOpportunity *opportunity = [dictionary objectForKey:key];
@@ -142,14 +143,17 @@
         if([opportunity.dayOfWeek isEqualToString:todayName]
            || self.viewType == XASOpportunitiesViewSearch) {
             
+            BOOL include = YES;
+            NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
+            NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
+            
             switch (self.viewType) {
                 case XASOpportunitiesViewAll:
-                    [objectsArray addObject:opportunity];
                     break;
                     
                 case XASOpportunitiesViewVenue:
-                    if([self.venue.remoteID isEqual:opportunity.venue.remoteID]) {
-                        [objectsArray addObject:opportunity];
+                    if([self.venue.remoteID isEqual:opportunity.venue.remoteID] == NO) {
+                        include = NO;
                     }
                     break;
                     
@@ -163,8 +167,8 @@
                     
                     NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
                     if(likes) {
-                        if(likes.boolValue) {
-                            [objectsArray addObject:opportunity];
+                        if(likes.boolValue == NO) {
+                            include = NO;
                         }
                     }
                 }
@@ -176,13 +180,9 @@
                     NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
                     NSNumber *timeOfDayNumber = [self.searchDictionary objectForKey:@"timeOfDay"];
                     
-                    NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
-                    NSInteger starHour = [[startTimeComponents objectAtIndex:0] integerValue];
-                    
                     NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
                     
-                    BOOL include = YES;
                     
                     if(opportunity.effortRating < minimumExertion) {
                         include = NO;
@@ -194,19 +194,19 @@
                     
                     switch (timeOfDayNumber.integerValue) {
                         case 0: // Morning 00:00 - 11:59
-                            if(starHour >= 12) {
+                            if(startHour >= 12) {
                                 include = NO;
                             }
                             break;
                             
                         case 1: // Afternoon 12:00 - 16:59
-                            if(starHour < 12 || starHour >= 17) {
+                            if(startHour < 12 || startHour >= 17) {
                                 include = NO;
                             }
                             break;
                             
                         case 2: // Evening 17:00 - 23:59
-                            if(starHour < 17) {
+                            if(startHour < 17) {
                                 include = NO;
                             }
                             break;
@@ -218,10 +218,6 @@
                     if([opportunity.dayOfWeek isEqualToString:dayName] == NO) {
                         include = NO;
                     }
-                    
-                    if(include) {
-                        [objectsArray addObject:opportunity];
-                    }
                 }
                     break;
                     
@@ -229,21 +225,42 @@
                 default:
                     break;
             }
+            
+            if(include) {
+                NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[NSNumber numberWithInteger:startHour]];
+                
+                if(objectsArray == nil) {
+                    objectsArray = [NSMutableArray array];
+                }
+                
+                [objectsArray addObject:opportunity];
+                
+                [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
+                                                    XASOpportunity *opportunity2){
+                    
+                    return [opportunity1.name compare:opportunity2.name options:NSCaseInsensitiveSearch];
+                }];
+                
+                
+                [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
+                                                    XASOpportunity *opportunity2){
+                    
+                    return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
+                }];
+                
+                [_collectionsDictionary setObject:objectsArray forKey:[NSNumber numberWithInteger:startHour]];
+            }
         }
     }
-    
-    [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
-                                        XASOpportunity *opportunity2){
-        
-        return [opportunity1.name compare:opportunity2.name options:NSCaseInsensitiveSearch];
+}
+
+- (NSArray*)sortedKeys {
+    NSMutableArray *keysArray = [NSMutableArray arrayWithArray:_collectionsDictionary.allKeys];
+    [keysArray sortUsingComparator:^(NSNumber *number1, NSNumber *number2) {
+        return [number1 compare:number2];
     }];
     
-    
-    [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
-                                        XASOpportunity *opportunity2){
-        
-        return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
-    }];
+    return keysArray;
 }
 
 
@@ -251,11 +268,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return _collectionsDictionary.count;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    NSNumber *hour = [[self sortedKeys] objectAtIndex:section];
+
+    NSString *heading = [NSString stringWithFormat:@"%02ld:00", (long)hour.integerValue];
+    
+    return heading;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:section]];
     return objectsArray.count;
 }
 
@@ -263,6 +290,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XASOpportunityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"opportunity" forIndexPath:indexPath];
     
+    NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+
     XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
     // Configure the cell...
     
@@ -340,8 +369,9 @@
         
         NSIndexPath *currentSelection = [self.tableView indexPathForSelectedRow];
         
-        XASOpportunity *opportunity = [objectsArray objectAtIndex:currentSelection.row];
+        NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:currentSelection.section]];
         
+        XASOpportunity *opportunity = [objectsArray objectAtIndex:currentSelection.row];
         controller.opportunity = opportunity;
         
     }
@@ -413,6 +443,7 @@
 {
     mCurrentLocation = newLocation;
     
+    /*
     // Re-calculate distances
     for(XASOpportunity *opportunity in objectsArray) {
         
@@ -424,7 +455,7 @@
         CLLocationDistance distance = [mCurrentLocation distanceFromLocation:venueLocation];
         opportunity.distanceInMeters = [NSNumber numberWithInt:distance];
     }
-    
+    */
     [self.tableView reloadData];
 }
 
