@@ -23,10 +23,6 @@
 		4931316F1A19660100B1365A /* XASVenuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4931316D1A19660100B1365A /* XASVenuesTableViewController.m */; };
 		49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F1D19E2EF2700BB3686 /* XASBaseObject.m */; };
 		49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F1D19E2EF2700BB3686 /* XASBaseObject.m */; };
-		49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */; };
-		49358F2319E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */; };
-		49358F2619E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2519E2FD9400BB3686 /* XASCollectionTableViewController.m */; };
-		49358F2719E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2519E2FD9400BB3686 /* XASCollectionTableViewController.m */; };
 		49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2919E3048900BB3686 /* XASOpportunity.m */; };
 		49358F2B19E3048900BB3686 /* XASOpportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 49358F2919E3048900BB3686 /* XASOpportunity.m */; };
 		494682E919E29C4800437B63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 494682E819E29C4800437B63 /* main.m */; };
@@ -56,6 +52,8 @@
 		497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
 		497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
 		497CA74319F3CA0E003F5F0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CA74219F3CA0E003F5F0A /* MapKit.framework */; };
+		49948ED81A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
+		49948ED91A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
 		49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
@@ -89,10 +87,6 @@
 		4931316D1A19660100B1365A /* XASVenuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenuesTableViewController.m; sourceTree = "<group>"; };
 		49358F1C19E2EF2700BB3686 /* XASBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASBaseObject.h; sourceTree = "<group>"; };
 		49358F1D19E2EF2700BB3686 /* XASBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASBaseObject.m; sourceTree = "<group>"; };
-		49358F2019E2FA4F00BB3686 /* XASCollectionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASCollectionsTableViewController.h; sourceTree = "<group>"; };
-		49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASCollectionsTableViewController.m; sourceTree = "<group>"; };
-		49358F2419E2FD9400BB3686 /* XASCollectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASCollectionTableViewController.h; sourceTree = "<group>"; };
-		49358F2519E2FD9400BB3686 /* XASCollectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASCollectionTableViewController.m; sourceTree = "<group>"; };
 		49358F2819E3048900BB3686 /* XASOpportunity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunity.h; sourceTree = "<group>"; };
 		49358F2919E3048900BB3686 /* XASOpportunity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunity.m; sourceTree = "<group>"; };
 		494682E319E29C4800437B63 /* ActiveSports.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActiveSports.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +122,8 @@
 		497CA73E19F3B914003F5F0A /* XASOpportunityDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityDetailsViewController.h; sourceTree = "<group>"; };
 		497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityDetailsViewController.m; sourceTree = "<group>"; };
 		497CA74219F3CA0E003F5F0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		49948ED61A252560005CC549 /* XASHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHomeViewController.h; sourceTree = "<group>"; };
+		49948ED71A252560005CC549 /* XASHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeViewController.m; sourceTree = "<group>"; };
 		49D607F81A1FA5D100D33961 /* XASSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSearchViewController.h; sourceTree = "<group>"; };
 		49D607F91A1FA5D100D33961 /* XASSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASSearchViewController.m; sourceTree = "<group>"; };
 		49D9317F1A0CE90800B17587 /* XASRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRateViewController.h; sourceTree = "<group>"; };
@@ -205,10 +201,6 @@
 				49358F1C19E2EF2700BB3686 /* XASBaseObject.h */,
 				49358F1D19E2EF2700BB3686 /* XASBaseObject.m */,
 				492FFFBF1A1A5B070067C4D9 /* Models */,
-				49358F2019E2FA4F00BB3686 /* XASCollectionsTableViewController.h */,
-				49358F2119E2FA4F00BB3686 /* XASCollectionsTableViewController.m */,
-				49358F2419E2FD9400BB3686 /* XASCollectionTableViewController.h */,
-				49358F2519E2FD9400BB3686 /* XASCollectionTableViewController.m */,
 				497CA73619F2E557003F5F0A /* XASOpportunitiesTableViewController.h */,
 				497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */,
 				497CA73A19F2EC43003F5F0A /* XASOpportunityTableViewCell.h */,
@@ -235,6 +227,8 @@
 				49D607F91A1FA5D100D33961 /* XASSearchViewController.m */,
 				496AF5151A233D7000F605F4 /* XASProgressView.h */,
 				496AF5161A233D7000F605F4 /* XASProgressView.m */,
+				49948ED61A252560005CC549 /* XASHomeViewController.h */,
+				49948ED71A252560005CC549 /* XASHomeViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -376,8 +370,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
-				49358F2619E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
-				49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
@@ -397,6 +389,7 @@
 				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				49081A941A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
+				49948ED81A252560005CC549 /* XASHomeViewController.m in Sources */,
 				4946831119E29D6D00437B63 /* XASRegion.m in Sources */,
 				497B8C8B19FD25B500734629 /* XASMenuTableViewController.m in Sources */,
 				4931316E1A19660100B1365A /* XASVenuesTableViewController.m in Sources */,
@@ -410,8 +403,8 @@
 			files = (
 				4931316F1A19660100B1365A /* XASVenuesTableViewController.m in Sources */,
 				497B8C8C19FD25B500734629 /* XASMenuTableViewController.m in Sources */,
+				49948ED91A252560005CC549 /* XASHomeViewController.m in Sources */,
 				492FFFBE1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
-				49358F2319E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
@@ -423,7 +416,6 @@
 				49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				4946831619E29E9C00437B63 /* XASConnector.m in Sources */,
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
-				49358F2719E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
 				493131671A19128A00B1365A /* XASRoundedView.m in Sources */,
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
