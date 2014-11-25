@@ -45,20 +45,19 @@
     if(_preferencesDictionary == nil) {
         _preferencesDictionary = [NSDictionary dictionary];
     }
-    NSDictionary *activitiesDictionary = [XASActivity dictionary];
-    for(NSString *key in activitiesDictionary.allKeys) {
-        XASActivity *activity = [activitiesDictionary objectForKey:key];
-        [_objectsArray addObject:activity];
-    }
     
-    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
-                                        XASActivity *activity2){
+    if([XASActivity dictionary].allKeys.count == 0) {
         
-        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
-    }];
-
-    if(_preferencesDictionary.count != _objectsArray.count) {
-        [self performSegueWithIdentifier:@"build" sender:self];
+        [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if(error) {
+                NSLog(@"error: %@", error.localizedDescription);
+            } else {
+                [self buildArray];
+            }
+        }];
+    } else {
+        [self buildArray];
     }
 }
 
@@ -78,6 +77,27 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)buildArray {
+    
+    NSDictionary *activitiesDictionary = [XASActivity dictionary];
+    for(NSString *key in activitiesDictionary.allKeys) {
+        XASActivity *activity = [activitiesDictionary objectForKey:key];
+        [_objectsArray addObject:activity];
+    }
+    
+    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
+                                         XASActivity *activity2){
+        
+        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
+    }];
+    
+    [self.tableView reloadData];
+    
+    if(_preferencesDictionary.count != _objectsArray.count) {
+        [self performSegueWithIdentifier:@"build" sender:self];
+    }
 }
 
 #pragma mark - Table view data source
