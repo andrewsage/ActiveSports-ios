@@ -43,6 +43,8 @@
 		4946831619E29E9C00437B63 /* XASConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831419E29E9C00437B63 /* XASConnector.m */; };
 		4946831919E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
 		4946831A19E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
+		496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
+		496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
 		497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
 		497B8C8B19FD25B500734629 /* XASMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */; };
@@ -113,6 +115,8 @@
 		4946831419E29E9C00437B63 /* XASConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASConnector.m; sourceTree = "<group>"; };
 		4946831719E2A38C00437B63 /* XASVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenue.h; sourceTree = "<group>"; };
 		4946831819E2A38C00437B63 /* XASVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenue.m; sourceTree = "<group>"; };
+		496AF5151A233D7000F605F4 /* XASProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProgressView.h; sourceTree = "<group>"; };
+		496AF5161A233D7000F605F4 /* XASProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProgressView.m; sourceTree = "<group>"; };
 		497B8C8519FD1A4E00734629 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		497B8C8619FD1A4E00734629 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		497B8C8919FD25B500734629 /* XASMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMenuTableViewController.h; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */,
 				49D607F81A1FA5D100D33961 /* XASSearchViewController.h */,
 				49D607F91A1FA5D100D33961 /* XASSearchViewController.m */,
+				496AF5151A233D7000F605F4 /* XASProgressView.h */,
+				496AF5161A233D7000F605F4 /* XASProgressView.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -373,6 +379,7 @@
 				49358F2619E2FD9400BB3686 /* XASCollectionTableViewController.m in Sources */,
 				49358F2219E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
+				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */,
 				492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
@@ -406,6 +413,7 @@
 				492FFFBE1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				49358F2319E2FA4F00BB3686 /* XASCollectionsTableViewController.m in Sources */,
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
+				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				4931316B1A19270700B1365A /* XASRateView.m in Sources */,
@@ -551,13 +559,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5cf07c07-82b7-4aa5-8562-c9f737daa0ed";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

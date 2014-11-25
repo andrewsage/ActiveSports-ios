@@ -13,7 +13,7 @@
 
 @interface XASProfileTableViewController () {
     NSMutableArray *_objectsArray;
-    NSDictionary *_preferencesDictionary;
+    NSMutableDictionary *_preferencesDictionary;
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
@@ -21,6 +21,30 @@
 @end
 
 @implementation XASProfileTableViewController
+
+- (void)dataLoaded {
+    _objectsArray = [NSMutableArray arrayWithCapacity:0];
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    NSDictionary *activitiesDictionary = [XASActivity dictionary];
+    for(NSString *key in activitiesDictionary.allKeys) {
+        XASActivity *activity = [activitiesDictionary objectForKey:key];
+        [_objectsArray addObject:activity];
+    }
+    
+    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
+                                         XASActivity *activity2){
+        
+        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
+    }];
+    
+    if(_preferencesDictionary.count != _objectsArray.count) {
+        [self performSegueWithIdentifier:@"build" sender:self];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,27 +62,16 @@
         [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
         [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
     }
+    
+    [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        if(error) {
+            NSLog(@"Error downloading activitiy list %@", error);
+        } else {
+            [self dataLoaded];
+        }
+    }];
 
-    _objectsArray = [NSMutableArray arrayWithCapacity:0];
-    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
-    
-    if(_preferencesDictionary == nil) {
-        _preferencesDictionary = [NSDictionary dictionary];
-    }
-    
-    if([XASActivity dictionary].allKeys.count == 0) {
-        
-        [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
-            if(error) {
-                NSLog(@"error: %@", error.localizedDescription);
-            } else {
-                [self buildArray];
-            }
-        }];
-    } else {
-        [self buildArray];
-    }
+    [self dataLoaded];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +81,7 @@
     _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
     
     if(_preferencesDictionary == nil) {
-        _preferencesDictionary = [NSDictionary dictionary];
+        _preferencesDictionary = [NSMutableDictionary dictionary];
     }
     
     [self.tableView reloadData];
@@ -77,27 +90,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)buildArray {
-    
-    NSDictionary *activitiesDictionary = [XASActivity dictionary];
-    for(NSString *key in activitiesDictionary.allKeys) {
-        XASActivity *activity = [activitiesDictionary objectForKey:key];
-        [_objectsArray addObject:activity];
-    }
-    
-    [_objectsArray sortUsingComparator:^(XASActivity *activity1,
-                                         XASActivity *activity2){
-        
-        return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
-    }];
-    
-    [self.tableView reloadData];
-    
-    if(_preferencesDictionary.count != _objectsArray.count) {
-        [self performSegueWithIdentifier:@"build" sender:self];
-    }
 }
 
 #pragma mark - Table view data source
@@ -126,39 +118,22 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
+    NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
+    if(included.boolValue) {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:NO] forKey:activity.remoteID];
+    } else {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:YES] forKey:activity.remoteID];
+    }
+    
+    if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
+    } else {
+        NSLog(@"Failed to save dictionary");
+    }
+    [self.tableView reloadData];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
