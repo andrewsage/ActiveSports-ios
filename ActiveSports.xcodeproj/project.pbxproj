@@ -54,6 +54,8 @@
 		497CA74319F3CA0E003F5F0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CA74219F3CA0E003F5F0A /* MapKit.framework */; };
 		49948ED81A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
 		49948ED91A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
+		49D57D6F1A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
+		49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
 		49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
@@ -124,6 +126,8 @@
 		497CA74219F3CA0E003F5F0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		49948ED61A252560005CC549 /* XASHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHomeViewController.h; sourceTree = "<group>"; };
 		49948ED71A252560005CC549 /* XASHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeViewController.m; sourceTree = "<group>"; };
+		49D57D6D1A264A0900749FA5 /* XASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMapViewController.h; sourceTree = "<group>"; };
+		49D57D6E1A264A0900749FA5 /* XASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMapViewController.m; sourceTree = "<group>"; };
 		49D607F81A1FA5D100D33961 /* XASSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSearchViewController.h; sourceTree = "<group>"; };
 		49D607F91A1FA5D100D33961 /* XASSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASSearchViewController.m; sourceTree = "<group>"; };
 		49D9317F1A0CE90800B17587 /* XASRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRateViewController.h; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				496AF5161A233D7000F605F4 /* XASProgressView.m */,
 				49948ED61A252560005CC549 /* XASHomeViewController.h */,
 				49948ED71A252560005CC549 /* XASHomeViewController.m */,
+				49D57D6D1A264A0900749FA5 /* XASMapViewController.h */,
+				49D57D6E1A264A0900749FA5 /* XASMapViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				494682EF19E29C4800437B63 /* ActiveSports.xcdatamodeld in Sources */,
 				497CA73819F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
 				497CA73C19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
+				49D57D6F1A264A0900749FA5 /* XASMapViewController.m in Sources */,
 				4946831919E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831519E29E9C00437B63 /* XASConnector.m in Sources */,
 				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
@@ -417,6 +424,7 @@
 				4946831619E29E9C00437B63 /* XASConnector.m in Sources */,
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
+				49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */,
 				493131671A19128A00B1365A /* XASRoundedView.m in Sources */,
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
 				492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
