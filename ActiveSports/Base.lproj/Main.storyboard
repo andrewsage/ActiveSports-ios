@@ -930,7 +930,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="klm-HN-9nU" kind="show" id="VLn-46-o7e"/>
+                                    <segue destination="f6z-vd-frT" kind="show" id="L6w-qH-5Zs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktU-yp-17a">
@@ -1016,6 +1016,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7H-ue-sbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="226" y="-1891"/>
+        </scene>
+        <!--Today Home View Controller-->
+        <scene sceneID="bTh-u8-9sU">
+            <objects>
+                <viewController id="f6z-vd-frT" customClass="XASTodayHomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vmz-bb-dsB"/>
+                        <viewControllerLayoutGuide type="bottom" id="L1E-Bx-qSu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2JK-Du-jkv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhO-Td-0Wn">
+                                <rect key="frame" x="16" y="285" width="59" height="30"/>
+                                <state key="normal" title="Strength">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="strength" id="PKp-Rn-muw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyd-Ux-uI5">
+                                <rect key="frame" x="83" y="285" width="46" height="30"/>
+                                <state key="normal" title="Cardio">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="cardio" id="Dls-ja-oJh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwa-nx-f0k">
+                                <rect key="frame" x="137" y="285" width="84" height="30"/>
+                                <state key="normal" title="Weight Loss">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="weight loss" id="auQ-kE-m29"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vob-cW-jUe">
+                                <rect key="frame" x="229" y="285" width="64" height="30"/>
+                                <state key="normal" title="Flexibility">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="flexibility" id="CeI-Ts-MMt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IhO-Td-0Wn" firstAttribute="centerY" secondItem="2JK-Du-jkv" secondAttribute="centerY" id="1zS-Fn-5AX"/>
+                            <constraint firstItem="vob-cW-jUe" firstAttribute="baseline" secondItem="vyd-Ux-uI5" secondAttribute="baseline" id="3Q4-ME-LQp"/>
+                            <constraint firstItem="vyd-Ux-uI5" firstAttribute="leading" secondItem="IhO-Td-0Wn" secondAttribute="trailing" constant="8" symbolic="YES" id="H5b-qf-Y2h"/>
+                            <constraint firstItem="IhO-Td-0Wn" firstAttribute="leading" secondItem="2JK-Du-jkv" secondAttribute="leadingMargin" id="JPD-Aw-CGL"/>
+                            <constraint firstItem="IhO-Td-0Wn" firstAttribute="baseline" secondItem="vob-cW-jUe" secondAttribute="baseline" id="PCu-Ax-0gu"/>
+                            <constraint firstItem="vob-cW-jUe" firstAttribute="leading" secondItem="bwa-nx-f0k" secondAttribute="trailing" constant="8" symbolic="YES" id="al8-qu-6GH"/>
+                            <constraint firstItem="vob-cW-jUe" firstAttribute="leading" secondItem="2JK-Du-jkv" secondAttribute="leading" constant="229" id="bIy-3E-97e"/>
+                            <constraint firstItem="IhO-Td-0Wn" firstAttribute="baseline" secondItem="bwa-nx-f0k" secondAttribute="baseline" id="yww-K6-eYh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxh-zN-osX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="-1891"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Ae9-t5-8Pl">
@@ -1586,11 +1652,11 @@
         <image name="yes" width="91" height="91"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="isJ-zb-Ta7"/>
         <segue reference="NeG-Kt-omc"/>
-        <segue reference="kU2-d7-24n"/>
+        <segue reference="isJ-zb-Ta7"/>
+        <segue reference="lP0-WU-Hqz"/>
         <segue reference="HZ3-K1-dZG"/>
         <segue reference="llM-Nm-isy"/>
-        <segue reference="lP0-WU-Hqz"/>
+        <segue reference="CeI-Ts-MMt"/>
     </inferredMetricsTieBreakers>
 </document>

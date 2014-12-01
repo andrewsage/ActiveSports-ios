@@ -182,40 +182,47 @@
                     
                     NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
+                    NSString *tag = [self.searchDictionary objectForKey:@"tag"];
                     
-                    
-                    if(opportunity.effortRating < minimumExertion) {
+                    if([self.searchDictionary objectForKey:@"tag"] &&
+                       [opportunity.tagsArray containsObject:tag] == NO) {
                         include = NO;
                     }
                     
-                    if(opportunity.effortRating > maximumExertion) {
+                    if(opportunity.effortRating < minimumExertion && [self.searchDictionary objectForKey:@"minimumExertion"]) {
                         include = NO;
                     }
                     
-                    switch (timeOfDayNumber.integerValue) {
-                        case 0: // Morning 00:00 - 11:59
-                            if(startHour >= 12) {
-                                include = NO;
-                            }
-                            break;
-                            
-                        case 1: // Afternoon 12:00 - 16:59
-                            if(startHour < 12 || startHour >= 17) {
-                                include = NO;
-                            }
-                            break;
-                            
-                        case 2: // Evening 17:00 - 23:59
-                            if(startHour < 17) {
-                                include = NO;
-                            }
-                            break;
-                            
-                        default:
-                            break;
+                    if(opportunity.effortRating > maximumExertion && [self.searchDictionary objectForKey:@"maximumExertion"]) {
+                        include = NO;
                     }
                     
-                    if([opportunity.dayOfWeek isEqualToString:dayName] == NO) {
+                    if([self.searchDictionary objectForKey:@"timeOfDay"]) {
+                        switch (timeOfDayNumber.integerValue) {
+                            case 0: // Morning 00:00 - 11:59
+                                if(startHour >= 12) {
+                                    include = NO;
+                                }
+                                break;
+                                
+                            case 1: // Afternoon 12:00 - 16:59
+                                if(startHour < 12 || startHour >= 17) {
+                                    include = NO;
+                                }
+                                break;
+                                
+                            case 2: // Evening 17:00 - 23:59
+                                if(startHour < 17) {
+                                    include = NO;
+                                }
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                    }
+                    
+                    if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
                         include = NO;
                     }
                 }
