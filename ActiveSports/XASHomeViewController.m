@@ -38,6 +38,8 @@
         [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
         [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     }
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
 
 }
 
