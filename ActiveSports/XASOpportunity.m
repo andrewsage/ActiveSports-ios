@@ -98,6 +98,7 @@
     [encoder encodeObject:_effortRating forKey:@"effortRating"];
     [encoder encodeObject:_imageURL forKey:@"imageURL"];
     [encoder encodeObject:_activityID forKey:@"activityID"];
+    [encoder encodeObject:_tagsArray forKey:@"tags"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -112,6 +113,7 @@
         _effortRating = [decoder decodeObjectForKey:@"effortRating"];
         _imageURL = [decoder decodeObjectForKey:@"imageURL"];
         _activityID = [decoder decodeObjectForKey:@"activityID"];
+        _tagsArray = [decoder decodeObjectForKey:@"tags"];
     }
     return self;
 }
@@ -135,6 +137,12 @@
         self.venue = [[XASVenue alloc] initWithDictionary:venueDictionary];
         [[XASVenue dictionary] setObject:self.venue forKey:self.venue.remoteID];
         [XASVenue saveDictionary];
+    }
+    
+    NSArray *tagListArray = [objectDictionary objectForKey:@"tag_list"];
+    if(tagListArray) {
+        self.tagsArray = [NSMutableArray arrayWithArray:tagListArray];
+        
     }
     
 }

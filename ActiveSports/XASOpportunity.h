@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSNumber *effortRating;
 @property (nonatomic, copy) NSString *imageURL;
 @property (nonatomic, copy) NSString *activityID;
+@property (nonatomic, copy) NSMutableArray *tagsArray;
 
 @property (nonatomic, retain) NSNumber * distanceInMeters;
 

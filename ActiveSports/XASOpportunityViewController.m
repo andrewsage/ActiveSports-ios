@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *whenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venueLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *effortIconView1;
@@ -91,6 +92,11 @@
     
     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
         self.imageHeightConstraint.constant = 0.0f;
+    }
+    
+    self.tagsLabel.text = [[self.opportunity.tagsArray valueForKey:@"description"] componentsJoinedByString:@", "];
+    if([self.tagsLabel.text isEqualToString:@""]) {
+        self.tagsLabel.text = @"No tags set";
     }
 
 
@@ -274,7 +280,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  5;
+    return  6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -297,11 +303,15 @@
         }
             break;
             
-        case 3: // Address
+        case 3: // Tags
+            height = 44.0f;
+            break;
+            
+        case 4: // Address
             height = 70.0f;
             break;
             
-        case 4: // map
+        case 5: // map
             height = 150.0f;
             break;
             
