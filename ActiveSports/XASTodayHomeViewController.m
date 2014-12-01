@@ -11,6 +11,11 @@
 
 
 @interface XASTodayHomeViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *strengthButton;
+@property (weak, nonatomic) IBOutlet UIButton *cardioButton;
+@property (weak, nonatomic) IBOutlet UIButton *weightLossButton;
+@property (weak, nonatomic) IBOutlet UIButton *flexibilityButton;
+@property (weak, nonatomic) IBOutlet UIButton *resultsButton;
 
 @end
 
@@ -19,6 +24,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.strengthButton.layer.borderWidth = 1.0f;
+    self.strengthButton.layer.cornerRadius = 2.0f;
+    self.strengthButton.layer.borderColor = [UIColor blueColor].CGColor;
+
+    self.cardioButton.layer.borderWidth = 1.0f;
+    self.cardioButton.layer.cornerRadius = 2.0f;
+    self.cardioButton.layer.borderColor = [UIColor blueColor].CGColor;
+    
+    self.weightLossButton.layer.borderWidth = 1.0f;
+    self.weightLossButton.layer.cornerRadius = 2.0f;
+    self.weightLossButton.layer.borderColor = [UIColor blueColor].CGColor;
+    
+    self.flexibilityButton.layer.borderWidth = 1.0f;
+    self.flexibilityButton.layer.cornerRadius = 2.0f;
+    self.flexibilityButton.layer.borderColor = [UIColor blueColor].CGColor;
+    
+    self.resultsButton.layer.cornerRadius = 2.0f;
+    
+    [self.resultsButton setBackgroundColor:[UIColor colorWithRed:0.169 green:0.655 blue:0.098 alpha:1]];
+    [self.resultsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,45 +60,42 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqualToString:@"strength"]) {
+    if([segue.identifier isEqualToString:@"results"]) {
         XASOpportunitiesTableViewController *controller = (XASOpportunitiesTableViewController*)[segue destinationViewController];
         
         NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
-        [searchDictionary setObject:@"strength" forKey:@"tag"];
+        NSMutableArray *tagsArray = [NSMutableArray arrayWithCapacity:0];
         
-        controller.viewType = XASOpportunitiesViewSearch;
-        controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
-    }
-    
-    if([segue.identifier isEqualToString:@"cardio"]) {
-        XASOpportunitiesTableViewController *controller = (XASOpportunitiesTableViewController*)[segue destinationViewController];
-        
-        NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
-        [searchDictionary setObject:@"cardio" forKey:@"tag"];
-        
-        controller.viewType = XASOpportunitiesViewSearch;
-        controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
-    }
-    
-    if([segue.identifier isEqualToString:@"weight loss"]) {
-        XASOpportunitiesTableViewController *controller = (XASOpportunitiesTableViewController*)[segue destinationViewController];
-        
-        NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
-        [searchDictionary setObject:@"weight loss" forKey:@"tag"];
-        
-        controller.viewType = XASOpportunitiesViewSearch;
-        controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
-    }
-    
-    if([segue.identifier isEqualToString:@"flexibility"]) {
-        XASOpportunitiesTableViewController *controller = (XASOpportunitiesTableViewController*)[segue destinationViewController];
-        
-        NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
-        [searchDictionary setObject:@"flexibility" forKey:@"tag"];
+        if(self.strengthButton.selected) {
+            [tagsArray addObject:@"strength"];
+        }
+        if(self.cardioButton.selected) {
+            [tagsArray addObject:@"cardio"];
+        }
+        if(self.weightLossButton.selected) {
+            [tagsArray addObject:@"weight loss"];
+        }
+        if(self.flexibilityButton.selected) {
+            [tagsArray addObject:@"flexibility"];
+        }
+        [searchDictionary setObject:tagsArray forKey:@"tag"];
         
         controller.viewType = XASOpportunitiesViewSearch;
         controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
     }
 }
+
+#pragma mark - Actions
+
+- (IBAction)buttonPressed:(UIButton *)sender {
+    if([sender isSelected]) {
+        [sender setSelected:NO];
+        sender.backgroundColor = [UIColor whiteColor];
+    } else {
+        [sender setSelected:YES];
+        sender.backgroundColor = [UIColor blueColor];
+    }
+}
+
 
 @end

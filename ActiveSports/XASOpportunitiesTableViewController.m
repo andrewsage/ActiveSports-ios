@@ -182,11 +182,17 @@
                     
                     NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
-                    NSString *tag = [self.searchDictionary objectForKey:@"tag"];
                     
-                    if([self.searchDictionary objectForKey:@"tag"] &&
-                       [opportunity.tagsArray containsObject:tag] == NO) {
-                        include = NO;
+                    if([self.searchDictionary objectForKey:@"tag"]) {
+                        BOOL matches = NO;
+                        for(NSString *tag in [self.searchDictionary objectForKey:@"tag"]) {
+                            if([opportunity.tagsArray containsObject:tag]) {
+                                matches = YES;
+                            }
+                        }
+                        if(matches == NO) {
+                            include = NO;
+                        }
                     }
                     
                     if(opportunity.effortRating < minimumExertion && [self.searchDictionary objectForKey:@"minimumExertion"]) {
