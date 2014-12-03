@@ -1178,6 +1178,9 @@
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="955-4P-SGN">
                                 <rect key="frame" x="0.0" y="64" width="600" height="298"/>
+                                <connections>
+                                    <outlet property="delegate" destination="f6z-vd-frT" id="MRm-fX-a7E"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1233,6 +1236,7 @@
                     <connections>
                         <outlet property="cardioButton" destination="rap-qz-MUU" id="SVH-EH-nEY"/>
                         <outlet property="flexibilityButton" destination="Mca-gT-O0C" id="Zeq-Yw-19q"/>
+                        <outlet property="mapView" destination="955-4P-SGN" id="gYX-sV-nLc"/>
                         <outlet property="resultsButton" destination="qaf-vD-TiC" id="TkZ-EE-W2f"/>
                         <outlet property="strengthButton" destination="IhO-Td-0Wn" id="fnf-YO-SO6"/>
                         <outlet property="weightLossButton" destination="R6V-Ei-awA" id="jRO-N5-x0R"/>
@@ -1860,8 +1864,8 @@
         <segue reference="NeG-Kt-omc"/>
         <segue reference="HZ3-K1-dZG"/>
         <segue reference="llM-Nm-isy"/>
-        <segue reference="kU2-d7-24n"/>
         <segue reference="lP0-WU-Hqz"/>
+        <segue reference="bv7-Yd-iH6"/>
         <segue reference="isJ-zb-Ta7"/>
     </inferredMetricsTieBreakers>
 </document>

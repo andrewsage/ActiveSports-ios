@@ -11,6 +11,8 @@
 		49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49081A931A05500D00941AC1 /* XASOpportunityViewController.m */; };
 		49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
 		49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
+		4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
+		4926E99D1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
 		492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
 		492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
 		492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFBC1A1A3A8E0067C4D9 /* XASActivity.m */; };
@@ -79,6 +81,8 @@
 		49081A931A05500D00941AC1 /* XASOpportunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityViewController.m; sourceTree = "<group>"; };
 		49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileTableViewController.h; sourceTree = "<group>"; };
 		49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileTableViewController.m; sourceTree = "<group>"; };
+		4926E99A1A2F52A9006CEEE4 /* XASVenueAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenueAnnotation.h; sourceTree = "<group>"; };
+		4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenueAnnotation.m; sourceTree = "<group>"; };
 		492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileBuiderViewController.h; sourceTree = "<group>"; };
 		492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileBuiderViewController.m; sourceTree = "<group>"; };
 		492FFFBB1A1A3A8E0067C4D9 /* XASActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASActivity.h; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 				49D57D6E1A264A0900749FA5 /* XASMapViewController.m */,
 				49AAE7A91A2CB24A00A2562F /* XASTodayHomeViewController.h */,
 				49AAE7AA1A2CB24A00A2562F /* XASTodayHomeViewController.m */,
+				4926E99A1A2F52A9006CEEE4 /* XASVenueAnnotation.h */,
+				4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 			files = (
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
+				4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
 				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */,
@@ -424,6 +431,7 @@
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				4931316B1A19270700B1365A /* XASRateView.m in Sources */,
+				4926E99D1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
 				4946831A19E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831219E29D6D00437B63 /* XASRegion.m in Sources */,
 				49358F2B19E3048900BB3686 /* XASOpportunity.m in Sources */,
