@@ -1327,6 +1327,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="answerButton" destination="LkX-8d-sr5" id="b5J-wu-hTb"/>
                         <outlet property="revealButtonItem" destination="Pd6-CB-SYk" id="Ho8-yI-zsR"/>
                     </connections>
                 </tableViewController>

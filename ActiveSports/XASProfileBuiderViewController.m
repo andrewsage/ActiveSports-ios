@@ -113,7 +113,8 @@
         _currentActivityIndex++;
         [self displayDetails];
     } else {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES
+                                 completion:nil];
     }
 }
 

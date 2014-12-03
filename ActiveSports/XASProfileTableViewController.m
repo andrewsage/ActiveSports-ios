@@ -17,6 +17,7 @@
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
+@property (weak, nonatomic) IBOutlet UIButton *answerButton;
 
 @end
 
@@ -41,11 +42,7 @@
         return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
     }];
     
-    /*
-    if(_preferencesDictionary.count != _objectsArray.count) {
-        [self performSegueWithIdentifier:@"build" sender:self];
-    }
-     */
+    self.answerButton.hidden = (_preferencesDictionary.count == _objectsArray.count);
 }
 
 - (void)viewDidLoad {
@@ -90,6 +87,9 @@
     if(_preferencesDictionary == nil) {
         _preferencesDictionary = [NSMutableDictionary dictionary];
     }
+    
+    self.answerButton.hidden = (_preferencesDictionary.count == _objectsArray.count);
+
     
     [self.tableView reloadData];
 }
@@ -146,6 +146,8 @@
         NSLog(@"Failed to save dictionary");
     }
     [self.tableView reloadData];
+    self.answerButton.hidden = (_preferencesDictionary.count == _objectsArray.count);
+
 }
 
 
@@ -175,6 +177,8 @@
             NSLog(@"Failed to save dictionary");
         }
         [self.tableView reloadData];
+        self.answerButton.hidden = (_preferencesDictionary.count == _objectsArray.count);
+
         
     } else if(buttonIndex == 1) {
         // do your other action
