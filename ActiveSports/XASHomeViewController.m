@@ -40,7 +40,15 @@
     }
     
     self.view.backgroundColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

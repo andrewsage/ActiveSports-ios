@@ -30,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = NO;
+
+    
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {

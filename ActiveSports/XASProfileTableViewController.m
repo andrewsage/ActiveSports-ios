@@ -11,7 +11,7 @@
 #import "XASActivity.h"
 
 
-@interface XASProfileTableViewController () {
+@interface XASProfileTableViewController () <UIActionSheetDelegate> {
     NSMutableArray *_objectsArray;
     NSMutableDictionary *_preferencesDictionary;
 }
@@ -41,9 +41,11 @@
         return [activity1.title compare:activity2.title options:NSCaseInsensitiveSearch];
     }];
     
+    /*
     if(_preferencesDictionary.count != _objectsArray.count) {
         [self performSegueWithIdentifier:@"build" sender:self];
     }
+     */
 }
 
 - (void)viewDidLoad {
@@ -76,6 +78,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
+
     [super viewWillAppear:animated];
     
     _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
@@ -106,6 +113,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
     
     XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
+    if([_preferencesDictionary objectForKey:activity.remoteID] == nil) {
+        cell.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.929 alpha:1];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    
     NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
     // Configure the cell...
     cell.textLabel.text = activity.title;
@@ -134,6 +147,40 @@
     }
     [self.tableView reloadData];
 }
+
+
+#pragma mark - Actions
+
+- (IBAction)resetTapped:(id)sender {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"Are you sure you wish to reset your preferences?"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:@"Reset"
+                                  otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(buttonIndex == 0) {
+        // Reset
+        
+        [_preferencesDictionary removeAllObjects];
+        
+        if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
+        } else {
+            NSLog(@"Failed to save dictionary");
+        }
+        [self.tableView reloadData];
+        
+    } else if(buttonIndex == 1) {
+        // do your other action
+    }
+}
+
 
 /*
 #pragma mark - Navigation

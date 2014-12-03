@@ -45,6 +45,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = NO;
+
+    
     _collectionsDictionary = [NSMutableDictionary dictionary];
     
     SWRevealViewController *revealViewController = self.revealViewController;
@@ -120,6 +123,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

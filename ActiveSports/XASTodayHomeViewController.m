@@ -45,6 +45,19 @@
     
     [self.resultsButton setBackgroundColor:[UIColor colorWithRed:0.169 green:0.655 blue:0.098 alpha:1]];
     [self.resultsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    self.title = @"Activties near you";
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

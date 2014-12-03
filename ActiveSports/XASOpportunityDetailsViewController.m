@@ -194,7 +194,19 @@
     [self.mapView addAnnotation:point];
     
     [self zoomToVenue];
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
 
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

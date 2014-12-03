@@ -19,6 +19,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationController.navigationBarHidden = NO;
+
+    
     self.mapView.delegate = self;
     MKUserTrackingBarButtonItem *buttonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
     self.navigationItem.rightBarButtonItem = buttonItem;

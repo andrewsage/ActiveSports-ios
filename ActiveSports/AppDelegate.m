@@ -25,7 +25,7 @@
     connector.serverAPIBaseURL = @"http://matchthecity.org";
     //connector.serverAPIBaseURL = @"http://192.168.1.128:3000";
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1]];
     [[UINavigationBar appearance] setTranslucent:NO];
