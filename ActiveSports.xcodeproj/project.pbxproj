@@ -58,6 +58,8 @@
 		49948ED91A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
 		49AAE7AB1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAE7AA1A2CB24A00A2562F /* XASTodayHomeViewController.m */; };
 		49AAE7AC1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAE7AA1A2CB24A00A2562F /* XASTodayHomeViewController.m */; };
+		49C1D1FF1A38C0E7005A38E4 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */; };
+		49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */; };
 		49D57D6F1A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
 		49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
 		49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
@@ -134,6 +136,8 @@
 		49948ED71A252560005CC549 /* XASHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeViewController.m; sourceTree = "<group>"; };
 		49AAE7A91A2CB24A00A2562F /* XASTodayHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASTodayHomeViewController.h; sourceTree = "<group>"; };
 		49AAE7AA1A2CB24A00A2562F /* XASTodayHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASTodayHomeViewController.m; sourceTree = "<group>"; };
+		49C1D1FD1A38C0E7005A38E4 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		49D57D6D1A264A0900749FA5 /* XASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMapViewController.h; sourceTree = "<group>"; };
 		49D57D6E1A264A0900749FA5 /* XASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMapViewController.m; sourceTree = "<group>"; };
 		49D607F81A1FA5D100D33961 /* XASSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSearchViewController.h; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 				49AAE7AA1A2CB24A00A2562F /* XASTodayHomeViewController.m */,
 				4926E99A1A2F52A9006CEEE4 /* XASVenueAnnotation.h */,
 				4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */,
+				49C1D1FD1A38C0E7005A38E4 /* UIImage+Resize.h */,
+				49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C1D1FF1A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 				4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
@@ -445,6 +452,7 @@
 				492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				49AAE7AC1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
 				497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
+				49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
 				497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 			);

@@ -46,7 +46,8 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden = NO;
-
+    
+    
     
     _collectionsDictionary = [NSMutableDictionary dictionary];
     
@@ -127,6 +128,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -287,11 +294,19 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if(_collectionsDictionary.count == 0) {
+        return 1;
+    }
 
     return _collectionsDictionary.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if(_collectionsDictionary.count == 0) {
+        return nil;
+    }
     
     NSNumber *hour = [[self sortedKeys] objectAtIndex:section];
 
@@ -302,12 +317,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    if(_collectionsDictionary.count == 0) {
+        return 1;
+    }
+    
     NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:section]];
     return objectsArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(_collectionsDictionary.count == 0) {
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        if(self.viewType == XASOpportunitiesViewSearch) {
+            cell.textLabel.text = @"No activites match your search criteria. Please try again with other options.";
+            cell.textLabel.numberOfLines = 0;
+            cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        } else {
+            cell.textLabel.text = @"No records to display";
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        return cell;
+    }
+    
     XASOpportunityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"opportunity" forIndexPath:indexPath];
     
     NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
@@ -332,6 +366,7 @@
     cell.ratingView.rate = opportunity.effortRating.floatValue;
     double distanceInMiles = opportunity.distanceInMeters.doubleValue / 1609.344;
     cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
+    cell.distanceLabel.layer.cornerRadius = 2.0f;
     
     cell.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     

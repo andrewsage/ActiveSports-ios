@@ -14,7 +14,7 @@
     // Initialization code
     self.ratingView.padding = 0.0f;
     self.ratingView.editable = NO;
-    self.ratingView.starImage = [UIImage imageNamed:@"drop_small"];
+    self.ratingView.starImage = [UIImage imageNamed:@"drop-rating-small"];
     self.ratingView.backgroundColor = [UIColor clearColor];
     self.ratingView.alignment = XASRateViewAlignmentRight;
     self.ratingView.direction = XASRateViewDirectionRightToLeft;

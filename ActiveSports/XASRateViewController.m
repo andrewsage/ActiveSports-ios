@@ -41,7 +41,7 @@
     
     self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
     
-    self.rateView.starImage = [UIImage imageNamed:@"drop"];
+    self.rateView.starImage = [UIImage imageNamed:@"drop-rating-small"];
 
     self.rateView.padding = 10;
     self.rateView.alignment = XASRateViewAlignmentCenter;

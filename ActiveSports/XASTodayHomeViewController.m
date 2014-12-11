@@ -10,6 +10,7 @@
 #import "XASOpportunitiesTableViewController.h"
 #import "XASVenueAnnotation.h"
 #import "XASOpportunity.h"
+#import "UIImage+Resize.h"
 
 
 @interface XASTodayHomeViewController () {
@@ -169,7 +170,10 @@
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
             //pinView.animatesDrop = YES;
             pinView.canShowCallout = YES;
-            pinView.image = [UIImage imageNamed:@"location"];
+            
+            UIImage *scaledImage = [UIImage imageWithImage:[UIImage imageNamed:@"map-marker"] scaledToSize:CGSizeMake(30.0, 30.0)];
+            pinView.image = scaledImage;
+            
             //pinView.calloutOffset = CGPointMake(0, 32);
             //pinView.pinColor = MKPinAnnotationColorGreen;
             
@@ -185,7 +189,7 @@
         }
         
         XASVenueAnnotation *venueAnnotation = (XASVenueAnnotation*)annotation;
-        UILabel *numberView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pinView.frame.size.width, pinView.frame.size.height)];
+        UILabel *numberView = [[UILabel alloc] initWithFrame:CGRectMake(0, -3, 30, 30)];
         numberView.text = venueAnnotation.numberOfActivities;
         numberView.textAlignment = NSTextAlignmentCenter;
         numberView.font = [UIFont boldSystemFontOfSize:10.0f];
@@ -256,11 +260,13 @@
         annotation.title = venue.name;
         NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:venue.name];
         
-        annotation.numberOfActivities = [NSString stringWithFormat:@"%d", objectsArray.count];
+        annotation.numberOfActivities = [NSString stringWithFormat:@"%lu", (unsigned long)objectsArray.count];
         annotation.coordinate = venueCoord;
         
         [self.mapView addAnnotation:annotation];
     }
+    
+    //[self.mapView showAnnotations:self.mapView.annotations animated:YES];
 
 }
 
