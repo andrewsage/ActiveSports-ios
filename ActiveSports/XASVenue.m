@@ -7,6 +7,7 @@
 //
 
 #import "XASVenue.h"
+#import "XASVenueNotice.h"
 
 @implementation XASVenue
 
@@ -118,6 +119,17 @@
     
     self.locationLat = latNumber;
     self.locationLong = longNumber;
+    
+    NSArray *venueNoticesArray = [objectDictionary objectForKey:@"venue_notices"];
+    if(venueNoticesArray) {
+        for(NSDictionary *venueNoticeDictionary in venueNoticesArray) {
+            XASVenueNotice *venueNotice = [[XASVenueNotice alloc] initWithDictionary:venueNoticeDictionary];
+            venueNotice.venue = self;
+            [[XASVenueNotice dictionary] setObject:venueNotice forKey:venueNotice.remoteID];
+            [XASVenueNotice saveDictionary];
+        }
+        
+    }
 }
 
 

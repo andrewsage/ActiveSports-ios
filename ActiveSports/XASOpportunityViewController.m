@@ -8,12 +8,12 @@
 
 #import "XASOpportunityViewController.h"
 #import "XASRateViewController.h"
+#import "XASVenueNotice.h"
 
-@interface XASOpportunityViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *opportunityNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *whenLabel;
-@property (weak, nonatomic) IBOutlet UILabel *venueLabel;
+@interface XASOpportunityViewController () {
+    NSMutableArray *_venueNotices;
+}
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
@@ -79,13 +79,14 @@
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
-    
+    /*
     NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
     // Hide the sweat drops if required
     for(NSInteger loop = 0; loop < 5; loop++) {
         UIView *effortIconView = effortIconViews[loop];
         effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
     }
+     */
     
     self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
     
@@ -98,136 +99,17 @@
     if([self.tagsLabel.text isEqualToString:@""]) {
         self.tagsLabel.text = @"No tags set";
     }
-
-
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    self.title = self.opportunity.name;
 
-    
-    self.opportunityNameLabel.text = self.opportunity.name;
-    self.whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
-                           self.opportunity.dayOfWeek,
-                           self.opportunity.startTime,
-                           self.opportunity.endTime];
-    self.venueLabel.text = self.opportunity.venue.name;
-    
-    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
-                                       size:14];
-    
-    UIFont *bodyFont = [UIFont fontWithName:@"ArialMT"
-                                       size:14];
-    
-    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
-    NSDictionary *bodyTextAttributes = @{NSFontAttributeName : bodyFont};
-    
-    
-    NSMutableAttributedString *descriptionText = [[NSMutableAttributedString alloc] initWithData:[self.opportunity.opportunityDescription dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                         options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                                                                              documentAttributes:nil error:nil];
-    
-    [descriptionText setAttributes:bodyTextAttributes range:NSMakeRange(0, descriptionText.length)];
-    
-    
-    NSMutableAttributedString *description = [[NSMutableAttributedString alloc] initWithString:@""];
-    
-    [description appendAttributedString:descriptionText];
-    
-    
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    /*
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:self.opportunity.venue.name
-                                                                        attributes:boldTextAttributes]];
-    
-    
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:self.opportunity.venue.address attributes:bodyTextAttributes]];
-    
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    
-    [description appendAttributedString:[[NSAttributedString alloc] initWithString:self.opportunity.venue.postCode attributes:bodyTextAttributes]];
-    */
-    
-    self.descriptionTextView.attributedText = description;
-    [self.descriptionTextView sizeToFit];
-    [self.descriptionTextView layoutIfNeeded];
-    self.descriptionTextView.scrollEnabled = NO;
-    
     self.addressLabel.text = [NSString stringWithFormat:@"%@, %@",
                               self.opportunity.venue.address,
                               self.opportunity.venue.postCode];
-    
-    self.title = self.opportunity.name;
-
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    if([self.opportunity.imageURL isKindOfClass:[NSNull class]] == NO) {
-        NSArray *arr = [self.opportunity.imageURL componentsSeparatedByString:@"\""];
-        NSURL *imageURL;
-        if(arr.count > 1) {
-            imageURL = [NSURL URLWithString:arr[1]];
-        }
-        
-        NSString *cachedImageFileName = [NSString stringWithFormat:@"%@.png", self.opportunity.remoteID];
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSURL *cachedImageURL = [[self applicationDataDirectory] URLByAppendingPathComponent:cachedImageFileName];
-        
-        if([fileManager fileExistsAtPath:cachedImageURL.absoluteString]) {
-            self.imageView.image = [UIImage imageWithContentsOfFile:cachedImageURL.absoluteString];
-        } else {
-            
-            [[session dataTaskWithURL:imageURL
-                    completionHandler:^(NSData *data,
-                                        NSURLResponse *response,
-                                        NSError *error) {
-                        if(error) {
-                            NSLog(@"error downloading from %@", self.opportunity.imageURL);
-                        } else {
-                            
-                            NSError *err = nil;
-                            NSString *cachedImageFileName = [NSString stringWithFormat:@"%@.png", self.opportunity.remoteID];
-                            
-                            NSFileManager *fileManager = [NSFileManager defaultManager];
-                            NSURL *cachedImageURL = [[self applicationDataDirectory] URLByAppendingPathComponent:cachedImageFileName];
-                            
-                            [fileManager removeItemAtPath:cachedImageURL.path error:&err];
-                            if ([data writeToURL:cachedImageURL atomically:YES])
-                            {
-                                NSLog(@"File is saved to =%@",cachedImageURL);
-                            }
-                            else
-                            {
-                                NSLog(@"failed to move: %@",[err userInfo]);
-                            }
-                            
-                            
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                
-                                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:cachedImageURL]];
-                                
-                                self.imageView.image = image;
-                                
-                            });
-                            
-                        }
-                        
-                    }] resume];
-        }
-    }
-
     
     self.mapView.delegate = self;
     
@@ -236,13 +118,14 @@
     point.coordinate = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
     point.title = self.opportunity.name;
     
-    
+    /*
     NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
     // Hide the sweat drops if required
     for(NSInteger loop = 0; loop < 5; loop++) {
         UIView *effortIconView = effortIconViews[loop];
         effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
     }
+     */
     
     self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
     
@@ -255,6 +138,24 @@
     [self.mapView addAnnotation:point];
     
     [self zoomToVenue];
+    
+    _venueNotices = [NSMutableArray arrayWithCapacity:0];
+    
+    NSDictionary *dictionary = [XASVenueNotice dictionary];
+    for(NSString *key in dictionary.allKeys) {
+        XASVenueNotice *venueNotice = [dictionary objectForKey:key];
+        
+        if(venueNotice.venue.remoteID == self.opportunity.venue.remoteID) {
+            [_venueNotices addObject:venueNotice];
+        }
+    }
+    
+    [_venueNotices sortUsingComparator:^(XASVenueNotice *notice1,
+                                        XASVenueNotice *notice2){
+        
+        return [notice2.starts compare:notice1.starts];
+    }];
+
 
 }
 
@@ -276,46 +177,97 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 6;
+            break;
+            
+        case 1:
+            return _venueNotices.count;
+            break;
+    }
     return  6;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return nil;
+            break;
+            
+        case 1:
+            return @"Notices";
+            break;
+    }
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat height = 44.0f;
     
-    switch (indexPath.row) {
-        case 0: // image
-            if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
-                height = 100.0f;
-            } else {
-                height = 250.0f;
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0: // image
+                    if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
+                        height = 100.0f;
+                    } else {
+                        height = 250.0f;
+                    }
+                    break;
+                    
+                case 2: // description
+                {
+                    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
+                    
+                    NSMutableAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                    
+                    textView.attributedText = description;
+                    
+                    CGSize size = [textView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
+                    height = size.height;
+                }
+                    break;
+                    
+                case 3: // Tags
+                    height = 44.0f;
+                    break;
+                    
+                case 4: // Address
+                    height = 70.0f;
+                    break;
+                    
+                case 5: // map
+                    height = 150.0f;
+                    break;
+                    
+                default:
+                    break;
             }
-            break;
-            
-        case 2: // description
-        {
-            CGSize size = [self.descriptionTextView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
-            height = size.height;
         }
             break;
             
-        case 3: // Tags
-            height = 44.0f;
-            break;
+        case 1: {
             
-        case 4: // Address
-            height = 70.0f;
-            break;
+            XASVenueNotice *venueNotice = [_venueNotices objectAtIndex:indexPath.row];
+
             
-        case 5: // map
-            height = 150.0f;
-            break;
+            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
             
-        default:
+            NSMutableAttributedString *description = [self buildAttributedString:venueNotice.message];
+            
+            textView.attributedText = description;
+            
+            CGSize size = [textView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
+            height = size.height + 30;
+            
+        }
             break;
     }
     
@@ -353,15 +305,199 @@
     }
 }
 
-/*
+- (NSMutableAttributedString *)buildAttributedString:(NSString*)sourceString {
+    NSMutableAttributedString *descriptionText = [[NSMutableAttributedString alloc] initWithData:[sourceString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                                         options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                                              documentAttributes:nil error:nil];
+    
+    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
+                                       size:14];
+    
+    UIFont *bodyFont = [UIFont fontWithName:@"ArialMT"
+                                       size:14];
+    
+    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
+    NSDictionary *bodyTextAttributes = @{NSFontAttributeName : bodyFont};
+    
+    [descriptionText setAttributes:bodyTextAttributes range:NSMakeRange(0, descriptionText.length)];
+    
+    
+    NSMutableAttributedString *description = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    [description appendAttributedString:descriptionText];
+    
+    
+    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    [description appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    return description;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    NSString *identifier = @"";
+    switch (indexPath.section) {
+        case 0:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    identifier = @"cell1";
+                    break;
+                case 1:
+                    identifier = @"cell2";
+                    break;
+                case 2:
+                    identifier = @"cell3";
+                    break;
+                case 3:
+                    identifier = @"cell4";
+                    break;
+                case 4:
+                    identifier = @"cell5";
+                    break;
+                case 5:
+                    identifier = @"cell6";
+                    break;
+            }
+        }
+            break;
+            
+        case 1:
+            identifier = @"venueNotice";
+            break;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    
+    switch (indexPath.section) {
+        case 0:
+        {
+            switch (indexPath.row) {
+                case 0: {
+                    UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
+                    UILabel *opportunityNameLabel = (UILabel*)[cell viewWithTag:2];
+                    UILabel *whenLabel = (UILabel*)[cell viewWithTag:3];
+                    UILabel *venueLabel = (UILabel*)[cell viewWithTag:4];
+                    
+                    opportunityNameLabel.text = self.opportunity.name;
+                    whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
+                                           self.opportunity.dayOfWeek,
+                                           self.opportunity.startTime,
+                                           self.opportunity.endTime];
+                    venueLabel.text = self.opportunity.venue.name;
+                    
+                    NSURLSession *session = [NSURLSession sharedSession];
+                    if([self.opportunity.imageURL isKindOfClass:[NSNull class]] == NO) {
+                        NSArray *arr = [self.opportunity.imageURL componentsSeparatedByString:@"\""];
+                        NSURL *imageURL;
+                        if(arr.count > 1) {
+                            imageURL = [NSURL URLWithString:arr[1]];
+                        }
+                        
+                        NSString *cachedImageFileName = [NSString stringWithFormat:@"%@.png", self.opportunity.remoteID];
+                        
+                        NSFileManager *fileManager = [NSFileManager defaultManager];
+                        NSURL *cachedImageURL = [[self applicationDataDirectory] URLByAppendingPathComponent:cachedImageFileName];
+                        
+                        if([fileManager fileExistsAtPath:cachedImageURL.absoluteString]) {
+                            imageView.image = [UIImage imageWithContentsOfFile:cachedImageURL.absoluteString];
+                        } else {
+                            
+                            [[session dataTaskWithURL:imageURL
+                                    completionHandler:^(NSData *data,
+                                                        NSURLResponse *response,
+                                                        NSError *error) {
+                                        if(error) {
+                                            NSLog(@"error downloading from %@", self.opportunity.imageURL);
+                                        } else {
+                                            
+                                            NSError *err = nil;
+                                            NSString *cachedImageFileName = [NSString stringWithFormat:@"%@.png", self.opportunity.remoteID];
+                                            
+                                            NSFileManager *fileManager = [NSFileManager defaultManager];
+                                            NSURL *cachedImageURL = [[self applicationDataDirectory] URLByAppendingPathComponent:cachedImageFileName];
+                                            
+                                            [fileManager removeItemAtPath:cachedImageURL.path error:&err];
+                                            if ([data writeToURL:cachedImageURL atomically:YES])
+                                            {
+                                                NSLog(@"File is saved to =%@",cachedImageURL);
+                                            }
+                                            else
+                                            {
+                                                NSLog(@"failed to move: %@",[err userInfo]);
+                                            }
+                                            
+                                            
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                
+                                                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:cachedImageURL]];
+                                                
+                                                imageView.image = image;
+                                                
+                                            });
+                                            
+                                        }
+                                        
+                                    }] resume];
+                        }
+                    }
+
+
+                }
+                    
+                    break;
+                    
+                case 2: {
+                    UITextView *textView = (UITextView*)[cell viewWithTag:1];
+                    
+                    NSMutableAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                    
+                    textView.selectable = YES;
+                    textView.attributedText = description;
+                    [textView sizeToFit];
+                    [textView layoutIfNeeded];
+                    textView.scrollEnabled = NO;
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        case 1: {
+            static NSDateFormatter *dateFormatter = nil;
+            if (dateFormatter == nil) {
+                dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+                [dateFormatter setLocale:[NSLocale currentLocale]];
+            }
+            
+            XASVenueNotice *venueNotice = [_venueNotices objectAtIndex:indexPath.row];
+            
+            UILabel *startsLabel = (UILabel*)[cell viewWithTag:1];
+            UITextView *textView = (UITextView*)[cell viewWithTag:2];
+            
+            startsLabel.text = [dateFormatter stringFromDate:venueNotice.starts];
+            
+            NSMutableAttributedString *description = [self buildAttributedString:venueNotice.message];
+            
+            textView.attributedText = description;
+            [textView sizeToFit];
+            [textView layoutIfNeeded];
+            textView.scrollEnabled = NO;
+
+            
+        }
+            break;
+    }
     
     // Configure the cell...
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
