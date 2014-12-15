@@ -9,23 +9,13 @@
 #import "XASOpportunityViewController.h"
 #import "XASRateViewController.h"
 #import "XASVenueNotice.h"
+#import "XASRateView.h"
 
 @interface XASOpportunityViewController () {
     NSMutableArray *_venueNotices;
 }
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
-@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *effortIconView1;
-@property (weak, nonatomic) IBOutlet UIImageView *effortIconView2;
-@property (weak, nonatomic) IBOutlet UIImageView *effortIconView3;
-@property (weak, nonatomic) IBOutlet UIImageView *effortIconView4;
-@property (weak, nonatomic) IBOutlet UIImageView *effortIconView5;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UILabel *telephoneLabel;
 
 @end
 
@@ -79,25 +69,9 @@
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
-    /*
-    NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
-    // Hide the sweat drops if required
-    for(NSInteger loop = 0; loop < 5; loop++) {
-        UIView *effortIconView = effortIconViews[loop];
-        effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
-    }
-     */
-    
-    self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
-    
     
     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
         self.imageHeightConstraint.constant = 0.0f;
-    }
-    
-    self.tagsLabel.text = [[self.opportunity.tagsArray valueForKey:@"description"] componentsJoinedByString:@", "];
-    if([self.tagsLabel.text isEqualToString:@""]) {
-        self.tagsLabel.text = @"No tags set";
     }
 }
 
@@ -106,38 +80,10 @@
     [super viewDidLoad];
     
     self.title = self.opportunity.name;
-
-    self.addressLabel.text = [NSString stringWithFormat:@"%@, %@",
-                              self.opportunity.venue.address,
-                              self.opportunity.venue.postCode];
-    
-    self.mapView.delegate = self;
-    
-    
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    point.coordinate = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
-    point.title = self.opportunity.name;
-    
-    /*
-    NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
-    // Hide the sweat drops if required
-    for(NSInteger loop = 0; loop < 5; loop++) {
-        UIView *effortIconView = effortIconViews[loop];
-        effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
-    }
-     */
-    
-    self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
-    
     
     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
         self.imageHeightConstraint.constant = 0.0f;
     }
-
-    
-    [self.mapView addAnnotation:point];
-    
-    [self zoomToVenue];
     
     _venueNotices = [NSMutableArray arrayWithCapacity:0];
     
@@ -155,17 +101,6 @@
         
         return [notice2.starts compare:notice1.starts];
     }];
-
-
-}
-
-- (void)zoomToVenue {
-    
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.02, 0.02);
-    
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
-    
-    [self.mapView setRegion:[self.mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:YES];
 }
 
 
@@ -183,7 +118,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 6;
+            return 8;
             break;
             
         case 1:
@@ -214,36 +149,54 @@
     switch (indexPath.section) {
         case 0: {
             switch (indexPath.row) {
-                case 0: // image
+                case 0: // Disclaimer
+                {
+                    height = 80.0f;
+                }
+                    break;
+                case 1: // image
                     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
-                        height = 100.0f;
+                        height = 0.0f;
                     } else {
-                        height = 250.0f;
+                        height = 150.0f;
                     }
                     break;
                     
-                case 2: // description
+                case 2: // title
+                    height = 100.0f;
+                    break;
+
+                    
+                case 3: // Rating
+                {
+                    height = 55.0f;
+                }
+                    break;
+                    
+                case 4: // description
                 {
                     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
                     
-                    NSMutableAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                    NSAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                    
                     
                     textView.attributedText = description;
                     
                     CGSize size = [textView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
                     height = size.height;
+                    
                 }
                     break;
                     
-                case 3: // Tags
+                case 5: // Tags
                     height = 44.0f;
                     break;
                     
-                case 4: // Address
+                case 6: // Address
                     height = 70.0f;
                     break;
                     
-                case 5: // map
+                case 7: // map
                     height = 150.0f;
                     break;
                     
@@ -305,7 +258,7 @@
     }
 }
 
-- (NSMutableAttributedString *)buildAttributedString:(NSString*)sourceString {
+- (NSAttributedString *)buildAttributedString:(NSString*)sourceString {
     NSMutableAttributedString *descriptionText = [[NSMutableAttributedString alloc] initWithData:[sourceString dataUsingEncoding:NSUTF8StringEncoding]
                                                                                          options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                    NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
@@ -341,21 +294,28 @@
         {
             switch (indexPath.row) {
                 case 0:
-                    identifier = @"cell1";
+                    identifier = @"disclaimer";
                     break;
                 case 1:
-                    identifier = @"cell2";
+                    identifier = @"image";
                     break;
+
                 case 2:
-                    identifier = @"cell3";
+                    identifier = @"cell1";
                     break;
                 case 3:
-                    identifier = @"cell4";
+                    identifier = @"cell2";
                     break;
                 case 4:
-                    identifier = @"cell5";
+                    identifier = @"cell3";
                     break;
                 case 5:
+                    identifier = @"cell4";
+                    break;
+                case 6:
+                    identifier = @"cell5";
+                    break;
+                case 7:
                     identifier = @"cell6";
                     break;
             }
@@ -373,18 +333,8 @@
         case 0:
         {
             switch (indexPath.row) {
-                case 0: {
+                case 1: {
                     UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
-                    UILabel *opportunityNameLabel = (UILabel*)[cell viewWithTag:2];
-                    UILabel *whenLabel = (UILabel*)[cell viewWithTag:3];
-                    UILabel *venueLabel = (UILabel*)[cell viewWithTag:4];
-                    
-                    opportunityNameLabel.text = self.opportunity.name;
-                    whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
-                                           self.opportunity.dayOfWeek,
-                                           self.opportunity.startTime,
-                                           self.opportunity.endTime];
-                    venueLabel.text = self.opportunity.venue.name;
                     
                     NSURLSession *session = [NSURLSession sharedSession];
                     if([self.opportunity.imageURL isKindOfClass:[NSNull class]] == NO) {
@@ -448,9 +398,39 @@
                     break;
                     
                 case 2: {
-                    UITextView *textView = (UITextView*)[cell viewWithTag:1];
+                    UILabel *opportunityNameLabel = (UILabel*)[cell viewWithTag:2];
+                    UILabel *whenLabel = (UILabel*)[cell viewWithTag:3];
+                    UILabel *venueLabel = (UILabel*)[cell viewWithTag:4];
                     
-                    NSMutableAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                    opportunityNameLabel.text = self.opportunity.name;
+                    whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
+                                      self.opportunity.dayOfWeek,
+                                      self.opportunity.startTime,
+                                      self.opportunity.endTime];
+                    venueLabel.text = self.opportunity.venue.name;
+                    
+                    
+                    
+                }
+                    
+                    break;
+                    
+                case 3: {
+                    UILabel *ratingLabel = (UILabel*)[cell viewWithTag:1];
+                    ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
+                    
+                    XASRateView *rateView = (XASRateView*)[cell viewWithTag:2];
+                    rateView.editable = NO;
+                    rateView.backgroundColor = [UIColor clearColor];
+                    rateView.rate = self.opportunity.effortRating.doubleValue;
+                    rateView.starImage = [UIImage imageNamed:@"drop-rating-small"];
+                    
+                }
+                    break;
+                    
+                case 4: {
+                    UITextView *textView = (UITextView*)[cell viewWithTag:1];
+                    NSAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
                     
                     textView.selectable = YES;
                     textView.attributedText = description;
@@ -459,6 +439,50 @@
                     textView.scrollEnabled = NO;
                 }
                     break;
+                    
+                case 5: {
+                    UILabel *tagsLabel = (UILabel*)[cell viewWithTag:1];
+                    
+                    tagsLabel.text = [[self.opportunity.tagsArray valueForKey:@"description"] componentsJoinedByString:@", "];
+                    if([tagsLabel.text isEqualToString:@""]) {
+                        tagsLabel.text = @"No tags set";
+                    }
+                }
+                    break;
+                
+                    
+                case 6: {
+                    UILabel *addressLabel = (UILabel*)[cell viewWithTag:1];
+                    UILabel *telephoneLabel = (UILabel*)[cell viewWithTag:2];
+                    
+                    addressLabel.text = [NSString stringWithFormat:@"%@, %@",
+                                         self.opportunity.venue.address,
+                                         self.opportunity.venue.postCode];
+                }
+                    break;
+                    
+                case 7: {
+                    
+                    MKMapView *mapView = (MKMapView*)[cell viewWithTag:1];
+                    
+                    mapView.delegate = self;
+                    
+                    
+                    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                    point.coordinate = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
+                    point.title = self.opportunity.name;
+                    
+                    [mapView addAnnotation:point];
+                    
+                    MKCoordinateSpan span = MKCoordinateSpanMake(0.02, 0.02);
+                    
+                    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
+                    
+                    [mapView setRegion:[mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:YES];
+                    
+                }
+                    break;
+                    
                     
                 default:
                     break;
@@ -482,7 +506,7 @@
             
             startsLabel.text = [dateFormatter stringFromDate:venueNotice.starts];
             
-            NSMutableAttributedString *description = [self buildAttributedString:venueNotice.message];
+            NSAttributedString *description = [self buildAttributedString:venueNotice.message];
             
             textView.attributedText = description;
             [textView sizeToFit];
