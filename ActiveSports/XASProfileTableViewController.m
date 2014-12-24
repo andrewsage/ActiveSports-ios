@@ -9,6 +9,7 @@
 #import "XASProfileTableViewController.h"
 #import "SWRevealViewController.h"
 #import "XASActivity.h"
+#import "XASPreferenceTableViewCell.h"
 
 
 @interface XASProfileTableViewController () <UIActionSheetDelegate> {
@@ -110,7 +111,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
+    XASPreferenceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
     
     XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
     if([_preferencesDictionary objectForKey:activity.remoteID] == nil) {
@@ -121,11 +122,13 @@
     
     NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
     // Configure the cell...
-    cell.textLabel.text = activity.title;
+    cell.titleLabel.text = activity.title;
     if(included.boolValue) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.yesImageView.alpha = 1.0f;
+        cell.noImageView.alpha = 0.25f;
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.yesImageView.alpha = 0.25f;
+        cell.noImageView.alpha = 1.0f;
     }
     
     return cell;

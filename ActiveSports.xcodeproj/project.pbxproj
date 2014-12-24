@@ -11,6 +11,8 @@
 		49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49081A931A05500D00941AC1 /* XASOpportunityViewController.m */; };
 		49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
 		49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
+		49236E411A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */; };
+		49236E421A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */; };
 		4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
 		4926E99D1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
 		492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
@@ -91,6 +93,8 @@
 		49081A931A05500D00941AC1 /* XASOpportunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityViewController.m; sourceTree = "<group>"; };
 		49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileTableViewController.h; sourceTree = "<group>"; };
 		49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileTableViewController.m; sourceTree = "<group>"; };
+		49236E3F1A4B3F4100936449 /* XASPreferenceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASPreferenceTableViewCell.h; sourceTree = "<group>"; };
+		49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASPreferenceTableViewCell.m; sourceTree = "<group>"; };
 		4926E99A1A2F52A9006CEEE4 /* XASVenueAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenueAnnotation.h; sourceTree = "<group>"; };
 		4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenueAnnotation.m; sourceTree = "<group>"; };
 		492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileBuiderViewController.h; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				495779601A4B1B800038569C /* XASHomeCollectionViewController.m */,
 				495779671A4B21890038569C /* XASMenuCollectionViewCell.h */,
 				495779681A4B21890038569C /* XASMenuCollectionViewCell.m */,
+				49236E3F1A4B3F4100936449 /* XASPreferenceTableViewCell.h */,
+				49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				49AAE7AB1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
 				493131661A19128A00B1365A /* XASRoundedView.m in Sources */,
 				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
+				49236E411A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */,
 				497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				49081A941A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				49C1D2031A3A7748005A38E4 /* XASVenueNotice.m in Sources */,
@@ -464,6 +471,7 @@
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
+				49236E421A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */,
 				4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */,
 				495779621A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
 				49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
