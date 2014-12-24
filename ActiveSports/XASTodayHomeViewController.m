@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *weightLossButton;
 @property (weak, nonatomic) IBOutlet UIButton *flexibilityButton;
 @property (weak, nonatomic) IBOutlet UIButton *resultsButton;
+@property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 
 @end
@@ -37,6 +38,7 @@
     
     // Do any additional setup after loading the view.
     
+    /*
     self.strengthButton.layer.borderWidth = 1.0f;
     self.strengthButton.layer.cornerRadius = 2.0f;
     self.strengthButton.layer.borderColor = [UIColor blueColor].CGColor;
@@ -52,13 +54,31 @@
     self.flexibilityButton.layer.borderWidth = 1.0f;
     self.flexibilityButton.layer.cornerRadius = 2.0f;
     self.flexibilityButton.layer.borderColor = [UIColor blueColor].CGColor;
+    */
     
     self.resultsButton.layer.cornerRadius = 2.0f;
     
     [self.resultsButton setBackgroundColor:[UIColor colorWithRed:0.169 green:0.655 blue:0.098 alpha:1]];
     [self.resultsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    self.title = @"Activties near you";
+    self.title = @"What's on today?";
+    
+    NSDate *now = [NSDate date];
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:now];
+    NSInteger hour = [components hour];
+    
+    // Morning 00:00 - 11:59
+    // Afternoon 12:00 - 16:59
+    // Evening 17:00 - 23:59
+    if(hour >= 17) {
+        self.greetingLabel.text = @"Good evening!";
+    } else if (hour >= 12) {
+        self.greetingLabel.text = @"Good afternoon!";
+    } else {
+        self.greetingLabel.text = @"Good morning!";
+    }
     
     
     self.mapView.delegate = self;
@@ -132,13 +152,14 @@
         tag = @"flexibility";
     }
     
+    [sender setImage:[UIImage imageNamed:@"dislikes"] forState:UIControlStateNormal];
+    [sender setImage:[UIImage imageNamed:@"likes"] forState:UIControlStateSelected];
+    
     if([sender isSelected]) {
         [sender setSelected:NO];
-        sender.backgroundColor = [UIColor whiteColor];
         [_tagsArray removeObject:tag];
     } else {
         [sender setSelected:YES];
-        sender.backgroundColor = [UIColor blueColor];
         [_tagsArray addObject:tag];
     }
     

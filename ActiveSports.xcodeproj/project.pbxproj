@@ -43,6 +43,10 @@
 		4946831A19E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
 		4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
 		4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
+		495779611A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779601A4B1B800038569C /* XASHomeCollectionViewController.m */; };
+		495779621A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779601A4B1B800038569C /* XASHomeCollectionViewController.m */; };
+		495779691A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779681A4B21890038569C /* XASMenuCollectionViewCell.m */; };
+		4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779681A4B21890038569C /* XASMenuCollectionViewCell.m */; };
 		496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
@@ -125,6 +129,10 @@
 		4946831819E2A38C00437B63 /* XASVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenue.m; sourceTree = "<group>"; };
 		4957795B1A4B09420038569C /* XASPaddedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASPaddedLabel.h; sourceTree = "<group>"; };
 		4957795C1A4B09420038569C /* XASPaddedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASPaddedLabel.m; sourceTree = "<group>"; };
+		4957795F1A4B1B800038569C /* XASHomeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHomeCollectionViewController.h; sourceTree = "<group>"; };
+		495779601A4B1B800038569C /* XASHomeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeCollectionViewController.m; sourceTree = "<group>"; };
+		495779671A4B21890038569C /* XASMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMenuCollectionViewCell.h; sourceTree = "<group>"; };
+		495779681A4B21890038569C /* XASMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMenuCollectionViewCell.m; sourceTree = "<group>"; };
 		496AF5151A233D7000F605F4 /* XASProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProgressView.h; sourceTree = "<group>"; };
 		496AF5161A233D7000F605F4 /* XASProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProgressView.m; sourceTree = "<group>"; };
 		497B8C8519FD1A4E00734629 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -265,6 +273,10 @@
 				49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */,
 				4957795B1A4B09420038569C /* XASPaddedLabel.h */,
 				4957795C1A4B09420038569C /* XASPaddedLabel.m */,
+				4957795F1A4B1B800038569C /* XASHomeCollectionViewController.h */,
+				495779601A4B1B800038569C /* XASHomeCollectionViewController.m */,
+				495779671A4B21890038569C /* XASMenuCollectionViewCell.h */,
+				495779681A4B21890038569C /* XASMenuCollectionViewCell.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -412,6 +424,7 @@
 				4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
 				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
+				495779691A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */,
 				49358F2A19E3048900BB3686 /* XASOpportunity.m in Sources */,
 				492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				494682EC19E29C4800437B63 /* AppDelegate.m in Sources */,
@@ -425,6 +438,7 @@
 				4946831519E29E9C00437B63 /* XASConnector.m in Sources */,
 				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */,
+				495779611A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
 				49AAE7AB1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
 				493131661A19128A00B1365A /* XASRoundedView.m in Sources */,
 				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
@@ -450,6 +464,8 @@
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
+				4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */,
+				495779621A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
 				49358F1F19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
 				4931316B1A19270700B1365A /* XASRateView.m in Sources */,
 				4926E99D1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
