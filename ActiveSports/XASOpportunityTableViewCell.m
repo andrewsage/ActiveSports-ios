@@ -7,6 +7,7 @@
 //
 
 #import "XASOpportunityTableViewCell.h"
+#import "UIImage+Resize.h"
 
 @implementation XASOpportunityTableViewCell
 
@@ -14,11 +15,21 @@
     // Initialization code
     self.ratingView.padding = 0.0f;
     self.ratingView.editable = NO;
-    self.ratingView.starImage = [UIImage imageNamed:@"drop-rating-small"];
+    self.ratingView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-small"] scaledToSize:CGSizeMake(34.0 / 3.0, 45.0 / 3.0)];
+    
     self.ratingView.backgroundColor = [UIColor clearColor];
     self.ratingView.alignment = XASRateViewAlignmentRight;
     self.ratingView.direction = XASRateViewDirectionRightToLeft;
     self.ratingView.emptyAlpha = 0.0f;
+    
+    
+    self.distanceLabel.layer.cornerRadius = 5.0f;
+    self.distanceLabel.clipsToBounds = YES;
+    self.distanceLabel.insets = UIEdgeInsetsMake(20, 20, 20, 20);
+    [self.distanceLabel resizeHeightToFitText];
+    self.distanceLabel.backgroundColor = [UIColor colorWithRed:0.094 green:0.490 blue:0.459 alpha:1];
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

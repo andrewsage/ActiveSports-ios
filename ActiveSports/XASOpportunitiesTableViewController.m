@@ -365,10 +365,12 @@
     cell.ratingView.padding = 0.0f;
     cell.ratingView.rate = opportunity.effortRating.floatValue;
     double distanceInMiles = opportunity.distanceInMeters.doubleValue / 1609.344;
-    cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
+    if(distanceInMiles > 10) {
+        cell.distanceLabel.text = @"> 10 miles";
+    } else {
+        cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
+    }
     cell.distanceLabel.layer.cornerRadius = 2.0f;
-    
-    cell.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     
     return cell;
 }

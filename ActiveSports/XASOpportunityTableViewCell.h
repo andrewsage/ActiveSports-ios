@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "XASRateView.h"
+#import "XASPaddedLabel.h"
 
 @interface XASOpportunityTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet XASPaddedLabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet XASRateView *ratingView;
 
 

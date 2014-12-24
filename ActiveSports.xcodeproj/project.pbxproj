@@ -41,6 +41,8 @@
 		4946831619E29E9C00437B63 /* XASConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831419E29E9C00437B63 /* XASConnector.m */; };
 		4946831919E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
 		4946831A19E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
+		4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
+		4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
 		496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
@@ -121,6 +123,8 @@
 		4946831419E29E9C00437B63 /* XASConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASConnector.m; sourceTree = "<group>"; };
 		4946831719E2A38C00437B63 /* XASVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenue.h; sourceTree = "<group>"; };
 		4946831819E2A38C00437B63 /* XASVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenue.m; sourceTree = "<group>"; };
+		4957795B1A4B09420038569C /* XASPaddedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASPaddedLabel.h; sourceTree = "<group>"; };
+		4957795C1A4B09420038569C /* XASPaddedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASPaddedLabel.m; sourceTree = "<group>"; };
 		496AF5151A233D7000F605F4 /* XASProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProgressView.h; sourceTree = "<group>"; };
 		496AF5161A233D7000F605F4 /* XASProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProgressView.m; sourceTree = "<group>"; };
 		497B8C8519FD1A4E00734629 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */,
 				49C1D1FD1A38C0E7005A38E4 /* UIImage+Resize.h */,
 				49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */,
+				4957795B1A4B09420038569C /* XASPaddedLabel.h */,
+				4957795C1A4B09420038569C /* XASPaddedLabel.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				49C1D1FF1A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
+				4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */,
 				4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
 				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49358F1E19E2EF2700BB3686 /* XASBaseObject.m in Sources */,
@@ -453,6 +460,7 @@
 				4946831619E29E9C00437B63 /* XASConnector.m in Sources */,
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
+				4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */,
 				49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */,
 				493131671A19128A00B1365A /* XASRoundedView.m in Sources */,
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
