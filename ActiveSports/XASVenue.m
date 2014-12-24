@@ -132,5 +132,22 @@
     }
 }
 
++ (XASVenue*)venueWithObjectID:(NSNumber*)objectID {
+    
+    XASVenue *matchingVenue = nil;
+    
+    NSDictionary *dictionary = [XASVenue dictionary];
+    for(NSString *key in dictionary.allKeys) {
+        XASVenue *venue = [dictionary objectForKey:key];
+        
+        if([venue.remoteID isEqual:objectID]) {
+            matchingVenue = venue;
+            break;
+        }
+    }
+    
+    return matchingVenue;
+}
+
 
 @end

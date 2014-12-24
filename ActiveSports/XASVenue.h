@@ -25,6 +25,7 @@
 + (NSString *)dictionaryPath;
 + (void)saveDictionary;
 
++ (XASVenue*)venueWithObjectID:(NSString*)objectID;
 
 
 @end

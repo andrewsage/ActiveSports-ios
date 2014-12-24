@@ -364,9 +364,11 @@
     cell.ratingView.editable = NO;
     cell.ratingView.padding = 0.0f;
     cell.ratingView.rate = opportunity.effortRating.floatValue;
-    double distanceInMiles = opportunity.distanceInMeters.doubleValue / 1609.344;
-    if(distanceInMiles > 10) {
-        cell.distanceLabel.text = @"> 10 miles";
+    
+    XASVenue *venue = [XASVenue venueWithObjectID:opportunity.venue.remoteID];
+    double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
+    if(distanceInMiles > 200) {
+        cell.distanceLabel.text = @"> 200 miles";
     } else {
         cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
     }
@@ -496,23 +498,28 @@
     //[errorAlert show];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+
     mCurrentLocation = newLocation;
     
-    /*
-    // Re-calculate distances
-    for(XASOpportunity *opportunity in objectsArray) {
+    // Re-calculate distances to the venues
+    NSDictionary *dictionary = [XASVenue dictionary];
+    for(NSString *key in dictionary.allKeys) {
+        XASVenue *venue = [dictionary objectForKey:key];
         
-        CLLocationCoordinate2D venueCoord = CLLocationCoordinate2DMake(opportunity.venue.locationLat.doubleValue, opportunity.venue.locationLong.doubleValue);
+        CLLocationCoordinate2D venueCoord = CLLocationCoordinate2DMake(venue.locationLat.doubleValue, venue.locationLong.doubleValue);
         
         CLLocation *venueLocation = [[CLLocation alloc] initWithLatitude:venueCoord.latitude
-                                                                 longitude:venueCoord.longitude];
+                                                               longitude:venueCoord.longitude];
         
         CLLocationDistance distance = [mCurrentLocation distanceFromLocation:venueLocation];
-        opportunity.distanceInMeters = [NSNumber numberWithInt:distance];
+        venue.distanceInMeters = [NSNumber numberWithInt:distance];
+        
+        [dictionary setValue:venue forKey:venue.remoteID];
     }
-    */
+    
+    [XASVenue saveDictionary];
+    
     [self.tableView reloadData];
 }
 
