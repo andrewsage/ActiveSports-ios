@@ -59,8 +59,6 @@
 		497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */; };
 		497CA73C19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */; };
 		497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */; };
-		497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
-		497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */; };
 		497CA74319F3CA0E003F5F0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CA74219F3CA0E003F5F0A /* MapKit.framework */; };
 		49948ED81A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
 		49948ED91A252560005CC549 /* XASHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49948ED71A252560005CC549 /* XASHomeViewController.m */; };
@@ -147,8 +145,6 @@
 		497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunitiesTableViewController.m; sourceTree = "<group>"; };
 		497CA73A19F2EC43003F5F0A /* XASOpportunityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityTableViewCell.h; sourceTree = "<group>"; };
 		497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityTableViewCell.m; sourceTree = "<group>"; };
-		497CA73E19F3B914003F5F0A /* XASOpportunityDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityDetailsViewController.h; sourceTree = "<group>"; };
-		497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityDetailsViewController.m; sourceTree = "<group>"; };
 		497CA74219F3CA0E003F5F0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		49948ED61A252560005CC549 /* XASHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHomeViewController.h; sourceTree = "<group>"; };
 		49948ED71A252560005CC549 /* XASHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeViewController.m; sourceTree = "<group>"; };
@@ -243,8 +239,6 @@
 				497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */,
 				497CA73A19F2EC43003F5F0A /* XASOpportunityTableViewCell.h */,
 				497CA73B19F2EC43003F5F0A /* XASOpportunityTableViewCell.m */,
-				497CA73E19F3B914003F5F0A /* XASOpportunityDetailsViewController.h */,
-				497CA73F19F3B914003F5F0A /* XASOpportunityDetailsViewController.m */,
 				497B8C8919FD25B500734629 /* XASMenuTableViewController.h */,
 				497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */,
 				49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */,
@@ -449,7 +443,6 @@
 				493131661A19128A00B1365A /* XASRoundedView.m in Sources */,
 				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				49236E411A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */,
-				497CA74019F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				49081A941A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				49C1D2031A3A7748005A38E4 /* XASVenueNotice.m in Sources */,
 				49948ED81A252560005CC549 /* XASHomeViewController.m in Sources */,
@@ -490,7 +483,6 @@
 				497CA73D19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
 				492FFFBA1A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				49AAE7AC1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
-				497CA74119F3B914003F5F0A /* XASOpportunityDetailsViewController.m in Sources */,
 				49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49C1D2041A3A7748005A38E4 /* XASVenueNotice.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,

@@ -8,9 +8,11 @@
 
 #import "XASRateViewController.h"
 #import "XASRateView.h"
+#import "UIImage+Resize.h"
 
 @interface XASRateViewController () <XASRateViewDelegate>
 @property (weak, nonatomic) IBOutlet XASRateView *rateView;
+@property (weak, nonatomic) IBOutlet XASRateView *currentRatingView;
 
 @end
 
@@ -31,23 +33,22 @@
     
     self.opportunityNameLabel.text = self.opportunity.name;
 
+    self.currentRatingView.rate = self.opportunity.effortRating.integerValue;
+    self.currentRatingView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(34.0 / 2.0, 45.0 / 2.0)];
     
-    NSArray *effortIconViews = @[self.effortIconView1, self.effortIconView2, self.effortIconView3, self.effortIconView4, self.effortIconView5];
-    // Hide the sweat drops if required
-    for(NSInteger loop = 0; loop < 5; loop++) {
-        UIView *effortIconView = effortIconViews[loop];
-        effortIconView.alpha = loop + 1 > self.opportunity.effortRating.integerValue ? 0.4 : 1.0;
-    }
-    
+    self.currentRatingView.padding = 10;
+    self.currentRatingView.alignment = XASRateViewAlignmentCenter;
+    self.currentRatingView.editable = NO;
+    self.currentRatingView.delegate = self;
+
     self.ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
     
-    self.rateView.starImage = [UIImage imageNamed:@"drop-rating-small"];
+    self.rateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-small"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
 
     self.rateView.padding = 10;
     self.rateView.alignment = XASRateViewAlignmentCenter;
     self.rateView.editable = YES;
     self.rateView.delegate = self;
-
 }
 
 - (void)didReceiveMemoryWarning {

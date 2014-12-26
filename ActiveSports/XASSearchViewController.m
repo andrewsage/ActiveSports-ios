@@ -10,8 +10,7 @@
 #import "SWRevealViewController.h"
 #import "XASRateView.h"
 #import "XASOpportunitiesTableViewController.h"
-
-
+#import "UIImage+Resize.h"
 
 @interface XASSearchViewController ()
 
@@ -49,6 +48,9 @@
         [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
     }
     
+    self.minimumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
+    self.maximumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
+
     self.minimumRateView.editable = YES;
     self.maximumRateView.editable = YES;
     self.maximumRateView.rate = 5.0f;

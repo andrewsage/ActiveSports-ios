@@ -10,6 +10,7 @@
 #import "XASRateViewController.h"
 #import "XASVenueNotice.h"
 #import "XASRateView.h"
+#import "UIImage+Resize.h"
 
 @interface XASOpportunityViewController () {
     NSMutableArray *_venueNotices;
@@ -169,7 +170,7 @@
                     
                 case 3: // Rating
                 {
-                    height = 55.0f;
+                    height = 60.0f;
                 }
                     break;
                     
@@ -423,7 +424,7 @@
                     rateView.editable = NO;
                     rateView.backgroundColor = [UIColor clearColor];
                     rateView.rate = self.opportunity.effortRating.doubleValue;
-                    rateView.starImage = [UIImage imageNamed:@"drop-rating-small"];
+                    rateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
                     
                 }
                     break;
