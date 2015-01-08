@@ -56,6 +56,11 @@
     self.flexibilityButton.layer.borderColor = [UIColor blueColor].CGColor;
     */
     
+    NSArray *buttonsArray = @[self.strengthButton, self.cardioButton, self.weightLossButton, self.flexibilityButton];
+    for(UIButton *button in buttonsArray) {
+        [self buttonPressed:button];
+    }
+    
     self.resultsButton.layer.cornerRadius = 2.0f;
     
     [self.resultsButton setBackgroundColor:[UIColor colorWithRed:0.169 green:0.655 blue:0.098 alpha:1]];
