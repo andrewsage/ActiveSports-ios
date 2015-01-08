@@ -7,15 +7,12 @@
 //
 
 #import "XASHomeViewController.h"
-#import "SWRevealViewController.h"
 #import "XASOpportunitiesTableViewController.h"
 
 
 
 @interface XASHomeViewController ()
 
-
-@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 
 @end
 
@@ -24,21 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        // Change button color
-        //self.revealButtonItem.tintColor = [UIColor colorWithWhite:0.96f alpha:0.2f];
         
-        // Set the gesture
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        
-        [self.revealButtonItem setTarget: self.revealViewController];
-        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-    }
-    
     self.view.backgroundColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
 }

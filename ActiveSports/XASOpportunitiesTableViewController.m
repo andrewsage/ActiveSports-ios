@@ -13,7 +13,6 @@
 #import "XASOpportunityDetailsViewController.h"
 #import "XASOpportunityViewController.h"
 
-#import "SWRevealViewController.h"
 
 
 @interface XASOpportunitiesTableViewController () {
@@ -24,7 +23,6 @@
     NSMutableDictionary *_collectionsDictionary;
 }
 
-@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 
 @end
 
@@ -45,25 +43,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
     
     
     
     _collectionsDictionary = [NSMutableDictionary dictionary];
     
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        // Change button color
-        //self.revealButtonItem.tintColor = [UIColor colorWithWhite:0.96f alpha:0.2f];
-        
-        // Set the gesture
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-
-        [self.revealButtonItem setTarget: self.revealViewController];
-        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-    }
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     

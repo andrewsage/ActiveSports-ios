@@ -7,7 +7,6 @@
 //
 
 #import "XASMenuTableViewController.h"
-#import "SWRevealViewController.h"
 #import "XASOpportunitiesTableViewController.h"
 
 @interface XASMenuTableViewController ()

@@ -51,8 +51,6 @@
 		4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779681A4B21890038569C /* XASMenuCollectionViewCell.m */; };
 		496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
-		497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
-		497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8619FD1A4E00734629 /* SWRevealViewController.m */; };
 		497B8C8B19FD25B500734629 /* XASMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */; };
 		497B8C8C19FD25B500734629 /* XASMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */; };
 		497CA73819F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497CA73719F2E557003F5F0A /* XASOpportunitiesTableViewController.m */; };
@@ -137,8 +135,6 @@
 		495779681A4B21890038569C /* XASMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMenuCollectionViewCell.m; sourceTree = "<group>"; };
 		496AF5151A233D7000F605F4 /* XASProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProgressView.h; sourceTree = "<group>"; };
 		496AF5161A233D7000F605F4 /* XASProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProgressView.m; sourceTree = "<group>"; };
-		497B8C8519FD1A4E00734629 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		497B8C8619FD1A4E00734629 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		497B8C8919FD25B500734629 /* XASMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMenuTableViewController.h; sourceTree = "<group>"; };
 		497B8C8A19FD25B500734629 /* XASMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMenuTableViewController.m; sourceTree = "<group>"; };
 		497CA73619F2E557003F5F0A /* XASOpportunitiesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunitiesTableViewController.h; sourceTree = "<group>"; };
@@ -220,7 +216,6 @@
 		494682E519E29C4800437B63 /* ActiveSports */ = {
 			isa = PBXGroup;
 			children = (
-				497B8C8419FD181000734629 /* Library */,
 				494682EA19E29C4800437B63 /* AppDelegate.h */,
 				494682EB19E29C4800437B63 /* AppDelegate.m */,
 				494682F019E29C4800437B63 /* ViewController.h */,
@@ -305,15 +300,6 @@
 				4946830419E29C4800437B63 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		497B8C8419FD181000734629 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				497B8C8519FD1A4E00734629 /* SWRevealViewController.h */,
-				497B8C8619FD1A4E00734629 /* SWRevealViewController.m */,
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,7 +405,6 @@
 			files = (
 				49C1D1FF1A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
-				497B8C8719FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 				4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */,
 				4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */,
 				496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */,
@@ -486,7 +471,6 @@
 				49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49C1D2041A3A7748005A38E4 /* XASVenueNotice.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
-				497B8C8819FD1A4E00734629 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,13 +599,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Sage Art & Entertainment Limited (33W58W5MZ2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Sage Art & Entertainment Limited (33W58W5MZ2)";
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "391d0364-3920-4c2b-92ea-89248dae9dd6";
+				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
 			};
 			name = Release;
 		};

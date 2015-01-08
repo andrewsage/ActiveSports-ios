@@ -7,7 +7,6 @@
 //
 
 #import "XASProfileTableViewController.h"
-#import "SWRevealViewController.h"
 #import "XASActivity.h"
 #import "XASPreferenceTableViewCell.h"
 
@@ -17,7 +16,6 @@
     NSMutableDictionary *_preferencesDictionary;
 }
 
-@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (weak, nonatomic) IBOutlet UIButton *answerButton;
 
 @end
@@ -55,13 +53,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.revealButtonItem setTarget: revealViewController];
-        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
-    }
     
     [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         if(error) {

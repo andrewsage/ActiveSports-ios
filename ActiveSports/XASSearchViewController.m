@@ -7,14 +7,11 @@
 //
 
 #import "XASSearchViewController.h"
-#import "SWRevealViewController.h"
 #import "XASRateView.h"
 #import "XASOpportunitiesTableViewController.h"
 #import "UIImage+Resize.h"
 
 @interface XASSearchViewController ()
-
-@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 
 @property (weak, nonatomic) IBOutlet XASRateView *minimumRateView;
 @property (weak, nonatomic) IBOutlet XASRateView *maximumRateView;
@@ -40,13 +37,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.revealButtonItem setTarget: revealViewController];
-        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer:revealViewController.panGestureRecognizer];
-    }
     
     self.minimumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
     self.maximumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];

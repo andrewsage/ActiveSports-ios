@@ -8,7 +8,6 @@
 
 #import "XASVenuesTableViewController.h"
 
-#import "SWRevealViewController.h"
 #import "XASVenue.h"
 #import "XASOpportunitiesTableViewController.h"
 
@@ -20,9 +19,6 @@
 }
 
 
-@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
-
-
 @end
 
 @implementation XASVenuesTableViewController
@@ -31,21 +27,6 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden = NO;
-
-    
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        // Change button color
-        //self.revealButtonItem.tintColor = [UIColor colorWithWhite:0.96f alpha:0.2f];
-        
-        // Set the gesture
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        
-        [self.revealButtonItem setTarget: self.revealViewController];
-        [self.revealButtonItem setAction: @selector( rightRevealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-    }
     
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
