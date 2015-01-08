@@ -174,7 +174,7 @@
 #pragma mark - Map stuff
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
@@ -226,6 +226,39 @@
     }
     return nil;
 }
+
+- (void)zoomToVenues {
+    CLLocationDegrees minLat = 90.0;
+    CLLocationDegrees maxLat = -90.0;
+    CLLocationDegrees minLon = 180.0;
+    CLLocationDegrees maxLon = -180.0;
+    
+    for (id <MKAnnotation> annotation in self.mapView.annotations) {
+        
+        if(annotation != self.mapView.userLocation) {
+            if (annotation.coordinate.latitude < minLat) {
+                minLat = annotation.coordinate.latitude;
+            }
+            if (annotation.coordinate.longitude < minLon) {
+                minLon = annotation.coordinate.longitude;
+            }
+            if (annotation.coordinate.latitude > maxLat) {
+                maxLat = annotation.coordinate.latitude;
+            }
+            if (annotation.coordinate.longitude > maxLon) {
+                maxLon = annotation.coordinate.longitude;
+            }
+        }
+    }
+    
+    MKCoordinateSpan span = MKCoordinateSpanMake((maxLat - minLat), (maxLon - minLon));
+    
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake((maxLat - span.latitudeDelta / 2), maxLon - span.longitudeDelta / 2);
+    
+    [self.mapView setRegion:[self.mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:YES];
+    
+}
+
 
 #pragma mark -
 
@@ -291,6 +324,8 @@
         
         [self.mapView addAnnotation:annotation];
     }
+    
+    [self zoomToVenues];
     
     //[self.mapView showAnnotations:self.mapView.annotations animated:YES];
 
