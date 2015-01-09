@@ -1046,6 +1046,9 @@
                                     <constraint firstAttribute="centerX" secondItem="A1G-Sy-kID" secondAttribute="centerX" id="MYo-PM-9lA"/>
                                     <constraint firstAttribute="centerY" secondItem="A1G-Sy-kID" secondAttribute="centerY" id="Ymo-qb-CW5"/>
                                 </constraints>
+                                <connections>
+                                    <segue destination="yDH-oX-T4f" kind="show" id="Ihp-YP-wIj"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="46o-vN-3aS">
@@ -1273,6 +1276,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxh-zN-osX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3701" y="-3327"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="pLN-lG-AVc">
+            <objects>
+                <viewController id="yDH-oX-T4f" customClass="XASAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k7p-w1-TVN"/>
+                        <viewControllerLayoutGuide type="bottom" id="otS-6b-5DK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cSz-Gd-5rv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsI-mB-R53">
+                                <rect key="frame" x="16" y="108" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhA-J3-ism">
+                                <rect key="frame" x="16" y="137" width="568" height="443"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">This software has been developed as part of Nesta Scotland's Code for Europe programme for Aberdeen City Council.  All code is Open Source and available on the Civic Exchange.  Developed by Andrew Sage Designed by Jen Thomson</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qhA-J3-ism" firstAttribute="top" secondItem="CsI-mB-R53" secondAttribute="bottom" constant="8" id="3of-xA-iyd"/>
+                            <constraint firstItem="CsI-mB-R53" firstAttribute="trailing" secondItem="cSz-Gd-5rv" secondAttribute="trailingMargin" id="DvG-sh-UHB"/>
+                            <constraint firstItem="qhA-J3-ism" firstAttribute="trailing" secondItem="cSz-Gd-5rv" secondAttribute="trailingMargin" id="dF7-4F-KDa"/>
+                            <constraint firstItem="qhA-J3-ism" firstAttribute="leading" secondItem="cSz-Gd-5rv" secondAttribute="leadingMargin" id="lwX-eR-zEF"/>
+                            <constraint firstItem="CsI-mB-R53" firstAttribute="top" secondItem="k7p-w1-TVN" secondAttribute="bottom" constant="44" id="s5M-3T-dSJ"/>
+                            <constraint firstItem="otS-6b-5DK" firstAttribute="top" secondItem="qhA-J3-ism" secondAttribute="bottom" constant="20" id="xh5-wh-O1c"/>
+                            <constraint firstItem="CsI-mB-R53" firstAttribute="leading" secondItem="cSz-Gd-5rv" secondAttribute="leadingMargin" id="yBe-n7-bjZ"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="CsI-mB-R53" id="6rb-FN-E46"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="49b-M4-CWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1950" y="-5106"/>
         </scene>
         <!--Your preferences-->
         <scene sceneID="Ae9-t5-8Pl">
@@ -1837,7 +1886,7 @@
         <!--Navigation Controller-->
         <scene sceneID="76U-54-mQO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="hHh-Xp-yfb" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hHh-Xp-yfb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dfc-uu-FP8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1871,6 +1920,6 @@
         <image name="time-mini" width="16" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bv7-Yd-iH6"/>
+        <segue reference="OkR-ez-jtU"/>
     </inferredMetricsTieBreakers>
 </document>
