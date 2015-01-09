@@ -134,6 +134,11 @@
         
         [searchDictionary setObject:[NSNumber numberWithInteger:weekday] forKey:@"dayOfWeek"];
         
+        if([sender isKindOfClass:[XASVenueAnnotation class]]) {
+            XASVenueAnnotation *venueAnnotation = (XASVenueAnnotation*)sender;
+            [searchDictionary setObject:venueAnnotation.venue.remoteID forKey:@"venue"];
+        }
+        
         controller.viewType = XASOpportunitiesViewSearch;
         controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
     }
@@ -222,9 +227,24 @@
         numberView.textColor = [UIColor redColor];
         [pinView addSubview:numberView];
         
+        pinView.canShowCallout = YES;
+        pinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+        
         return pinView;
     }
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    
+    XASVenueAnnotation *venueAnnotation = (XASVenueAnnotation*)view.annotation;
+    
+    NSLog(@"you touched the disclosure indicator");
+    NSLog(@"%@",view.annotation.title);
+    NSLog(@"%@", venueAnnotation.venue.name);
+
+    [self performSegueWithIdentifier:@"results" sender:venueAnnotation];
 }
 
 - (void)zoomToVenues {
@@ -321,6 +341,7 @@
         
         annotation.numberOfActivities = [NSString stringWithFormat:@"%lu", (unsigned long)objectsArray.count];
         annotation.coordinate = venueCoord;
+        annotation.venue = venue;
         
         [self.mapView addAnnotation:annotation];
     }

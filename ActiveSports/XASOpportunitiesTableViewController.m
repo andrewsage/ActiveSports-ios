@@ -182,6 +182,14 @@
                     NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
                     
+                    NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
+                    
+                    if([self.searchDictionary objectForKey:@"venue"]) {
+                        if([venueID isEqual:opportunity.venue.remoteID] == NO) {
+                            include = NO;
+                        }
+                    }
+                    
                     if([self.searchDictionary objectForKey:@"tag"]) {
                         BOOL matches = NO;
                         for(NSString *tag in [self.searchDictionary objectForKey:@"tag"]) {

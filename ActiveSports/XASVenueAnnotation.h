@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MKAnnotation.h>
+#import "XASVenue.h"
 
 @interface XASVenueAnnotation : NSObject <MKAnnotation> 
 @property(nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property(nonatomic, copy) NSString *title;
 @property(nonatomic, copy) NSString *numberOfActivities;
-
+@property(nonatomic, retain) XASVenue *venue;
 
 @end
