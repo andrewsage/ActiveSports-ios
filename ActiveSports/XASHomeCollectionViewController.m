@@ -123,8 +123,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Available height is the size of the collection view minus the header
+    CGFloat height = collectionView.frame.size.height - 90;
+    
     //You may want to create a divider to scale the size by the way..
-    return CGSizeMake(collectionView.frame.size.width / 2, collectionView.frame.size.width / 2);
+    return CGSizeMake(collectionView.frame.size.width / 2, height /  4);
 }
 
 
