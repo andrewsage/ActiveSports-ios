@@ -11,7 +11,8 @@
 #import "XASVenueAnnotation.h"
 #import "XASOpportunity.h"
 #import "UIImage+Resize.h"
-
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 @interface XASTodayHomeViewController () {
     
@@ -36,34 +37,18 @@
     
     _tagsArray = [NSMutableArray arrayWithCapacity:0];
     
-    // Do any additional setup after loading the view.
-    
-    /*
-    self.strengthButton.layer.borderWidth = 1.0f;
-    self.strengthButton.layer.cornerRadius = 2.0f;
-    self.strengthButton.layer.borderColor = [UIColor blueColor].CGColor;
-
-    self.cardioButton.layer.borderWidth = 1.0f;
-    self.cardioButton.layer.cornerRadius = 2.0f;
-    self.cardioButton.layer.borderColor = [UIColor blueColor].CGColor;
-    
-    self.weightLossButton.layer.borderWidth = 1.0f;
-    self.weightLossButton.layer.cornerRadius = 2.0f;
-    self.weightLossButton.layer.borderColor = [UIColor blueColor].CGColor;
-    
-    self.flexibilityButton.layer.borderWidth = 1.0f;
-    self.flexibilityButton.layer.cornerRadius = 2.0f;
-    self.flexibilityButton.layer.borderColor = [UIColor blueColor].CGColor;
-    */
-    
     NSArray *buttonsArray = @[self.strengthButton, self.cardioButton, self.weightLossButton, self.flexibilityButton];
     for(UIButton *button in buttonsArray) {
+        button.layer.borderWidth = 1.0f;
+        button.layer.cornerRadius = 5.0f;
+        button.layer.borderColor = [UIColor colorWithHexString:XASBrandMainColor].CGColor;
+
         [self buttonPressed:button];
     }
     
     self.resultsButton.layer.cornerRadius = 2.0f;
     
-    [self.resultsButton setBackgroundColor:[UIColor colorWithRed:0.169 green:0.655 blue:0.098 alpha:1]];
+    [self.resultsButton setBackgroundColor:[UIColor colorWithHexString:XASPositveActionColor]];
     [self.resultsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     self.title = @"What's on today?";
@@ -162,13 +147,15 @@
         tag = @"flexibility";
     }
     
-    [sender setImage:[UIImage imageNamed:@"dislikes"] forState:UIControlStateNormal];
-    [sender setImage:[UIImage imageNamed:@"likes"] forState:UIControlStateSelected];
-    
     if([sender isSelected]) {
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setTintColor:[UIColor colorWithHexString:XASBrandMainColor]];
         [sender setSelected:NO];
         [_tagsArray removeObject:tag];
     } else {
+        [sender setBackgroundColor:[UIColor colorWithHexString:XASBrandMainColor]];
+        [sender setTintColor:[UIColor whiteColor]];
         [sender setSelected:YES];
         [_tagsArray addObject:tag];
     }
@@ -223,8 +210,8 @@
         UILabel *numberView = [[UILabel alloc] initWithFrame:CGRectMake(0, -3, 30, 30)];
         numberView.text = venueAnnotation.numberOfActivities;
         numberView.textAlignment = NSTextAlignmentCenter;
-        numberView.font = [UIFont boldSystemFontOfSize:10.0f];
-        numberView.textColor = [UIColor redColor];
+        numberView.font = [UIFont fontWithName:XASFontRegular size:12];
+        numberView.textColor = [UIColor colorWithHexString:XASMainTextColor];
         [pinView addSubview:numberView];
         
         pinView.canShowCallout = YES;
