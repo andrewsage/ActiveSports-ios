@@ -18,6 +18,7 @@
     
     NSMutableArray *_tagsArray;
     NSMutableDictionary *_collectionsDictionary;
+    NSString *_timeOfDay;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *strengthButton;
@@ -34,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     _tagsArray = [NSMutableArray arrayWithCapacity:0];
     
@@ -63,17 +65,17 @@
     // Afternoon 12:00 - 16:59
     // Evening 17:00 - 23:59
     if(hour >= 17) {
-        self.greetingLabel.text = @"Good evening!";
+        _timeOfDay = @"evening";
     } else if (hour >= 12) {
-        self.greetingLabel.text = @"Good afternoon!";
+        _timeOfDay = @"afternoon";
     } else {
-        self.greetingLabel.text = @"Good morning!";
+        _timeOfDay = @"morning";
     }
     
     
+    self.greetingLabel.text = [NSString stringWithFormat:@"Good %@!", _timeOfDay];
+    
     self.mapView.delegate = self;
-    MKUserTrackingBarButtonItem *buttonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
-    self.navigationItem.rightBarButtonItem = buttonItem;
     
     
     [self rebuildContent];
@@ -81,12 +83,14 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+
+
+    /*
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
-    
+    */
     [super viewWillAppear:animated];
 }
 
@@ -130,6 +134,10 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)homePressed:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 - (IBAction)buttonPressed:(UIButton *)sender {
     
@@ -189,8 +197,10 @@
             //pinView.animatesDrop = YES;
             pinView.canShowCallout = YES;
             
-            UIImage *scaledImage = [UIImage imageWithImage:[UIImage imageNamed:@"map-marker"] scaledToSize:CGSizeMake(30.0, 30.0)];
-            pinView.image = scaledImage;
+            //UIImage *scaledImage = [UIImage imageWithImage:[UIImage imageNamed:@"map-pin"] scaledToSize:CGSizeMake(40.0, 54.0)];
+            //pinView.image = scaledImage;
+            
+            pinView.image = [UIImage imageNamed:@"map-pin"];
             
             //pinView.calloutOffset = CGPointMake(0, 32);
             //pinView.pinColor = MKPinAnnotationColorGreen;
@@ -269,15 +279,32 @@
 
 #pragma mark -
 
+- (NSString *)daySuffixForDate:(NSDate *)date {
+    
+    if ([[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] isEqualToString:@"en"]) {
+        NSInteger day_of_month = [[[NSCalendar currentCalendar] components:NSDayCalendarUnit fromDate:date] day];
+        switch (day_of_month) {
+            case 1:
+            case 21:
+            case 31: return @"st";
+            case 2:
+            case 22: return @"nd";
+            case 3:
+            case 23: return @"rd";
+            default: return @"th";
+        }
+    } else {
+        return @"";
+    }
+}
+
 - (void)rebuildContent {
     NSDate *now = [NSDate date];
     NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
     [weekday setDateFormat: @"EEEE"];
     NSString *todayName = [weekday stringFromDate:now];
 
-    
     _collectionsDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
-    
     
     NSDictionary *dictionary = [XASOpportunity dictionary];
     for(NSString *key in dictionary.allKeys) {
@@ -317,6 +344,8 @@
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     
+    NSInteger numberOfActivities = 0;
+    
     for(NSString *key in venues.allKeys) {
         
         XASVenue *venue = [venues objectForKey:key];
@@ -325,6 +354,8 @@
         XASVenueAnnotation *annotation = [[XASVenueAnnotation alloc] init];
         annotation.title = venue.name;
         NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:venue.name];
+        
+        numberOfActivities += objectsArray.count;
         
         annotation.numberOfActivities = [NSString stringWithFormat:@"%lu", (unsigned long)objectsArray.count];
         annotation.coordinate = venueCoord;
@@ -336,6 +367,32 @@
     [self zoomToVenues];
     
     //[self.mapView showAnnotations:self.mapView.annotations animated:YES];
+    
+    [weekday setDateFormat: @"eee dd"];
+    todayName = [weekday stringFromDate:now];
+    
+    NSMutableAttributedString *headerText = [[NSMutableAttributedString alloc] initWithString:@"Activities near you\n"];
+    NSMutableAttributedString *bottomText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld Activities - This %@ (%@%@)", (long)numberOfActivities, _timeOfDay, todayName, [self daySuffixForDate:now]]];
+    
+    UIFont *topRowFont = [UIFont fontWithName:XASFontRegular size:11];
+    UIFont *bottomRowFont = [UIFont fontWithName:XASFontBold size:11];
+    
+    NSDictionary *topRowTextAttributes = @{NSFontAttributeName : topRowFont };
+    NSDictionary *bottomRowTextAttributes = @{NSFontAttributeName : bottomRowFont };
+    
+    [headerText setAttributes:topRowTextAttributes range:NSMakeRange(0, headerText.length)];
+    [bottomText setAttributes:bottomRowTextAttributes range:NSMakeRange(0, bottomText.length)];
+    
+    [headerText appendAttributedString:bottomText];
+
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setNumberOfLines:2];
+    [label setTextColor:[UIColor colorWithHexString:XASBrandMainColor]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    label.attributedText = headerText;
+    self.navigationItem.titleView = label;
+    
 
 }
 

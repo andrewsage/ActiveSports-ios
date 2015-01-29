@@ -48,6 +48,9 @@ static NSString * const reuseIdentifier = @"Cell";
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+
+    
     if([segue.identifier isEqualToString:@"favourites"]) {
         XASOpportunitiesTableViewController *opportunitiesController = (XASOpportunitiesTableViewController*)segue.destinationViewController;
         opportunitiesController.viewType = XASOpportunitiesViewLikes;
