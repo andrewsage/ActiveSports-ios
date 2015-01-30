@@ -52,12 +52,11 @@
     
     NSDate *today = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *weekdayComponents =
-    [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+    [gregorian components:NSCalendarUnitWeekday fromDate:today];
     NSInteger weekday = [weekdayComponents weekday] - 1;
     [self.daySegmentedControl setSelectedSegmentIndex:weekday];
-
 
 }
 

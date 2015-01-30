@@ -43,7 +43,13 @@
                             <outlet property="delegate" destination="Wg8-DQ-mEK" id="9xb-4m-jYe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Venues" id="H97-Oj-54k"/>
+                    <navigationItem key="navigationItem" title="Venues" id="H97-Oj-54k">
+                        <barButtonItem key="rightBarButtonItem" image="icon-home" id="MIg-gb-xUP">
+                            <connections>
+                                <action selector="homePressed:" destination="Wg8-DQ-mEK" id="CMb-x8-sQc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVm-6n-QcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1995,6 +2001,6 @@
         <image name="time-mini" width="16" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bv7-Yd-iH6"/>
+        <segue reference="gQq-j1-XeE"/>
     </inferredMetricsTieBreakers>
 </document>

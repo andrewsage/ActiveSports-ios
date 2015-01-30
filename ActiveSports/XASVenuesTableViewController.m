@@ -10,6 +10,8 @@
 
 #import "XASVenue.h"
 #import "XASOpportunitiesTableViewController.h"
+#import "Constants.h"
+#import "UIColor+Expanded.h"
 
 
 @interface XASVenuesTableViewController () {
@@ -51,6 +53,15 @@
     }];
     
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:XASBrandMainColor], NSForegroundColorAttributeName, nil];
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,6 +147,13 @@
     }
 
 }
+
+#pragma mark - actions
+
+- (IBAction)homePressed:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark - CLLocationManagerDelegate
 
