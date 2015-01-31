@@ -58,7 +58,7 @@
     NSDate *now = [NSDate date];
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:now];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
     NSInteger hour = [components hour];
     
     // Morning 00:00 - 11:59
@@ -116,9 +116,9 @@
         
         NSDate *today = [NSDate date];
         NSCalendar *gregorian = [[NSCalendar alloc]
-                                 initWithCalendarIdentifier:NSGregorianCalendar];
+                                 initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *weekdayComponents =
-        [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+        [gregorian components:NSCalendarUnitWeekday fromDate:today];
         NSInteger weekday = [weekdayComponents weekday] - 1;
         
         [searchDictionary setObject:[NSNumber numberWithInteger:weekday] forKey:@"dayOfWeek"];
@@ -282,7 +282,7 @@
 - (NSString *)daySuffixForDate:(NSDate *)date {
     
     if ([[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] isEqualToString:@"en"]) {
-        NSInteger day_of_month = [[[NSCalendar currentCalendar] components:NSDayCalendarUnit fromDate:date] day];
+        NSInteger day_of_month = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date] day];
         switch (day_of_month) {
             case 1:
             case 21:

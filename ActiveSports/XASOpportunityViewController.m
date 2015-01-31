@@ -219,7 +219,7 @@
             
             UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
             
-            NSMutableAttributedString *description = [self buildAttributedString:venueNotice.message];
+            NSMutableAttributedString *description = [[NSMutableAttributedString alloc] initWithAttributedString:[self buildAttributedString:venueNotice.message]];
             
             textView.attributedText = description;
             
