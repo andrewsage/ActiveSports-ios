@@ -73,8 +73,7 @@
                                             forState:UIControlStateNormal];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-
+    self.tableView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -120,6 +119,14 @@
 
 
 #pragma mark - Table view data source
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.001;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 5.0;
+}
 
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
