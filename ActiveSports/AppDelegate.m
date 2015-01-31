@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "XASConnector.h"
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 @interface AppDelegate ()
 
@@ -27,7 +29,7 @@
     
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:XASBrandMainColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];

@@ -10,6 +10,8 @@
 #import "XASRateView.h"
 #import "XASOpportunitiesTableViewController.h"
 #import "UIImage+Resize.h"
+#import "Constants.h"
+#import "UIColor+Expanded.h"
 
 @interface XASSearchViewController ()
 
@@ -44,10 +46,12 @@
     self.minimumRateView.editable = YES;
     self.maximumRateView.editable = YES;
     self.maximumRateView.rate = 5.0f;
-    self.dayQuickSegmentedControl.tintColor = [UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1];
-    self.daySegmentedControl.tintColor = [UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1];
-    self.timeOfDaySegmentedControl.tintColor = [UIColor colorWithRed:0.110 green:0.090 blue:0.541 alpha:1];
-    self.searchButton.backgroundColor = [UIColor colorWithRed:0.000 green:0.702 blue:0.000 alpha:1];
+    self.dayQuickSegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.daySegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.timeOfDaySegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.searchButton.backgroundColor = [UIColor colorWithHexString:XASPositveActionColor];
+    
+    self.tableView.backgroundColor = [UIColor colorWithHexString:XASBrandMainColor];
     
     
     NSDate *today = [NSDate date];
@@ -57,12 +61,30 @@
     [gregorian components:NSCalendarUnitWeekday fromDate:today];
     NSInteger weekday = [weekdayComponents weekday] - 1;
     [self.daySegmentedControl setSelectedSegmentIndex:weekday];
+    
+    // Style the segment controls
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIFont fontWithName:XASFontRegular size:13], NSFontAttributeName,
+                                nil];
+    [self.dayQuickSegmentedControl setTitleTextAttributes:attributes
+                                                 forState:UIControlStateNormal];
+    
+    [self.daySegmentedControl setTitleTextAttributes:attributes
+                                            forState:UIControlStateNormal];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    /*
+     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
+     */
     [super viewWillAppear:animated];
 }
 
@@ -99,13 +121,16 @@
 
 #pragma mark - Table view data source
 
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    
+    return 1;
 }
+ */
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
