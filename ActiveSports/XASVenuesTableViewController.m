@@ -13,6 +13,7 @@
 #import "XASOpportunitiesTableViewController.h"
 #import "Constants.h"
 #import "UIColor+Expanded.h"
+#import "XASVenueTableViewCell.h"
 
 
 @interface XASVenuesTableViewController () {
@@ -102,15 +103,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"venue" forIndexPath:indexPath];
+    XASVenueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"venue" forIndexPath:indexPath];
     
     XASVenue *venue = [objectsArray objectAtIndex:indexPath.row];
     
     // Configure the cell...
-    cell.textLabel.text = venue.name;
-    double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
+    cell.nameLabel.text = venue.name;
+    cell.addressLabel.text = venue.address;
     
+    double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
+    cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
     return cell;
 }
 

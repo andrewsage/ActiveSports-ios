@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4903B86D1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4903B86C1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m */; };
+		4903B86E1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4903B86C1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m */; };
 		49081A941A05500D00941AC1 /* XASOpportunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49081A931A05500D00941AC1 /* XASOpportunityViewController.m */; };
 		49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49081A931A05500D00941AC1 /* XASOpportunityViewController.m */; };
 		49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
@@ -91,6 +93,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4903B86B1A9B9F5D006E6FE8 /* XASVenueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenueTableViewCell.h; sourceTree = "<group>"; };
+		4903B86C1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenueTableViewCell.m; sourceTree = "<group>"; };
 		49081A921A05500D00941AC1 /* XASOpportunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASOpportunityViewController.h; sourceTree = "<group>"; };
 		49081A931A05500D00941AC1 /* XASOpportunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASOpportunityViewController.m; sourceTree = "<group>"; };
 		49092D7E19FD299D0037ACCD /* XASProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileTableViewController.h; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 				49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */,
 				49808D371A5F554900DC7625 /* XASAboutViewController.h */,
 				49808D381A5F554900DC7625 /* XASAboutViewController.m */,
+				4903B86B1A9B9F5D006E6FE8 /* XASVenueTableViewCell.h */,
+				4903B86C1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -429,6 +435,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4903B86D1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m in Sources */,
 				49C1D1FF1A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */,
 				4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */,
@@ -501,6 +508,7 @@
 				49AAE7AC1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
 				49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */,
 				49C1D2041A3A7748005A38E4 /* XASVenueNotice.m in Sources */,
+				4903B86E1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m in Sources */,
 				498F16481A77FE8C00875634 /* UIColor+Expanded.m in Sources */,
 				497CA73919F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
 			);
