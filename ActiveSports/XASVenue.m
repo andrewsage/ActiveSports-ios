@@ -48,17 +48,17 @@
 
 + (NSMutableArray*)arrayFromJSONArray:(NSArray *)jsonArray {
     NSMutableArray *objectsArray = [NSMutableArray array];
+    NSMutableDictionary *dictionary = [XASVenue dictionary];
+
     
     for(NSDictionary *objectDictionary in jsonArray) {
-        XASVenue *venue = [[XASVenue alloc] init];
+        XASVenue *object = [[XASVenue alloc] initWithDictionary:objectDictionary];
+        [dictionary setObject:object forKey:object.remoteID];
         
-        [venue updateBasicInformation:objectDictionary];
-        
-        venue.name = [objectDictionary objectForKey:@"name"];
-        
-        [objectsArray addObject:venue];
+        [objectsArray addObject:object];
     }
-    
+    [XASVenue saveDictionary];
+
     return objectsArray;
 }
 
@@ -66,6 +66,12 @@
 + (void)fetchAllInBackgroundWithBlock:(XASArrayResultBlock)block {
     
     NSString *command = @"venues.json";
+    
+    [self sendRequestToServer:command block:block];
+}
+
++ (void)fetchAllInBackgroundFor:(XASBaseObject*)object withBlock:(XASArrayResultBlock)block {
+    NSString *command = [NSString stringWithFormat:@"regions/%@/venues.json", object.remoteID];
     
     [self sendRequestToServer:command block:block];
 }
@@ -110,6 +116,8 @@
     self.name = [objectDictionary valueForKey:@"name"];
     self.address = [objectDictionary valueForKey:@"address"];
     self.postCode = [objectDictionary valueForKey:@"postcode"];
+    
+    NSLog(@"updating %@", self.name);
     
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];

@@ -9,6 +9,7 @@
 #import "XASVenuesTableViewController.h"
 
 #import "XASVenue.h"
+#import "XASRegion.h"
 #import "XASOpportunitiesTableViewController.h"
 #import "Constants.h"
 #import "UIColor+Expanded.h"
@@ -25,20 +26,7 @@
 
 @implementation XASVenuesTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.navigationController.navigationBarHidden = NO;
-    
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager requestWhenInUseAuthorization];
-    
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
-    [locationManager startUpdatingLocation];
-    
-    objectsArray = [NSMutableArray array];
+- (void)rebuildContent {
     objectsArray = [NSMutableArray array];
     NSDictionary *dictionary = [XASVenue dictionary];
     for(NSString *key in dictionary.allKeys) {
@@ -53,6 +41,39 @@
     }];
     
     [self.tableView reloadData];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBarHidden = NO;
+    
+    locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [locationManager startUpdatingLocation];
+    
+    [self rebuildContent];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    
+    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
+                                       size:14];
+    
+    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
+    
+    
+    NSMutableAttributedString *attributedText =
+    [[NSMutableAttributedString alloc] initWithString:@"Pull down to refresh content"
+                                           attributes:boldTextAttributes];
+    
+    
+    self.refreshControl.attributedTitle = attributedText;
+    
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,8 +166,57 @@
         controller.venue = venue;
         controller.viewType = XASOpportunitiesViewVenue;
     }
-
 }
+
+
+- (void)refreshTable {
+    
+    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
+                                       size:14];
+    
+    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
+    
+    
+    NSMutableAttributedString *attributedText =
+    [[NSMutableAttributedString alloc] initWithString:@"Downloading content"
+                                           attributes:boldTextAttributes];
+    
+    
+    self.refreshControl.attributedTitle = attributedText;
+    
+    [self refreshContent];
+}
+
+
+- (void)refreshContent {
+    XASRegion *region = [[XASRegion alloc] init];
+    region.remoteID = @"4";
+    
+    [XASVenue fetchAllInBackgroundFor:region withBlock:^(NSArray *objects, NSError *error) {
+        
+        if(error) {
+            NSLog(@"error: %@", error.localizedDescription);
+        } else {
+            [self rebuildContent];
+            [self.tableView reloadData];
+        }
+        
+        [self.refreshControl endRefreshing];
+        
+        UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
+                                           size:14];
+        
+        NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
+        
+        
+        NSMutableAttributedString *attributedText =
+        [[NSMutableAttributedString alloc] initWithString:@"Pull down to refresh content"
+                                               attributes:boldTextAttributes];
+        
+        self.refreshControl.attributedTitle = attributedText;
+    }];
+}
+
 
 #pragma mark - actions
 
