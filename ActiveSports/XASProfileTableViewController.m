@@ -9,6 +9,8 @@
 #import "XASProfileTableViewController.h"
 #import "XASActivity.h"
 #import "XASPreferenceTableViewCell.h"
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 
 @interface XASProfileTableViewController () <UIActionSheetDelegate> {
@@ -65,12 +67,12 @@
     [self dataLoaded];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
 
     [super viewWillAppear:animated];
     
@@ -146,6 +148,10 @@
 
 
 #pragma mark - Actions
+- (IBAction)homeTapped:(id)sender {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 - (IBAction)resetTapped:(id)sender {
     

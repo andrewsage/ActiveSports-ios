@@ -11,6 +11,8 @@
 #import "XASVenueNotice.h"
 #import "XASRateView.h"
 #import "UIImage+Resize.h"
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 @interface XASOpportunityViewController () {
     NSMutableArray *_venueNotices;
@@ -69,10 +71,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    /*
+    
+    self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
     
+     */
     [super viewWillAppear:animated];
     
     
@@ -114,6 +122,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Actions
+
+- (IBAction)homePressed:(id)sender {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Table view data source
 

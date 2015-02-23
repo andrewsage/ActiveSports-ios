@@ -250,6 +250,10 @@
     CLLocationDegrees minLon = 180.0;
     CLLocationDegrees maxLon = -180.0;
     
+    if(self.mapView.annotations.count == 0) {
+        return;
+    }
+    
     for (id <MKAnnotation> annotation in self.mapView.annotations) {
         
         if(annotation != self.mapView.userLocation) {

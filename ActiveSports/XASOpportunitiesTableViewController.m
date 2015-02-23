@@ -12,7 +12,8 @@
 #import "XASOpportunityTableViewCell.h"
 #import "XASOpportunityDetailsViewController.h"
 #import "XASOpportunityViewController.h"
-
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 
 @interface XASOpportunitiesTableViewController () {
@@ -92,7 +93,7 @@
             break;
             
         case XASOpportunitiesViewSearch:
-            self.title = @"Search Results";
+            self.title = @"Advanced Search";
             break;
             
         default:
@@ -113,7 +114,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
 
 }
 
@@ -136,6 +140,8 @@
     [weekday setDateFormat: @"EEEE"];
     NSString *todayName = [weekday stringFromDate:now];
     
+
+    NSInteger numberOfActivities = 0;
     
     NSDictionary *dictionary = [XASOpportunity dictionary];
     for(NSString *key in dictionary.allKeys) {
@@ -249,6 +255,9 @@
             }
             
             if(include) {
+                
+                numberOfActivities++;
+                
                 NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[NSNumber numberWithInteger:startHour]];
                 
                 if(objectsArray == nil) {
@@ -274,6 +283,29 @@
             }
         }
     }
+    
+    
+    NSMutableAttributedString *headerText = [[NSMutableAttributedString alloc] initWithString:self.title];
+    NSMutableAttributedString *bottomText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%ld Activities", (long)numberOfActivities]];
+    
+    UIFont *topRowFont = [UIFont fontWithName:XASFontRegular size:11];
+    UIFont *bottomRowFont = [UIFont fontWithName:XASFontBold size:11];
+    
+    NSDictionary *topRowTextAttributes = @{NSFontAttributeName : topRowFont };
+    NSDictionary *bottomRowTextAttributes = @{NSFontAttributeName : bottomRowFont };
+    
+    [headerText setAttributes:topRowTextAttributes range:NSMakeRange(0, headerText.length)];
+    [bottomText setAttributes:bottomRowTextAttributes range:NSMakeRange(0, bottomText.length)];
+    
+    [headerText appendAttributedString:bottomText];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setNumberOfLines:2];
+    [label setTextColor:[UIColor colorWithHexString:XASBrandMainColor]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    label.attributedText = headerText;
+    self.navigationItem.titleView = label;
 }
 
 - (NSArray*)sortedKeys {
@@ -283,6 +315,13 @@
     }];
     
     return keysArray;
+}
+
+#pragma mark - Actions
+
+- (IBAction)homePressed:(id)sender {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
