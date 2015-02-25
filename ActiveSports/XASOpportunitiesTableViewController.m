@@ -191,6 +191,14 @@
                     NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
                     
                     NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
+                    NSString *textSearch = [self.searchDictionary objectForKey:@"text"];
+                    
+                    if([self.searchDictionary objectForKey:@"text"]) {
+                        if([opportunity.name containsString:textSearch] == NO
+                           && [opportunity.description containsString:textSearch] == NO) {
+                            include = NO;
+                        }
+                    }
                     
                     if([self.searchDictionary objectForKey:@"venue"]) {
                         if([venueID isEqual:opportunity.venue.remoteID] == NO) {

@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timeOfDaySegmentedControl;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UITextField *textSearchField;
 
 
 @end
@@ -202,6 +203,7 @@
         [searchDictionary setObject:[NSNumber numberWithInteger:self.timeOfDaySegmentedControl.selectedSegmentIndex] forKey:@"timeOfDay"];
         [searchDictionary setObject:[NSNumber numberWithInteger:self.minimumRateView.rate] forKey:@"minimumExertion"];
         [searchDictionary setObject:[NSNumber numberWithInteger:self.maximumRateView.rate] forKey:@"maximumExertion"];
+        [searchDictionary setObject:self.textSearchField.text forKey:@"text"];
         
         controller.viewType = XASOpportunitiesViewSearch;
         controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];

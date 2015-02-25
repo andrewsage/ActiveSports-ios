@@ -1839,6 +1839,28 @@ Designed by Jen Thomson</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
+                            <tableViewSection id="iv9-bb-36h">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="45" id="cOJ-zt-awk" userLabel="Search Table View Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cOJ-zt-awk" id="mZY-IL-vaX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by activity name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="It9-Sc-w1E">
+                                                    <rect key="frame" x="8" y="8" width="584" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="It9-Sc-w1E" firstAttribute="leading" secondItem="mZY-IL-vaX" secondAttribute="leadingMargin" id="Hr3-hZ-1z8"/>
+                                                <constraint firstItem="It9-Sc-w1E" firstAttribute="top" secondItem="mZY-IL-vaX" secondAttribute="topMargin" id="Ty8-f6-eW2"/>
+                                                <constraint firstItem="It9-Sc-w1E" firstAttribute="trailing" secondItem="mZY-IL-vaX" secondAttribute="trailingMargin" id="Yeb-8o-SFF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="oio-SD-UaY">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="67" id="ofL-XK-wVf" userLabel="Time of day Table View Cell">
@@ -2054,6 +2076,7 @@ Designed by Jen Thomson</string>
                         <outlet property="maximumRateView" destination="sVm-P4-RN8" id="lme-vk-qWN"/>
                         <outlet property="minimumRateView" destination="Nm0-n3-nxq" id="rn7-lM-pgf"/>
                         <outlet property="searchButton" destination="5Yp-UP-wFE" id="9nT-6j-XyH"/>
+                        <outlet property="textSearchField" destination="It9-Sc-w1E" id="j3y-sN-gmk"/>
                         <outlet property="timeOfDaySegmentedControl" destination="TSv-5D-cxK" id="O75-uR-BCK"/>
                     </connections>
                 </tableViewController>
@@ -2103,6 +2126,6 @@ Designed by Jen Thomson</string>
         <image name="time-mini" width="16" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yoO-VU-oCe"/>
+        <segue reference="CiH-L8-POW"/>
     </inferredMetricsTieBreakers>
 </document>
