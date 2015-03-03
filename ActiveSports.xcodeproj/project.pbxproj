@@ -74,6 +74,8 @@
 		49C1D2001A38C0E7005A38E4 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */; };
 		49C1D2031A3A7748005A38E4 /* XASVenueNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1D2021A3A7748005A38E4 /* XASVenueNotice.m */; };
 		49C1D2041A3A7748005A38E4 /* XASVenueNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1D2021A3A7748005A38E4 /* XASVenueNotice.m */; };
+		49C963151AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C963141AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m */; };
+		49C963161AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C963141AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m */; };
 		49D57D6F1A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
 		49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D57D6E1A264A0900749FA5 /* XASMapViewController.m */; };
 		49D607FA1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
@@ -166,6 +168,8 @@
 		49C1D1FE1A38C0E7005A38E4 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		49C1D2011A3A7748005A38E4 /* XASVenueNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenueNotice.h; sourceTree = "<group>"; };
 		49C1D2021A3A7748005A38E4 /* XASVenueNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenueNotice.m; sourceTree = "<group>"; };
+		49C963131AA4E55F0087E9CB /* XASSavedSearchesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSavedSearchesTableViewController.h; sourceTree = "<group>"; };
+		49C963141AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASSavedSearchesTableViewController.m; sourceTree = "<group>"; };
 		49D57D6D1A264A0900749FA5 /* XASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMapViewController.h; sourceTree = "<group>"; };
 		49D57D6E1A264A0900749FA5 /* XASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMapViewController.m; sourceTree = "<group>"; };
 		49D607F81A1FA5D100D33961 /* XASSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASSearchViewController.h; sourceTree = "<group>"; };
@@ -293,6 +297,8 @@
 				49808D381A5F554900DC7625 /* XASAboutViewController.m */,
 				4903B86B1A9B9F5D006E6FE8 /* XASVenueTableViewCell.h */,
 				4903B86C1A9B9F5D006E6FE8 /* XASVenueTableViewCell.m */,
+				49C963131AA4E55F0087E9CB /* XASSavedSearchesTableViewController.h */,
+				49C963141AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				4946831919E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831519E29E9C00437B63 /* XASConnector.m in Sources */,
 				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
+				49C963151AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m in Sources */,
 				49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				495779611A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
 				49AAE7AB1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
@@ -500,6 +507,7 @@
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				49808D3A1A5F554900DC7625 /* XASAboutViewController.m in Sources */,
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
+				49C963161AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m in Sources */,
 				4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */,
 				49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */,
 				493131671A19128A00B1365A /* XASRoundedView.m in Sources */,
@@ -632,7 +640,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};

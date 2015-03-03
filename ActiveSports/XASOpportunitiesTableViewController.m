@@ -24,6 +24,7 @@
     NSMutableDictionary *_collectionsDictionary;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *saveSearchButton;
 
 @end
 
@@ -330,6 +331,48 @@
 - (IBAction)homePressed:(id)sender {
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)saveSearchTapped:(id)sender {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Name the search"
+                                                                   message:@"This is the name the search will be saved under."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Name of search";
+    }];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              UITextField *titleField =                                                       alert.textFields.firstObject;
+                                                              
+                                                              [self.saveSearchButton setImage:[UIImage imageNamed:@"save-search-active"] forState:UIControlStateNormal];
+                                                              
+                                                              NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                                                              NSString *searchQueriesPath = [documentDirectory stringByAppendingPathExtension:@"searches"];
+                                                              
+                                                              
+                                                              NSMutableDictionary *searchQueriesDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:searchQueriesPath];
+                                                              
+                                                              if(searchQueriesDictionary == nil) {
+                                                                  searchQueriesDictionary = [[NSMutableDictionary alloc] initWithCapacity:0];
+                                                              }
+                                                              
+                                                              [searchQueriesDictionary setObject:self.searchDictionary forKey:titleField.text];
+                                                              
+                                                              [searchQueriesDictionary writeToFile:searchQueriesPath atomically:YES];
+
+                                                          }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction * action) {
+                                                          }];
+    
+    [alert addAction:defaultAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

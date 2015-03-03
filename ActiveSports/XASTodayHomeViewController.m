@@ -217,7 +217,7 @@
         }
         
         XASVenueAnnotation *venueAnnotation = (XASVenueAnnotation*)annotation;
-        UILabel *numberView = [[UILabel alloc] initWithFrame:CGRectMake(0, -3, 30, 30)];
+        UILabel *numberView = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, pinView.frame.size.width, 30)];
         numberView.text = venueAnnotation.numberOfActivities;
         numberView.textAlignment = NSTextAlignmentCenter;
         numberView.font = [UIFont fontWithName:XASFontRegular size:12];

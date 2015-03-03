@@ -134,6 +134,27 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="h6c-oJ-hpQ">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzT-tD-JXb">
+                                    <rect key="frame" x="216" y="6" width="169" height="32"/>
+                                    <state key="normal" title="Save this search" image="save-search-inactive">
+                                        <color key="titleColor" red="0.059878920119999998" green="0.090293408140000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveSearchTapped:" destination="klm-HN-9nU" eventType="touchUpInside" id="y1T-WC-Gcp"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="centerY" secondItem="XzT-tD-JXb" secondAttribute="centerY" id="GRz-Kc-l2N"/>
+                                <constraint firstAttribute="centerX" secondItem="XzT-tD-JXb" secondAttribute="centerX" id="JeD-6l-nUE"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="opportunity" rowHeight="86" id="eNY-ZI-LVe" customClass="XASOpportunityTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -296,6 +317,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="saveSearchButton" destination="XzT-tD-JXb" id="2Ov-Iv-Gxp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5J1-nF-Vu7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1029,6 +1053,9 @@
                                     <constraint firstItem="cUa-7q-1s4" firstAttribute="top" secondItem="jPe-im-3MN" secondAttribute="bottom" constant="8" symbolic="YES" id="nbw-9V-JKj"/>
                                     <constraint firstItem="cUa-7q-1s4" firstAttribute="leading" secondItem="swl-Z3-08i" secondAttribute="leadingMargin" id="qZy-1r-8Dq"/>
                                 </constraints>
+                                <connections>
+                                    <segue destination="DBi-ra-BDF" kind="show" identifier="savedsearch" id="4nJ-Zo-Ejm"/>
+                                </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Favourites" id="P8d-Lq-rFd" customClass="XASMenuCollectionViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -2084,6 +2111,43 @@ Designed by Jen Thomson</string>
             </objects>
             <point key="canvasLocation" x="2577" y="-2360"/>
         </scene>
+        <!--Saved Searches-->
+        <scene sceneID="ORZ-zz-GMg">
+            <objects>
+                <tableViewController id="DBi-ra-BDF" customClass="XASSavedSearchesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CXa-xS-CeR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="search" id="hec-GD-ZyI">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hec-GD-ZyI" id="HGn-WP-OHY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="klm-HN-9nU" kind="show" identifier="search" id="Dnw-Sb-CSW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="DBi-ra-BDF" id="ukp-F2-1NZ"/>
+                            <outlet property="delegate" destination="DBi-ra-BDF" id="13C-Ya-cIU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Saved Searches" id="izX-JJ-JFk">
+                        <barButtonItem key="rightBarButtonItem" image="icon-home" id="OIr-ab-dWK">
+                            <connections>
+                                <action selector="homePressed:" destination="DBi-ra-BDF" id="XMQ-YG-9Cz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kcb-lN-3oR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1360" y="-1554"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="76U-54-mQO">
             <objects>
@@ -2126,6 +2190,6 @@ Designed by Jen Thomson</string>
         <image name="time-mini" width="16" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CiH-L8-POW"/>
+        <segue reference="Dnw-Sb-CSW"/>
     </inferredMetricsTieBreakers>
 </document>
