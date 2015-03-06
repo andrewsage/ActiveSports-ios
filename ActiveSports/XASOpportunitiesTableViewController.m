@@ -183,7 +183,7 @@
                     break;
                     
                 case XASOpportunitiesViewSearch: {
-                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
+                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @""];
                     NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
                     NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
                     NSNumber *timeOfDayNumber = [self.searchDictionary objectForKey:@"timeOfDay"];
@@ -195,9 +195,11 @@
                     NSString *textSearch = [self.searchDictionary objectForKey:@"text"];
                     
                     if([self.searchDictionary objectForKey:@"text"]) {
-                        if([opportunity.name containsString:textSearch] == NO
-                           && [opportunity.description containsString:textSearch] == NO) {
-                            include = NO;
+                        
+                        if([opportunity.name rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
+                            if([opportunity.description rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
+                                include = NO;
+                            }
                         }
                     }
                     
@@ -252,8 +254,10 @@
                         }
                     }
                     
-                    if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
-                        include = NO;
+                    if([dayName isEqualToString:@""] == NO) {
+                        if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
+                            include = NO;
+                        }
                     }
                 }
                     break;

@@ -1955,6 +1955,7 @@ Designed by Jen Thomson</string>
                                                         <segment title="Thu"/>
                                                         <segment title="Fri"/>
                                                         <segment title="Sat"/>
+                                                        <segment title="Any"/>
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
@@ -2190,6 +2191,6 @@ Designed by Jen Thomson</string>
         <image name="time-mini" width="16" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dnw-Sb-CSW"/>
+        <segue reference="CiH-L8-POW"/>
     </inferredMetricsTieBreakers>
 </document>
