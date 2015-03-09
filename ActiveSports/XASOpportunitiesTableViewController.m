@@ -25,6 +25,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *saveSearchButton;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -97,6 +98,10 @@
             self.title = @"Advanced Search";
             break;
             
+        case XASOpportunitiesViewSavedSearch:
+            self.title = [NSString stringWithFormat:@"Saved Search: %@", self.searchName];
+            break;
+            
         default:
             break;
     }
@@ -119,7 +124,12 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
-
+    
+    if(self.viewType == XASOpportunitiesViewSearch) {
+        self.tableView.tableHeaderView.hidden = NO;
+    } else {
+        self.tableView.tableHeaderView.hidden = YES;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -149,7 +159,7 @@
         XASOpportunity *opportunity = [dictionary objectForKey:key];
         
         if([opportunity.dayOfWeek isEqualToString:todayName]
-           || self.viewType == XASOpportunitiesViewSearch) {
+           || self.viewType == XASOpportunitiesViewSearch || self.viewType == XASOpportunitiesViewSavedSearch) {
             
             BOOL include = YES;
             NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
@@ -182,6 +192,7 @@
                 }
                     break;
                     
+                case XASOpportunitiesViewSavedSearch:
                 case XASOpportunitiesViewSearch: {
                     NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @""];
                     NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
@@ -194,11 +205,13 @@
                     NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
                     NSString *textSearch = [self.searchDictionary objectForKey:@"text"];
                     
-                    if([self.searchDictionary objectForKey:@"text"]) {
+                    if(textSearch) {
+                        if([textSearch isEqualToString:@""] == NO) {
                         
-                        if([opportunity.name rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                            if([opportunity.description rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                                include = NO;
+                            if([opportunity.name rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
+                                if([opportunity.description rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
+                                    include = NO;
+                                }
                             }
                         }
                     }
@@ -353,6 +366,9 @@
                                                               
                                                               [self.saveSearchButton setImage:[UIImage imageNamed:@"save-search-active"] forState:UIControlStateNormal];
                                                               
+                                                              self.tableView.tableHeaderView.hidden = YES;
+
+                                                              
                                                               NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
                                                               NSString *searchQueriesPath = [documentDirectory stringByAppendingPathExtension:@"searches"];
                                                               
@@ -381,6 +397,7 @@
 
 
 #pragma mark - Table view data source
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     

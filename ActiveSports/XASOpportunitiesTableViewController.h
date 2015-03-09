@@ -16,7 +16,8 @@ typedef enum {
     XASOpportunitiesViewVenue,
     XASOpportunitiesViewLikes,
     XASOpportunitiesViewFavourites,
-    XASOpportunitiesViewSearch
+    XASOpportunitiesViewSearch,
+    XASOpportunitiesViewSavedSearch
 } XASOpportunitiesView;
 
 
@@ -25,6 +26,7 @@ typedef enum {
 @property (nonatomic, strong) XASVenue *venue;
 @property(nonatomic, assign) XASOpportunitiesView viewType;
 @property (nonatomic, strong) NSDictionary *searchDictionary;
+@property (nonatomic, copy) NSString *searchName;
 
 
 @end

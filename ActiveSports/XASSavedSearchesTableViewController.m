@@ -46,6 +46,11 @@
     [_savedSearchesDictionary writeToFile:searchQueriesPath atomically:YES];
     
     _savesSearchesArray = [NSMutableArray arrayWithArray:_savedSearchesDictionary.allKeys];
+    [_savesSearchesArray sortUsingComparator:^(NSString *title1,
+                                        NSString *title2){
+        
+        return [title1 compare:title2 options:NSCaseInsensitiveSearch];
+    }];
 
 }
 
@@ -158,9 +163,10 @@
 
         
         NSString *searchDictionaryKey = [_savesSearchesArray objectAtIndex:currentSelection.row];
-        
-        controller.viewType = XASOpportunitiesViewSearch;
+    
+        controller.viewType = XASOpportunitiesViewSavedSearch;
         controller.searchDictionary = [NSDictionary dictionaryWithDictionary:[_savedSearchesDictionary objectForKey:searchDictionaryKey]];
+        controller.searchName = searchDictionaryKey;
     }
 
 }

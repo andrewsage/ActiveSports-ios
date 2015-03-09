@@ -318,6 +318,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerView" destination="h6c-oJ-hpQ" id="QUG-3y-nzP"/>
                         <outlet property="saveSearchButton" destination="XzT-tD-JXb" id="2Ov-Iv-Gxp"/>
                     </connections>
                 </tableViewController>
