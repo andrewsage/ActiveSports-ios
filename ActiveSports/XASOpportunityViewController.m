@@ -294,16 +294,19 @@
                     
                 case 5: // description
                 {
-                    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
-                    
-                    NSAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
-                    
-                    
-                    textView.attributedText = description;
-                    
-                    CGSize size = [textView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
-                    height = size.height;
-                    
+                    if([self.opportunity.opportunityDescription isEqualToString:@""]) {
+                        height = 0;
+                    } else {
+                        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
+                        
+                        NSAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
+                        
+                        
+                        textView.attributedText = description;
+                        
+                        CGSize size = [textView sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)];
+                        height = size.height;
+                    }
                 }
                     break;
                     
@@ -522,8 +525,8 @@
                     
                 case 2: {
                     UILabel *opportunityNameLabel = (UILabel*)[cell viewWithTag:2];
-                    UILabel *whenLabel = (UILabel*)[cell viewWithTag:3];
-                    UILabel *venueLabel = (UILabel*)[cell viewWithTag:4];
+                    UILabel *whenLabel = (UILabel*)[cell viewWithTag:4];
+                    UILabel *venueLabel = (UILabel*)[cell viewWithTag:3];
                     
                     opportunityNameLabel.text = self.opportunity.name;
                     whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
