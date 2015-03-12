@@ -18,6 +18,8 @@
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *postCode;
 @property (nonatomic, retain) NSNumber * distanceInMeters;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *website;
 
 
 

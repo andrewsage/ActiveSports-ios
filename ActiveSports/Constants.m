@@ -12,6 +12,7 @@
 
 // Colours
 NSString *const XASBrandMainColor = @"#2905A0";
+NSString *const XASNegativeActionColor = @"#ED2D3A";
 NSString *const XASPositveActionColor = @"#097d75";
 NSString *const XASMainTextColor = @"#000000";
 

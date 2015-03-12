@@ -129,6 +129,7 @@
         self.tableView.tableHeaderView.hidden = NO;
     } else {
         self.tableView.tableHeaderView.hidden = YES;
+        self.tableView.tableHeaderView = nil;
     }
 }
 
@@ -367,6 +368,7 @@
                                                               [self.saveSearchButton setImage:[UIImage imageNamed:@"save-search-active"] forState:UIControlStateNormal];
                                                               
                                                               self.tableView.tableHeaderView.hidden = YES;
+                                                              self.tableView.tableHeaderView = nil;
 
                                                               
                                                               NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];

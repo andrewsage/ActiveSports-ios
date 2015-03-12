@@ -84,6 +84,8 @@
     [encoder encodeObject:_locationLong forKey:@"long"];
     [encoder encodeObject:_address forKey:@"address"];
     [encoder encodeObject:_postCode forKey:@"postCode"];
+    [encoder encodeObject:_phone forKey:@"phone"];
+    [encoder encodeObject:_website forKey:@"website"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -94,6 +96,8 @@
         _locationLong = [decoder decodeObjectForKey:@"long"];
         _address = [decoder decodeObjectForKey:@"address"];
         _postCode = [decoder decodeObjectForKey:@"postCode"];
+        _phone = [decoder decodeObjectForKey:@"phone"];
+        _website = [decoder decodeObjectForKey:@"website"];
     }
     return self;
 }
@@ -116,6 +120,8 @@
     self.name = [objectDictionary valueForKey:@"name"];
     self.address = [objectDictionary valueForKey:@"address"];
     self.postCode = [objectDictionary valueForKey:@"postcode"];
+    self.phone = [objectDictionary valueForKey:@"telephone"];
+    self.website = [objectDictionary valueForKey:@"web"];
     
     NSLog(@"updating %@", self.name);
     

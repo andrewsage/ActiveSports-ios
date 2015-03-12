@@ -13,6 +13,7 @@
 // Colours
 extern NSString *const XASBrandMainColor;
 extern NSString *const XASPositveActionColor;
+extern NSString *const XASNegativeActionColor;
 extern NSString *const XASMainTextColor;
 
 // Fonts

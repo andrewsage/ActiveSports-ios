@@ -73,6 +73,10 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:XASBrandMainColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+
     /*
     
     self.navigationController.navigationBarHidden = NO;
@@ -130,17 +134,106 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (IBAction)notificationsPressed:(id)sender {
+    NSLog(@"go to notifications");
+    
+    NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    [self.tableView scrollToRowAtIndexPath:scrollIndexPath
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
+}
+
+- (IBAction)websitePressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.opportunity.venue.website]];
+}
+
+- (IBAction)phonePressed:(id)sender {
+    NSString *formattedPhone = [NSString stringWithFormat:@"telprompt://%@", [self.opportunity.venue.phone stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:formattedPhone]];
+
+}
 
 #pragma mark - Table view data source
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+    switch (section) {
+        case 0:
+            return nil;
+            break;
+        case 1: {
+            
+            UIView *sectionHeaderView = [[UIView alloc] initWithFrame:
+                                         CGRectMake(0, 0, tableView.frame.size.width, 50.0)];
+            sectionHeaderView.backgroundColor = [UIColor clearColor];
+            
+            
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+            headerLabel.backgroundColor = [UIColor clearColor];
+            headerLabel.textAlignment = NSTextAlignmentLeft;
+            [headerLabel setFont:[UIFont fontWithName:XASFontBold size:15.0]];
+            headerLabel.textColor = [UIColor colorWithHexString:XASNegativeActionColor];
+            headerLabel.text = @"NOTICES";
+            headerLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            
+            [sectionHeaderView addSubview:headerLabel];
+            
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notices-red"]];
+            imageView.center = CGPointMake(15, headerLabel.center.y);
+            imageView.translatesAutoresizingMaskIntoConstraints = NO;
+            
+            [sectionHeaderView addSubview:imageView];
+            
+            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:imageView
+                                                                          attribute:NSLayoutAttributeTop
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:sectionHeaderView
+                                                                          attribute:NSLayoutAttributeTop
+                                                                         multiplier:1.0
+                                                                           constant:10.0]];
+            
+            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:imageView
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:sectionHeaderView
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                         multiplier:1.0
+                                                                           constant:10.0]];
+            
+            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:headerLabel
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:imageView
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                         multiplier:1.0
+                                                                           constant:8.0]];
+            
+            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:headerLabel
+                                                                          attribute:NSLayoutAttributeCenterY
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:imageView
+                                                                          attribute:NSLayoutAttributeCenterY
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+            
+            return sectionHeaderView;
+        }
+            
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return _venueNotices.count > 0 ? 2 : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 8;
+            return 9;
             break;
             
         case 1:
@@ -157,12 +250,13 @@
             break;
             
         case 1:
-            return @"Notices";
+            return @"NOTICES";
             break;
     }
     
     return nil;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -187,15 +281,18 @@
                 case 2: // title
                     height = 100.0f;
                     break;
-
                     
-                case 3: // Rating
+                case 3: // notices indictor
+                    height = _venueNotices.count > 0 ? 30.0f : 0.0f;
+                    break;
+                    
+                case 4: // Rating
                 {
                     height = 60.0f;
                 }
                     break;
                     
-                case 4: // description
+                case 5: // description
                 {
                     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
                     
@@ -210,15 +307,15 @@
                 }
                     break;
                     
-                case 5: // Tags
+                case 6: // Tags
                     height = 44.0f;
                     break;
                     
-                case 6: // Address
-                    height = 70.0f;
+                case 7: // Address
+                    height = 100.0f;
                     break;
                     
-                case 7: // map
+                case 8: // map
                     height = 150.0f;
                     break;
                     
@@ -326,18 +423,22 @@
                     identifier = @"cell1";
                     break;
                 case 3:
+                    identifier = @"notifications";
+                    break;
+                    
+                case 4:
                     identifier = @"cell2";
                     break;
-                case 4:
+                case 5:
                     identifier = @"cell3";
                     break;
-                case 5:
+                case 6:
                     identifier = @"cell4";
                     break;
-                case 6:
+                case 7:
                     identifier = @"cell5";
                     break;
-                case 7:
+                case 8:
                     identifier = @"cell6";
                     break;
             }
@@ -438,6 +539,13 @@
                     break;
                     
                 case 3: {
+                    cell.backgroundColor = [UIColor colorWithHexString:XASNegativeActionColor];
+                    cell.textLabel.text = [NSString stringWithFormat:@"%lu Notice%@", (unsigned long)_venueNotices.count, _venueNotices.count == 1 ? @"" : @"s"];
+                    
+                }
+                    break;
+                    
+                case 4: {
                     UILabel *ratingLabel = (UILabel*)[cell viewWithTag:1];
                     ratingLabel.text = [NSString stringWithFormat:@"%.1f", self.opportunity.effortRating.doubleValue];
                     
@@ -450,7 +558,7 @@
                 }
                     break;
                     
-                case 4: {
+                case 5: {
                     UITextView *textView = (UITextView*)[cell viewWithTag:1];
                     NSAttributedString *description = [self buildAttributedString:self.opportunity.opportunityDescription];
                     
@@ -462,7 +570,7 @@
                 }
                     break;
                     
-                case 5: {
+                case 6: {
                     UILabel *tagsLabel = (UILabel*)[cell viewWithTag:1];
                     
                     tagsLabel.text = [[self.opportunity.tagsArray valueForKey:@"description"] componentsJoinedByString:@", "];
@@ -473,17 +581,21 @@
                     break;
                 
                     
-                case 6: {
+                case 7: {
                     UILabel *addressLabel = (UILabel*)[cell viewWithTag:1];
                     UILabel *telephoneLabel = (UILabel*)[cell viewWithTag:2];
+                    UILabel *webLabel = (UILabel*)[cell viewWithTag:3];
                     
                     addressLabel.text = [NSString stringWithFormat:@"%@, %@",
                                          self.opportunity.venue.address,
                                          self.opportunity.venue.postCode];
+                    
+                    telephoneLabel.text = self.opportunity.venue.phone;
+                    webLabel.text = self.opportunity.venue.website;
                 }
                     break;
                     
-                case 7: {
+                case 8: {
                     
                     MKMapView *mapView = (MKMapView*)[cell viewWithTag:1];
                     
