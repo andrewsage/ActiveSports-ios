@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "UIColor+Expanded.h"
 #import "XASVenueTableViewCell.h"
+#import "XASVenueTableViewController.h"
 
 
 @interface XASVenuesTableViewController () {
@@ -159,14 +160,13 @@
         self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
         
         
-        XASOpportunitiesTableViewController *controller = (XASOpportunitiesTableViewController*)[segue destinationViewController];
+        XASVenueTableViewController *controller = (XASVenueTableViewController*)[segue destinationViewController];
         
         NSIndexPath *currentSelection = [self.tableView indexPathForSelectedRow];
         
         XASVenue *venue = [objectsArray objectAtIndex:currentSelection.row];
         
         controller.venue = venue;
-        controller.viewType = XASOpportunitiesViewVenue;
     }
 }
 

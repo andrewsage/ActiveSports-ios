@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSNumber * distanceInMeters;
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, copy) NSString *website;
+@property (nonatomic, copy) NSString *slug;
 
 
 

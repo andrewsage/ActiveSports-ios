@@ -63,6 +63,8 @@
 }
 
 
+
+
 + (void)fetchAllInBackgroundWithBlock:(XASArrayResultBlock)block {
     
     NSString *command = @"venues.json";
@@ -86,6 +88,7 @@
     [encoder encodeObject:_postCode forKey:@"postCode"];
     [encoder encodeObject:_phone forKey:@"phone"];
     [encoder encodeObject:_website forKey:@"website"];
+    [encoder encodeObject:_slug forKey:@"slug"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -98,6 +101,7 @@
         _postCode = [decoder decodeObjectForKey:@"postCode"];
         _phone = [decoder decodeObjectForKey:@"phone"];
         _website = [decoder decodeObjectForKey:@"website"];
+        _slug = [decoder decodeObjectForKey:@"slug"];
     }
     return self;
 }
@@ -122,6 +126,7 @@
     self.postCode = [objectDictionary valueForKey:@"postcode"];
     self.phone = [objectDictionary valueForKey:@"telephone"];
     self.website = [objectDictionary valueForKey:@"web"];
+    self.slug = [objectDictionary valueForKey:@"slug"];
     
     NSLog(@"updating %@", self.name);
     
@@ -162,6 +167,5 @@
     
     return matchingVenue;
 }
-
 
 @end

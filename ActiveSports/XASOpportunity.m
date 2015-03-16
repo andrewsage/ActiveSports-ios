@@ -270,6 +270,21 @@
                            }];
 }
 
++ (NSArray*)forVenue:(XASVenue*)venue {
+    NSMutableArray *opportunitiesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    NSDictionary *dictionary = [XASOpportunity dictionary];
+    for(NSString *key in dictionary.allKeys) {
+        XASOpportunity *opportunity = [dictionary objectForKey:key];
+        if([opportunity.venue.remoteID isEqual:venue.remoteID]) {
+            
+            [opportunitiesArray addObject:opportunity];
+        }
+    }
+    
+    return opportunitiesArray;
+}
+
 
 
 @end

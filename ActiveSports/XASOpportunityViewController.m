@@ -153,6 +153,29 @@
 
 }
 
+- (IBAction)addressPressed:(id)sender {
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+    [mapItem setName:self.opportunity.venue.name];
+    
+    
+    CLLocation *addressLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+                                                             longitude:coordinate.longitude];
+    
+    
+    // Create a region centered on the starting point with a 10km span
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(addressLocation.coordinate, 10000, 10000);
+    
+    // Open the item in Maps, specifying the map region to display.
+    [MKMapItem openMapsWithItems:[NSArray arrayWithObject:mapItem]
+                   launchOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+                                  [NSValue valueWithMKCoordinate:region.center], MKLaunchOptionsMapCenterKey,
+                                  [NSValue valueWithMKCoordinateSpan:region.span], MKLaunchOptionsMapSpanKey, nil]];
+}
+
+
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

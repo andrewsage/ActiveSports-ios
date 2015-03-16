@@ -29,6 +29,7 @@
 + (void)saveDictionary;
 
 - (void)rateInBackground:(NSInteger)rating withBlock:(XASBooleanResultBlock)block;
++ (NSArray*)forVenue:(XASVenue*)venue;
 
 
 @end
