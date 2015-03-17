@@ -257,8 +257,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="znZ-a1-hF3"/>
                                             <exclude reference="ilQ-h0-Xtw"/>
+                                            <exclude reference="znZ-a1-hF3"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -266,6 +266,25 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Fs6-so-vEl" appends="YES" id="kUH-7V-spe"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="whatsonheader" rowHeight="100" id="hdv-Ju-EUE">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hdv-Ju-EUE" id="DLC-8U-EHg">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's on today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Z3-vU-hVe">
+                                            <rect key="frame" x="130" y="21" width="340" height="57"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="48"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="9Z3-vU-hVe" secondAttribute="centerX" id="Bf2-ta-yIK"/>
+                                        <constraint firstAttribute="centerY" secondItem="9Z3-vU-hVe" secondAttribute="centerY" id="NeC-sL-X6j"/>
+                                    </constraints>
+                                </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="opportunity" rowHeight="86" id="KqZ-Lg-CDV" customClass="XASOpportunityTableViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
@@ -385,16 +404,16 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="jS3-7w-FCm"/>
                                             <exclude reference="8uo-6d-GZz"/>
+                                            <exclude reference="jS3-7w-FCm"/>
                                             <exclude reference="JvO-If-Ke5"/>
                                             <exclude reference="UGN-TU-kaD"/>
-                                            <exclude reference="ich-WQ-GiG"/>
                                             <exclude reference="JNG-CR-oZl"/>
                                             <exclude reference="Pmz-nD-5qU"/>
-                                            <exclude reference="c6T-Hu-fAl"/>
+                                            <exclude reference="ich-WQ-GiG"/>
                                             <exclude reference="H6v-0a-AeR"/>
                                             <exclude reference="OZu-fz-LwL"/>
+                                            <exclude reference="c6T-Hu-fAl"/>
                                             <exclude reference="qWZ-7K-sC5"/>
                                             <exclude reference="XJg-t8-7HP"/>
                                         </mask>
@@ -660,7 +679,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check with the venue before attending that the activity is still taking place and that there are spaces available." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3o-ZC-Ftp">
                                             <rect key="frame" x="16" y="16" width="568" height="47"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>

@@ -16,6 +16,7 @@
 
 @interface XASOpportunityViewController () {
     NSMutableArray *_venueNotices;
+    BOOL _hideImage;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
@@ -87,8 +88,15 @@
      */
     [super viewWillAppear:animated];
     
+    _hideImage = NO;
     
     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
+        _hideImage = YES;
+    } else if([self.opportunity.imageURL isEqualToString:@""]) {
+        _hideImage = YES;
+    }
+    
+    if(_hideImage) {
         self.imageHeightConstraint.constant = 0.0f;
     }
 }
@@ -99,9 +107,18 @@
     
     self.title = self.opportunity.name;
     
+    _hideImage = NO;
+    
     if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
+        _hideImage = YES;
+    } else if([self.opportunity.imageURL isEqualToString:@""]) {
+        _hideImage = YES;
+    }
+    
+    if(_hideImage) {
         self.imageHeightConstraint.constant = 0.0f;
     }
+
     
     _venueNotices = [NSMutableArray arrayWithCapacity:0];
     
@@ -294,7 +311,7 @@
                 }
                     break;
                 case 1: // image
-                    if([self.opportunity.imageURL isKindOfClass:[NSNull class]]) {
+                    if(_hideImage) {
                         height = 0.0f;
                     } else {
                         height = 150.0f;
@@ -483,10 +500,10 @@
         {
             switch (indexPath.row) {
                 case 1: {
-                    UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
-                    
-                    NSURLSession *session = [NSURLSession sharedSession];
-                    if([self.opportunity.imageURL isKindOfClass:[NSNull class]] == NO) {
+                    if(_hideImage == NO) {
+                        UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
+                        
+                        NSURLSession *session = [NSURLSession sharedSession];
                         NSArray *arr = [self.opportunity.imageURL componentsSeparatedByString:@"\""];
                         NSURL *imageURL;
                         if(arr.count > 1) {

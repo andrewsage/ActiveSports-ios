@@ -111,61 +111,6 @@
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 100;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    switch (section) {
-        case 0:
-            return nil;
-            break;
-        case 1: {
-            
-            UIView *sectionHeaderView = [[UIView alloc] initWithFrame:
-                                         CGRectMake(0, 0, tableView.frame.size.width, 100.0)];
-            sectionHeaderView.backgroundColor = [UIColor clearColor];
-            
-            
-            UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            headerLabel.backgroundColor = [UIColor clearColor];
-            headerLabel.textAlignment = NSTextAlignmentCenter;
-            [headerLabel setFont:[UIFont fontWithName:XASFontLight size:48.0]];
-            headerLabel.textColor = [UIColor blackColor];
-            headerLabel.text = @"What's on today";
-            headerLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            
-            [sectionHeaderView addSubview:headerLabel];
-            
-            
-            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:headerLabel
-                                                                          attribute:NSLayoutAttributeCenterX
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:sectionHeaderView
-                                                                          attribute:NSLayoutAttributeCenterX
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-            
-            [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:headerLabel
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:sectionHeaderView
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-            
-            return sectionHeaderView;
-        }
-            
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
@@ -174,7 +119,7 @@
 
     switch (section) {
         case 0:
-            return 3;
+            return 4;
             break;
             
         case 1:
@@ -189,19 +134,7 @@
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    switch (section) {
-        case 0:
-            return nil;
-            break;
-            
-        case 1:
-            return @"What's on today";
-            break;
-            
-        default:
-            return nil;
-            break;
-    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -219,6 +152,10 @@
                     break;
                     
                 case 2:
+                    height = 100;
+                    break;
+                    
+                case 3:
                     height = 100;
                     break;
                     
@@ -285,6 +222,11 @@
                 }
                     break;
                     
+                case 3: {
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"whatsonheader" forIndexPath:indexPath];
+                }
+                    break;
+                    
                 default:
                     break;
             }
@@ -314,12 +256,26 @@
             
             XASVenue *venue = [XASVenue venueWithObjectID:opportunity.venue.remoteID];
             double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
-            if(distanceInMiles > 200) {
-                cell.distanceLabel.text = @"> 200 miles";
+            if(distanceInMiles > 50) {
+                cell.distanceLabel.text = @"> 50 miles";
             } else {
                 cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
             }
             cell.distanceLabel.layer.cornerRadius = 2.0f;
+            
+            NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
+            NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
+            
+            NSDate *now = [NSDate date];
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
+            NSInteger hour = [components hour];
+            NSInteger minute = [components minute];
+            
+            if(startHour - hour > 2) {
+                cell.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];
+            }
+
             
             
             return cell;

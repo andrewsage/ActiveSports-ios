@@ -128,6 +128,9 @@
     self.dayOfWeek = [objectDictionary valueForKey:@"day_of_week"];
     self.opportunityDescription = [objectDictionary valueForKey:@"description"];
     self.imageURL = [objectDictionary valueForKey:@"image_url"];
+    if([self.imageURL isKindOfClass:[NSNull class]] == NO) {
+        self.imageURL = [self.imageURL stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
     self.activityID = [objectDictionary valueForKey:@"activity_id"];
     
     self.effortRating = [objectDictionary valueForKey:@"effort_rating"];
