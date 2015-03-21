@@ -31,7 +31,7 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.914 green:0.204 blue:0.220 alpha:1];
     
-    self.opportunityNameLabel.text = self.opportunity.name;
+    self.opportunityNameLabel.text = [NSString stringWithFormat:@"%@?", self.opportunity.name];
 
     self.currentRatingView.rate = self.opportunity.effortRating.integerValue;
     self.currentRatingView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(34.0 / 2.0, 45.0 / 2.0)];

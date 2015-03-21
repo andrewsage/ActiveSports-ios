@@ -655,7 +655,7 @@
                     
                     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.opportunity.venue.locationLat.doubleValue, self.opportunity.venue.locationLong.doubleValue);
                     
-                    [mapView setRegion:[mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:YES];
+                    [mapView setRegion:[mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:NO];
                     
                 }
                     break;
