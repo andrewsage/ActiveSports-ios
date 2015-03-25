@@ -119,7 +119,7 @@
 
     switch (section) {
         case 0:
-            return 4;
+            return 5;
             break;
             
         case 1:
@@ -155,7 +155,11 @@
                     height = 100;
                     break;
                     
-                case 3:
+                case 3: // Map
+                    height = 150;
+                    break;
+                    
+                case 4:
                     height = 100;
                     break;
                     
@@ -188,12 +192,7 @@
                     
                     cell = [tableView dequeueReusableCellWithIdentifier:@"logo" forIndexPath:indexPath];
                     UIImageView *logoImageView = (UIImageView*)[cell viewWithTag:1];
-                    logoImageView.image = [UIImage imageNamed:self.venue.slug];
-                    
-                    if(logoImageView.image == nil) {
-                        logoImageView.image = [UIImage imageNamed:@"sport-aberdeen"];
-
-                    }
+                    logoImageView.image = [UIImage imageNamed:self.venue.venueOwner.slug];
                 }
                     
                     break;
@@ -222,7 +221,31 @@
                 }
                     break;
                     
-                case 3: {
+                case 3: // Map
+                {
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"map" forIndexPath:indexPath];
+                    
+                    MKMapView *mapView = (MKMapView*)[cell viewWithTag:1];
+                    
+                    mapView.delegate = self;
+                    
+                    
+                    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                    point.coordinate = CLLocationCoordinate2DMake(self.venue.locationLat.doubleValue, self.venue.locationLong.doubleValue);
+                    point.title = self.venue.name;
+                    
+                    [mapView addAnnotation:point];
+                    
+                    MKCoordinateSpan span = MKCoordinateSpanMake(0.02, 0.02);
+                    
+                    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.venue.locationLat.doubleValue, self.venue.locationLong.doubleValue);
+                    
+                    [mapView setRegion:[mapView regionThatFits:MKCoordinateRegionMake(center, span)] animated:NO];
+                    
+                }
+                    break;
+                    
+                case 4: {
                     cell = [tableView dequeueReusableCellWithIdentifier:@"whatsonheader" forIndexPath:indexPath];
                 }
                     break;

@@ -12,18 +12,17 @@
 #import "UIImage+Resize.h"
 #import "Constants.h"
 #import "UIColor+Expanded.h"
+#import "XASRangeSlider.h"
 
 @interface XASSearchViewController ()
 
-@property (weak, nonatomic) IBOutlet XASRateView *minimumRateView;
-@property (weak, nonatomic) IBOutlet XASRateView *maximumRateView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dayQuickSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *daySegmentedControl;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timeOfDaySegmentedControl;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITextField *textSearchField;
-
+@property (weak, nonatomic) IBOutlet XASRangeSlider *rangeSlider;
 
 @end
 
@@ -40,13 +39,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    self.minimumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
-    self.maximumRateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
-
-    self.minimumRateView.editable = YES;
-    self.maximumRateView.editable = YES;
-    self.maximumRateView.rate = 5.0f;
+    self.rangeSlider.trackColour = [UIColor colorWithWhite:0.5 alpha:1.0];
+    self.rangeSlider.trackHighlightColour = [UIColor colorWithHexString:XASNegativeActionColor];
+    self.rangeSlider.knobColour = [UIColor colorWithHexString:XASBrandMainColor];
+    self.rangeSlider.backgroundColor = [UIColor clearColor];
     self.dayQuickSegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
     self.daySegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
     self.timeOfDaySegmentedControl.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
@@ -75,6 +71,12 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.tableView.delegate = self;
+    
+    
+    self.searchButton.layer.cornerRadius = 2.0f;
+    
+    [self.searchButton setBackgroundColor:[UIColor colorWithHexString:XASPositveActionColor]];
+    [self.searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,6 +120,23 @@
     }
 }
 
+- (IBAction)slideValueChanged:(id)sender {
+    
+    XASRangeSlider *slider = (XASRangeSlider*)sender;
+    
+    int minValue = (int)slider.lowerValue;
+    int maxValue = (int)slider.upperValue;
+    
+    for(int tag = 1; tag < 6; tag++) {
+        UIImageView *imageView = (UIImageView*)[slider.superview viewWithTag:tag];
+        
+        if(tag < minValue || tag > maxValue) {
+            imageView.image = [UIImage imageNamed:@"drop-rating-small-grey"];
+        } else {
+            imageView.image = [UIImage imageNamed:@"drop-rating-small"];
+        }
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -201,8 +220,8 @@
         NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
         [searchDictionary setObject:[NSNumber numberWithInteger:self.daySegmentedControl.selectedSegmentIndex] forKey:@"dayOfWeek"];
         [searchDictionary setObject:[NSNumber numberWithInteger:self.timeOfDaySegmentedControl.selectedSegmentIndex] forKey:@"timeOfDay"];
-        [searchDictionary setObject:[NSNumber numberWithInteger:self.minimumRateView.rate] forKey:@"minimumExertion"];
-        [searchDictionary setObject:[NSNumber numberWithInteger:self.maximumRateView.rate] forKey:@"maximumExertion"];
+        [searchDictionary setObject:[NSNumber numberWithInteger:round(self.rangeSlider.lowerValue)] forKey:@"minimumExertion"];
+        [searchDictionary setObject:[NSNumber numberWithInteger:round(self.rangeSlider.upperValue)] forKey:@"maximumExertion"];
         [searchDictionary setObject:self.textSearchField.text forKey:@"text"];
         
         controller.viewType = XASOpportunitiesViewSearch;

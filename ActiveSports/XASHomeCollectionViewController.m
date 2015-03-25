@@ -9,6 +9,8 @@
 #import "XASHomeCollectionViewController.h"
 #import "XASOpportunitiesTableViewController.h"
 #import "XASMenuCollectionViewCell.h"
+#import "XASRegion.h"
+#import "XASOpportunity.h"
 
 @interface XASHomeCollectionViewController ()
 
@@ -72,7 +74,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    return 7;
+    return 8;
 }
 
 
@@ -106,6 +108,10 @@ static NSString * const reuseIdentifier = @"Cell";
             break;
             
         case 6:
+            identifier = @"UpdateData";
+            break;
+            
+        case 7:
             identifier = @"About";
             break;
     }
@@ -160,6 +166,26 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.row == 6) {
+        
+        NSLog(@"Update data requested");
+        
+        XASRegion *region = [[XASRegion alloc] init];
+        region.remoteID = @"4";
+        
+        [XASOpportunity fetchAllInBackgroundFor:region withBlock:^(NSArray *objects, NSError *error) {
+            
+            if(error) {
+                NSLog(@"error: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Data updated");
+            }
+        }];
+    }
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

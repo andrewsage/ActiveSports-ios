@@ -1,18 +1,17 @@
 //
-//  XASVenue.m
+//  XASVenueOwner.m
 //  ActiveSports
 //
-//  Created by Andrew Sage on 06/10/2014.
-//  Copyright (c) 2014 Xoverto. All rights reserved.
+//  Created by Andrew Sage on 24/03/2015.
+//  Copyright (c) 2015 Xoverto. All rights reserved.
 //
 
-#import "XASVenue.h"
-#import "XASVenueNotice.h"
+#import "XASVenueOwner.h"
 
-@implementation XASVenue
+@implementation XASVenueOwner
 
 + (NSString *)szClassName {
-    return @"Venue";
+    return @"VenueOwner";
 }
 
 + (NSMutableDictionary *)dictionary {
@@ -34,13 +33,13 @@
 
 + (NSString *)dictionaryPath {
     NSString *documentsDir = [XASBaseObject cacheDirectory];
-    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@",[XASVenue szClassName], @"123"]];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@",[XASVenueOwner szClassName], @"123"]];
     return path;
 }
 
 + (void) saveDictionary {
-    NSMutableDictionary *dictionary = [XASVenue dictionary];
-    if([NSKeyedArchiver archiveRootObject:dictionary toFile:[XASVenue dictionaryPath]]) {
+    NSMutableDictionary *dictionary = [XASVenueOwner dictionary];
+    if([NSKeyedArchiver archiveRootObject:dictionary toFile:[XASVenueOwner dictionaryPath]]) {
     } else {
         NSLog(@"Failed to save dictionary");
     }
@@ -48,17 +47,17 @@
 
 + (NSMutableArray*)arrayFromJSONArray:(NSArray *)jsonArray {
     NSMutableArray *objectsArray = [NSMutableArray array];
-    NSMutableDictionary *dictionary = [XASVenue dictionary];
-
+    NSMutableDictionary *dictionary = [XASVenueOwner dictionary];
+    
     
     for(NSDictionary *objectDictionary in jsonArray) {
-        XASVenue *object = [[XASVenue alloc] initWithDictionary:objectDictionary];
+        XASVenueOwner *object = [[XASVenueOwner alloc] initWithDictionary:objectDictionary];
         [dictionary setObject:object forKey:object.remoteID];
         
         [objectsArray addObject:object];
     }
-    [XASVenue saveDictionary];
-
+    [XASVenueOwner saveDictionary];
+    
     return objectsArray;
 }
 
@@ -67,13 +66,13 @@
 
 + (void)fetchAllInBackgroundWithBlock:(XASArrayResultBlock)block {
     
-    NSString *command = @"venues.json";
+    NSString *command = @"venue_owners.json";
     
     [self sendRequestToServer:command block:block];
 }
 
 + (void)fetchAllInBackgroundFor:(XASBaseObject*)object withBlock:(XASArrayResultBlock)block {
-    NSString *command = [NSString stringWithFormat:@"regions/%@/venues.json", object.remoteID];
+    NSString *command = [NSString stringWithFormat:@"regions/%@/venue_owners.json", object.remoteID];
     
     [self sendRequestToServer:command block:block];
 }
@@ -89,7 +88,6 @@
     [encoder encodeObject:_phone forKey:@"phone"];
     [encoder encodeObject:_website forKey:@"website"];
     [encoder encodeObject:_slug forKey:@"slug"];
-    [encoder encodeObject:_venueOwner forKey:@"venueOwner"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -103,7 +101,6 @@
         _phone = [decoder decodeObjectForKey:@"phone"];
         _website = [decoder decodeObjectForKey:@"website"];
         _slug = [decoder decodeObjectForKey:@"slug"];
-        _venueOwner = [decoder decodeObjectForKey:@"venueOwner"];
     }
     return self;
 }
@@ -134,47 +131,19 @@
     
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber * latNumber = [f numberFromString:[objectDictionary valueForKey:@"latitude"]];
-    
-    NSNumber * longNumber = [f numberFromString:[objectDictionary valueForKey:@"longitude"]];
-    
-    self.locationLat = latNumber;
-    self.locationLong = longNumber;
-    
-    NSDictionary *venueOwnerDictionary = [objectDictionary objectForKey:@"venue_owner"];
-    if(venueOwnerDictionary) {
-        self.venueOwner = [[XASVenueOwner alloc] initWithDictionary:venueOwnerDictionary];
-        [[XASVenueOwner dictionary] setObject:self.venueOwner forKey:self.venueOwner.remoteID];
-        [XASVenueOwner saveDictionary];
+    if([[objectDictionary valueForKey:@"latitude"] isKindOfClass:[NSNull class]] == NO) {
+        NSNumber * latNumber = [f numberFromString:[objectDictionary valueForKey:@"latitude"]];
+        self.locationLat = latNumber;
+
     }
     
-    NSArray *venueNoticesArray = [objectDictionary objectForKey:@"venue_notices"];
-    if(venueNoticesArray) {
-        for(NSDictionary *venueNoticeDictionary in venueNoticesArray) {
-            XASVenueNotice *venueNotice = [[XASVenueNotice alloc] initWithDictionary:venueNoticeDictionary];
-            venueNotice.venue = self;
-            [[XASVenueNotice dictionary] setObject:venueNotice forKey:venueNotice.remoteID];
-            [XASVenueNotice saveDictionary];
-        }
-        
+    if([[objectDictionary valueForKey:@"longitude"] isKindOfClass:[NSNull class]] == NO) {
+        NSNumber * longNumber = [f numberFromString:[objectDictionary valueForKey:@"longitude"]];
+        self.locationLong = longNumber;
+
     }
+    
 }
 
-+ (XASVenue*)venueWithObjectID:(NSNumber*)objectID {
-    
-    XASVenue *matchingVenue = nil;
-    
-    NSDictionary *dictionary = [XASVenue dictionary];
-    for(NSString *key in dictionary.allKeys) {
-        XASVenue *venue = [dictionary objectForKey:key];
-        
-        if([venue.remoteID isEqual:objectID]) {
-            matchingVenue = venue;
-            break;
-        }
-    }
-    
-    return matchingVenue;
-}
 
 @end

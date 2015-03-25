@@ -235,12 +235,14 @@
                         }
                     }
                     
-                    if(opportunity.effortRating < minimumExertion && [self.searchDictionary objectForKey:@"minimumExertion"]) {
-                        include = NO;
-                    }
-                    
-                    if(opportunity.effortRating > maximumExertion && [self.searchDictionary objectForKey:@"maximumExertion"]) {
-                        include = NO;
+                    if(minimumExertion.integerValue > 1 || maximumExertion.integerValue < 5) {
+                        if(opportunity.effortRating < minimumExertion && [self.searchDictionary objectForKey:@"minimumExertion"]) {
+                            include = NO;
+                        }
+                        
+                        if(opportunity.effortRating > maximumExertion && [self.searchDictionary objectForKey:@"maximumExertion"]) {
+                            include = NO;
+                        }
                     }
                     
                     if([self.searchDictionary objectForKey:@"timeOfDay"]) {
