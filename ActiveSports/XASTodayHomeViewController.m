@@ -353,19 +353,22 @@
     for(NSString *key in venues.allKeys) {
         
         XASVenue *venue = [venues objectForKey:key];
-        CLLocationCoordinate2D venueCoord = CLLocationCoordinate2DMake(venue.locationLat.doubleValue, venue.locationLong.doubleValue);
-        
-        XASVenueAnnotation *annotation = [[XASVenueAnnotation alloc] init];
-        annotation.title = venue.name;
         NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:venue.name];
-        
-        numberOfActivities += objectsArray.count;
-        
-        annotation.numberOfActivities = [NSString stringWithFormat:@"%lu", (unsigned long)objectsArray.count];
-        annotation.coordinate = venueCoord;
-        annotation.venue = venue;
-        
-        [self.mapView addAnnotation:annotation];
+
+        if(objectsArray.count > 0) {
+            CLLocationCoordinate2D venueCoord = CLLocationCoordinate2DMake(venue.locationLat.doubleValue, venue.locationLong.doubleValue);
+            
+            XASVenueAnnotation *annotation = [[XASVenueAnnotation alloc] init];
+            annotation.title = venue.name;
+            
+            numberOfActivities += objectsArray.count;
+            
+            annotation.numberOfActivities = [NSString stringWithFormat:@"%lu", (unsigned long)objectsArray.count];
+            annotation.coordinate = venueCoord;
+            annotation.venue = venue;
+            
+            [self.mapView addAnnotation:annotation];
+        }
     }
     
     [self zoomToVenues];
