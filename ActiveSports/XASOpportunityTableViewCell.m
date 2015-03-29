@@ -75,7 +75,7 @@
     NSString *todayName = [weekdayDateFormat stringFromDate:now];
     
     if([opportunity.dayOfWeek isEqualToString:todayName]) {
-        if(startHour - hour > 2) {
+        if(startHour - hour < 2) {
             self.timeLabel.textColor = [UIColor colorWithHexString:XASNegativeActionColor];
 
         } else {
