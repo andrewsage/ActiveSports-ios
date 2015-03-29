@@ -18,17 +18,10 @@
 
 @implementation XASHomeCollectionViewController
 
-static NSString * const reuseIdentifier = @"button";
+static NSString * const reuseIdentifier = @"menuoption";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
     
     self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home-bg"]];
 }
@@ -99,15 +92,7 @@ static NSString * const reuseIdentifier = @"button";
                                 @"home-about",
                                 @"home-about"];
     
-    
-    NSString *identifier = reuseIdentifier;
-    
-
-    XASMenuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menuoption" forIndexPath:indexPath];
-    
-    // Configure the cell
-    //cell.layer.borderWidth = 1.0f;
-    //cell.layer.borderColor = [UIColor whiteColor].CGColor;
+    XASMenuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     cell.titleLabel.text = [titlesArray objectAtIndex:indexPath.row];
     cell.iconImageView.image = [UIImage imageNamed:[iconNamesArray objectAtIndex:indexPath.row]];
@@ -115,7 +100,6 @@ static NSString * const reuseIdentifier = @"button";
     cell.bottomBorderLayer.frame = CGRectMake(0.0f, cell.frame.size.height - 1.0f, cell.frame.size.width, 1.0f);
     cell.bottomBorderLayer.backgroundColor = [UIColor colorWithWhite:0.5f
                                                      alpha:0.5f].CGColor;
-    
     
     if(indexPath.row % 2 == 0) {
         cell.rightBorderLayer.frame = CGRectMake(cell.frame.size.width - 1.0f, 0.0f, 1.0f, cell.frame.size.height);

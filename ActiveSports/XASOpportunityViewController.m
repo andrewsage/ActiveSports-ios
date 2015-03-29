@@ -426,13 +426,10 @@
                                                                                                    NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
                                                                               documentAttributes:nil error:nil];
     
-    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
-                                       size:14];
     
-    UIFont *bodyFont = [UIFont fontWithName:@"ArialMT"
-                                       size:14];
+    UIFont *bodyFont = [UIFont fontWithName:XASFontRegular
+                                       size:12];
     
-    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
     NSDictionary *bodyTextAttributes = @{NSFontAttributeName : bodyFont};
     
     [descriptionText setAttributes:bodyTextAttributes range:NSMakeRange(0, descriptionText.length)];

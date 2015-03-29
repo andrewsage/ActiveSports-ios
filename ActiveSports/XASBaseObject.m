@@ -63,6 +63,11 @@
     return cacheDirectoryPath;
 }
 
+- (NSString*)objectId {
+    
+    return _remoteID;
+}
+
 
 - (void) encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_remoteID forKey:@"RemoteID"];
@@ -78,7 +83,7 @@
         _createdAt = [decoder decodeObjectForKey:@"CreatedAt"];
         _updatedAt = [decoder decodeObjectForKey:@"UpdatedAt"];
         
-        NSNumber *boolNumber = [decoder decodeObjectForKey:@"onServer"];
+        //NSNumber *boolNumber = [decoder decodeObjectForKey:@"onServer"];
         //self.onServer = boolNumber.boolValue;
     }
     return self;
