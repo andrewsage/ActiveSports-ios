@@ -46,15 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.navigationController.navigationBarHidden = NO;
-    
-    
-    
     _collectionsDictionary = [NSMutableDictionary dictionary];
     
-    
     self.tableView.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
-    
     
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
@@ -94,6 +88,10 @@
             self.title = @"What's on today that you like";
             break;
             
+        case XASOpportunitiesViewFavourites:
+            self.title = @"Your favourites";
+            break;
+            
         case XASOpportunitiesViewSearch:
             self.title = @"Advanced Search";
             break;
@@ -102,20 +100,15 @@
             self.title = [NSString stringWithFormat:@"Saved Search: %@", self.searchName];
             break;
             
+        case XASOpportunitiesViewToday:
+            self.title = @"What's on today";
+            break;
+            
         default:
             break;
     }
     
     [self rebuildContent];
-
-    
-    //[self refreshContent];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -135,7 +128,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    
     [super viewWillDisappear:animated];
 }
 
@@ -152,7 +144,6 @@
     [weekday setDateFormat: @"EEEE"];
     NSString *todayName = [weekday stringFromDate:now];
     
-
     NSInteger numberOfActivities = 0;
     
     NSDictionary *dictionary = [XASOpportunity dictionary];
@@ -160,7 +151,7 @@
         XASOpportunity *opportunity = [dictionary objectForKey:key];
         
         if([opportunity.dayOfWeek isEqualToString:todayName]
-           || self.viewType == XASOpportunitiesViewSearch || self.viewType == XASOpportunitiesViewSavedSearch) {
+           || self.viewType == XASOpportunitiesViewSearch || self.viewType == XASOpportunitiesViewSavedSearch || self.viewType == XASOpportunitiesViewFavourites) {
             
             BOOL include = YES;
             NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
@@ -190,6 +181,11 @@
                             include = NO;
                         }
                     }
+                }
+                    break;
+                    
+                case XASOpportunitiesViewFavourites: {
+                    
                 }
                     break;
                     
@@ -278,6 +274,53 @@
                 }
                     break;
                     
+                    
+                case XASOpportunitiesViewToday: {
+                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @""];
+                    NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
+                    NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
+                    
+                    
+                    NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
+                    
+                    if([self.searchDictionary objectForKey:@"venue"]) {
+                        if([venueID isEqual:opportunity.venue.remoteID] == NO) {
+                            include = NO;
+                        }
+                    }
+                    
+                    if([self.searchDictionary objectForKey:@"tag"]) {
+                        BOOL matches = NO;
+                        for(NSString *tag in [self.searchDictionary objectForKey:@"tag"]) {
+                            if([opportunity.tagsArray containsObject:tag]) {
+                                matches = YES;
+                            }
+                        }
+                        if(matches == NO) {
+                            include = NO;
+                        }
+                    }
+                    
+                    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+                    
+                    if(preferencesDictionary == nil) {
+                        preferencesDictionary = [NSDictionary dictionary];
+                    }
+                    
+                    NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
+                    if(likes) {
+                        if(likes.boolValue == NO) {
+                            include = NO;
+                        }
+                    }
+                    
+                    if([dayName isEqualToString:@""] == NO) {
+                        if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
+                            include = NO;
+                        }
+                    }
+                }
+                    break;
                     
                 default:
                     break;
@@ -475,6 +518,9 @@
     cell.ratingView.padding = 0.0f;
     cell.ratingView.rate = opportunity.effortRating.floatValue;
     
+    //cell.favouriteImageView.image = [UIImage imageNamed:@"favourite-activity-selected"];
+
+    
     XASVenue *venue = [XASVenue venueWithObjectID:opportunity.venue.remoteID];
     double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
     if(distanceInMiles > 50) {
@@ -482,7 +528,6 @@
     } else {
         cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
     }
-    cell.distanceLabel.layer.cornerRadius = 2.0f;
     
     NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
     NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
@@ -491,7 +536,6 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
     NSInteger hour = [components hour];
-    NSInteger minute = [components minute];
     
     if(startHour - hour > 2) {
         cell.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];

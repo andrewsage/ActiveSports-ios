@@ -156,7 +156,9 @@
                                            
                                            jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                                            
-                                           NSLog(@"dictionary of data: %@", jsonDictionary);
+                                           if(connector.debugMode) {
+                                               NSLog(@"dictionary of data: %@", jsonDictionary);
+                                           }
                                            
                                            [self updateInformation:jsonDictionary];
                                            
@@ -230,7 +232,9 @@
                                            
                                            jsonArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                                            
-                                           NSLog(@"array of data: %@", jsonArray);
+                                           if(connector.debugMode) {
+                                               NSLog(@"array of data: %@", jsonArray);
+                                           }
                                            
                                            NSMutableArray *objectsArray = [self arrayFromJSONArray:jsonArray];
                                            

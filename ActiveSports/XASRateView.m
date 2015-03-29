@@ -8,7 +8,7 @@
 
 #import "XASRateView.h"
 
-static NSString *defaulStarImageFilename = @"drop-rating-big.png";
+static NSString *defaulStarImageFilename = @"sweat-blue";
 
 @interface XASRateView ()
 

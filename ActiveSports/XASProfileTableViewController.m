@@ -11,6 +11,7 @@
 #import "XASPreferenceTableViewCell.h"
 #import "UIColor+Expanded.h"
 #import "Constants.h"
+#import "XASHeaderView.h"
 
 
 @interface XASProfileTableViewController () <UIActionSheetDelegate> {
@@ -19,6 +20,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *answerButton;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet XASHeaderView *headerView;
 
 @end
 
@@ -55,6 +58,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.title = @"Your preferences";
+        
+    self.answerButton.layer.cornerRadius = 2.0f;
+    [self.answerButton setBackgroundColor:[UIColor colorWithHexString:XASBrandMainColor]];
+    [self.answerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.answerButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    [self.answerButton sizeToFit];
+    
+    self.resetButton.layer.cornerRadius = 2.0f;
+    [self.resetButton setBackgroundColor:[UIColor colorWithHexString:XASNegativeActionColor]];
+    [self.resetButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.resetButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    [self.resetButton sizeToFit];
     
     [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         if(error) {
@@ -73,6 +89,7 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:XASBrandMainColor], NSForegroundColorAttributeName, nil];
 
     [super viewWillAppear:animated];
     
@@ -107,11 +124,13 @@
     XASPreferenceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
     
     XASActivity *activity = [_objectsArray objectAtIndex:indexPath.row];
+    /*
     if([_preferencesDictionary objectForKey:activity.remoteID] == nil) {
         cell.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.929 alpha:1];
     } else {
         cell.backgroundColor = [UIColor whiteColor];
     }
+     */
     
     NSNumber *included = [_preferencesDictionary objectForKey:activity.remoteID];
     // Configure the cell...

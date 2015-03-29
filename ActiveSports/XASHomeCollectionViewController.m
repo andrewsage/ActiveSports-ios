@@ -18,7 +18,7 @@
 
 @implementation XASHomeCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"button";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,7 +30,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     
-    }
+    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home-bg"]];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,7 +61,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if([segue.identifier isEqualToString:@"favourites"]) {
         XASOpportunitiesTableViewController *opportunitiesController = (XASOpportunitiesTableViewController*)segue.destinationViewController;
-        opportunitiesController.viewType = XASOpportunitiesViewLikes;
+        opportunitiesController.viewType = XASOpportunitiesViewFavourites;
         
     }
 }
@@ -80,46 +81,36 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSArray *titlesArray = @[@"What's on today?",
+                             @"Advanced Search",
+                             @"Saved Searches",
+                             @"Favourite Activities",
+                             @"Activity Preferences",
+                             @"Venues",
+                             @"Update Data",
+                             @"About this app"];
+    
+    NSArray *iconNamesArray = @[@"home-whats-on",
+                                @"home-advanced-search",
+                                @"home-saved-searches",
+                                @"home-fave-activities",
+                                @"home-activity-prefs",
+                                @"home-venues",
+                                @"home-about",
+                                @"home-about"];
+    
+    
     NSString *identifier = reuseIdentifier;
     
-    switch(indexPath.row) {
-        case 0:
-            identifier = @"Today";
-            break;
-            
-        case 1:
-            identifier = @"Search";
-            break;
-            
-        case 2:
-            identifier = @"SavedSearches";
-            break;
-            
-        case 3:
-            identifier = @"Favourites";
-            break;
-            
-        case 4:
-            identifier = @"Preferences";
-            break;
-            
-        case 5:
-            identifier = @"Venues";
-            break;
-            
-        case 6:
-            identifier = @"UpdateData";
-            break;
-            
-        case 7:
-            identifier = @"About";
-            break;
-    }
-    XASMenuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+
+    XASMenuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menuoption" forIndexPath:indexPath];
     
     // Configure the cell
     //cell.layer.borderWidth = 1.0f;
     //cell.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    cell.titleLabel.text = [titlesArray objectAtIndex:indexPath.row];
+    cell.iconImageView.image = [UIImage imageNamed:[iconNamesArray objectAtIndex:indexPath.row]];
     
     cell.bottomBorderLayer.frame = CGRectMake(0.0f, cell.frame.size.height - 1.0f, cell.frame.size.width, 1.0f);
     cell.bottomBorderLayer.backgroundColor = [UIColor colorWithWhite:0.5f
@@ -168,6 +159,39 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.row) {
+        case 0:
+            [self performSegueWithIdentifier:@"today" sender:self];
+            break;
+            
+        case 1:
+            [self performSegueWithIdentifier:@"search" sender:self];
+            break;
+            
+        case 2:
+            [self performSegueWithIdentifier:@"savedsearches" sender:self];
+            break;
+            
+        case 3:
+            [self performSegueWithIdentifier:@"favourites" sender:self];
+            break;
+            
+        case 4:
+            [self performSegueWithIdentifier:@"preferences" sender:self];
+            break;
+            
+        case 5:
+            [self performSegueWithIdentifier:@"venues" sender:self];
+            break;
+            
+        case 7:
+            [self performSegueWithIdentifier:@"about" sender:self];
+            break;
+            
+        default:
+            break;
+    }
     
     if(indexPath.row == 6) {
         

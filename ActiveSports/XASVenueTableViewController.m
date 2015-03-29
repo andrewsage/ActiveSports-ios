@@ -284,7 +284,6 @@
             } else {
                 cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
             }
-            cell.distanceLabel.layer.cornerRadius = 2.0f;
             
             NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
             NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
@@ -293,17 +292,12 @@
             NSCalendar *calendar = [NSCalendar currentCalendar];
             NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
             NSInteger hour = [components hour];
-            NSInteger minute = [components minute];
             
             if(startHour - hour > 2) {
                 cell.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];
             }
 
-            
-            
             return cell;
-
-            
         }
             break;
             

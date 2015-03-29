@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITextField *textSearchField;
 @property (weak, nonatomic) IBOutlet XASRangeSlider *rangeSlider;
+@property (nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -33,11 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //Keyboard stuff
+    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapAnywhere:)];
+    self.tapRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:self.tapRecognizer];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     
     self.rangeSlider.trackColour = [UIColor colorWithWhite:0.5 alpha:1.0];
     self.rangeSlider.trackHighlightColour = [UIColor colorWithHexString:XASNegativeActionColor];
@@ -83,10 +85,8 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:XASBrandMainColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
-    /*
-     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
-     */
     [super viewWillAppear:animated];
 }
 
@@ -229,5 +229,17 @@
     }
 
 }
+
+#pragma mark - TextField delegate methods
+
+-(BOOL) textFieldShouldReturn: (UITextField *) textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)didTapAnywhere:(UITapGestureRecognizer *) sender {
+    [self.view endEditing:YES];
+}
+
 
 @end

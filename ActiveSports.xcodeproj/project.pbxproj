@@ -51,6 +51,8 @@
 		495779621A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779601A4B1B800038569C /* XASHomeCollectionViewController.m */; };
 		495779691A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779681A4B21890038569C /* XASMenuCollectionViewCell.m */; };
 		4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779681A4B21890038569C /* XASMenuCollectionViewCell.m */; };
+		49677CDD1AC6EC92002E0A4F /* XASHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49677CDC1AC6EC92002E0A4F /* XASHeaderView.m */; };
+		49677CDE1AC6EC92002E0A4F /* XASHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49677CDC1AC6EC92002E0A4F /* XASHeaderView.m */; };
 		496AF5171A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 496AF5161A233D7000F605F4 /* XASProgressView.m */; };
 		4976D8D11ABEF0AE00A7C988 /* XASRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4976D8D01ABEF0AE00A7C988 /* XASRangeSlider.m */; };
@@ -155,6 +157,8 @@
 		495779601A4B1B800038569C /* XASHomeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHomeCollectionViewController.m; sourceTree = "<group>"; };
 		495779671A4B21890038569C /* XASMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASMenuCollectionViewCell.h; sourceTree = "<group>"; };
 		495779681A4B21890038569C /* XASMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASMenuCollectionViewCell.m; sourceTree = "<group>"; };
+		49677CDB1AC6EC92002E0A4F /* XASHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHeaderView.h; sourceTree = "<group>"; };
+		49677CDC1AC6EC92002E0A4F /* XASHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASHeaderView.m; sourceTree = "<group>"; };
 		496AF5151A233D7000F605F4 /* XASProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProgressView.h; sourceTree = "<group>"; };
 		496AF5161A233D7000F605F4 /* XASProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProgressView.m; sourceTree = "<group>"; };
 		4976D8CF1ABEF0AE00A7C988 /* XASRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRangeSlider.h; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 				4976D8D41ABEFCFB00A7C988 /* XASRangeSliderKnobLayer.m */,
 				4976D8D71ABF118D00A7C988 /* XASRangeSliderTrackLayer.h */,
 				4976D8D81ABF118D00A7C988 /* XASRangeSliderTrackLayer.m */,
+				49677CDB1AC6EC92002E0A4F /* XASHeaderView.h */,
+				49677CDC1AC6EC92002E0A4F /* XASHeaderView.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -492,6 +498,7 @@
 				497CA73C19F2EC43003F5F0A /* XASOpportunityTableViewCell.m in Sources */,
 				49D57D6F1A264A0900749FA5 /* XASMapViewController.m in Sources */,
 				4976D8D51ABEFCFB00A7C988 /* XASRangeSliderKnobLayer.m in Sources */,
+				49677CDD1AC6EC92002E0A4F /* XASHeaderView.m in Sources */,
 				4946831919E2A38C00437B63 /* XASVenue.m in Sources */,
 				4946831519E29E9C00437B63 /* XASConnector.m in Sources */,
 				49092D8019FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
@@ -546,6 +553,7 @@
 				49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */,
 				49808D3A1A5F554900DC7625 /* XASAboutViewController.m in Sources */,
 				4946830619E29C4800437B63 /* ActiveSportsTests.m in Sources */,
+				49677CDE1AC6EC92002E0A4F /* XASHeaderView.m in Sources */,
 				49C963161AA4E55F0087E9CB /* XASSavedSearchesTableViewController.m in Sources */,
 				4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */,
 				49D57D701A264A0900749FA5 /* XASMapViewController.m in Sources */,

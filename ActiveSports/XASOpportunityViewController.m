@@ -596,7 +596,7 @@
                     rateView.editable = NO;
                     rateView.backgroundColor = [UIColor clearColor];
                     rateView.rate = self.opportunity.effortRating.doubleValue;
-                    rateView.starImage = [UIImage imageWithImage:[UIImage imageNamed:@"drop-rating-big"] scaledToSize:CGSizeMake(71.0 / 2.0, 94.0 / 2.0)];
+                    rateView.starImage = [UIImage imageNamed:@"sweat-blue"];
                     
                 }
                     break;

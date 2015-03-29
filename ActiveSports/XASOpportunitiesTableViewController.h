@@ -17,7 +17,8 @@ typedef enum {
     XASOpportunitiesViewLikes,
     XASOpportunitiesViewFavourites,
     XASOpportunitiesViewSearch,
-    XASOpportunitiesViewSavedSearch
+    XASOpportunitiesViewSavedSearch,
+    XASOpportunitiesViewToday,
 } XASOpportunitiesView;
 
 

@@ -10,27 +10,22 @@
 
 @implementation XASPaddedLabel
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
-
 - (void)drawTextInRect:(CGRect)rect {
     return [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.insets)];
 }
 
-- (void)resizeHeightToFitText {
-    CGRect frame = [self bounds];
-    CGFloat textWidth = frame.size.width - (self.insets.left + self.insets.right);
+- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines {
+    UIEdgeInsets insets = self.insets;
+    CGRect rect = [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, insets)
+                    limitedToNumberOfLines:numberOfLines];
     
-    CGRect newSize = [self.text boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.font} context:nil];
+    rect.origin.x    -= insets.left;
+    rect.origin.y    -= insets.top;
+    rect.size.width  += (insets.left + insets.right);
+    rect.size.height += (insets.top + insets.bottom);
     
-    frame.size.height = newSize.size.height + self.insets.top + self.insets.bottom;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, frame.size.width, frame.size.height);
+    return rect;
 }
+
 
 @end

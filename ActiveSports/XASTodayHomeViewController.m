@@ -36,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     _tagsArray = [NSMutableArray arrayWithCapacity:0];
     
     NSArray *buttonsArray = @[self.strengthButton, self.cardioButton, self.weightLossButton, self.flexibilityButton];
@@ -49,9 +48,10 @@
     }
     
     self.resultsButton.layer.cornerRadius = 2.0f;
-    
     [self.resultsButton setBackgroundColor:[UIColor colorWithHexString:XASPositveActionColor]];
     [self.resultsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.resultsButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    [self.resultsButton sizeToFit];
     
     self.title = @"What's on today?";
     
@@ -72,11 +72,8 @@
         _timeOfDay = @"morning";
     }
     
-    
     self.greetingLabel.text = [NSString stringWithFormat:@"Good %@!", _timeOfDay];
-    
     self.mapView.delegate = self;
-    
     
     [self rebuildContent];
 }
@@ -87,10 +84,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
 
-
-    /*
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.090 green:0.161 blue:0.490 alpha:1], NSForegroundColorAttributeName, nil];
-    */
     [super viewWillAppear:animated];
 }
 
@@ -128,7 +121,7 @@
             [searchDictionary setObject:venueAnnotation.venue.remoteID forKey:@"venue"];
         }
         
-        controller.viewType = XASOpportunitiesViewSearch;
+        controller.viewType = XASOpportunitiesViewToday;
         controller.searchDictionary = [NSDictionary dictionaryWithDictionary:searchDictionary];
     }
 }
@@ -156,7 +149,6 @@
     }
     
     if([sender isSelected]) {
-        
         [sender setBackgroundColor:[UIColor whiteColor]];
         [sender setTintColor:[UIColor colorWithHexString:XASBrandMainColor]];
         [sender setSelected:NO];
@@ -179,35 +171,20 @@
 }
 
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
-{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     // If it's the user location, just return nil.
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
     // Handle any custom annotations.
-    if ([annotation isKindOfClass:[XASVenueAnnotation class]])
-    {
+    if ([annotation isKindOfClass:[XASVenueAnnotation class]]) {
         // Try to dequeue an existing pin view first.
         MKPinAnnotationView *pinView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
-        if (!pinView)
-        {
+        if (!pinView) {
             // If an existing pin view was not available, create one.
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
-            //pinView.animatesDrop = YES;
             pinView.canShowCallout = YES;
-            
-            //UIImage *scaledImage = [UIImage imageWithImage:[UIImage imageNamed:@"map-pin"] scaledToSize:CGSizeMake(40.0, 54.0)];
-            //pinView.image = scaledImage;
-            
             pinView.image = [UIImage imageNamed:@"map-pin"];
-            
-            //pinView.calloutOffset = CGPointMake(0, 32);
-            //pinView.pinColor = MKPinAnnotationColorGreen;
-            
-            // Add an image to the left callout.
-            //UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"location"]];
-            //pinView.leftCalloutAccessoryView = iconView;
         } else {
             pinView.annotation = annotation;
         }
@@ -318,8 +295,6 @@
             
             BOOL include = YES;
             
-            
-            
             BOOL matches = NO;
             for(NSString *tag in _tagsArray) {
                 if([opportunity.tagsArray containsObject:tag]) {
@@ -330,6 +305,19 @@
                 include = NO;
             }
             
+            NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+            
+            if(preferencesDictionary == nil) {
+                preferencesDictionary = [NSDictionary dictionary];
+            }
+            
+            NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
+            if(likes) {
+                if(likes.boolValue == NO) {
+                    include = NO;
+                }
+            }
+
             if(include) {
                 NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:opportunity.venue.name];
                 
@@ -373,8 +361,6 @@
     
     [self zoomToVenues];
     
-    //[self.mapView showAnnotations:self.mapView.annotations animated:YES];
-    
     [weekday setDateFormat: @"eee dd"];
     todayName = [weekday stringFromDate:now];
     
@@ -399,8 +385,16 @@
     [label setTextAlignment:NSTextAlignmentCenter];
     label.attributedText = headerText;
     self.navigationItem.titleView = label;
-    
+}
 
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
 }
 
 @end

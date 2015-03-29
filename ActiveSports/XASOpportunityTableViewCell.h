@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet XASPaddedLabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet XASRateView *ratingView;
+@property (weak, nonatomic) IBOutlet UIImageView *favouriteImageView;
 
 
 @end

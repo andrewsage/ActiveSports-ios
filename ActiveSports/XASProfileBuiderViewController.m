@@ -10,6 +10,7 @@
 #import "XASActivity.h"
 #import "XASProgressView.h"
 
+
 @interface XASProfileBuiderViewController () {
     NSInteger _currentActivityIndex;
     NSMutableArray *_activitiesArray;
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     self.skipButton.layer.cornerRadius = 5.0f;
     self.skipButton.layer.masksToBounds = YES;

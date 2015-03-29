@@ -7,6 +7,8 @@
 //
 
 #import "XASVenueTableViewCell.h"
+#import "UIColor+Expanded.h"
+#import "Constants.h"
 
 @implementation XASVenueTableViewCell
 
@@ -15,12 +17,10 @@
     
     self.distanceLabel.layer.cornerRadius = 5.0f;
     self.distanceLabel.clipsToBounds = YES;
-    self.distanceLabel.insets = UIEdgeInsetsMake(20, 10, 20, 10);
-    [self.distanceLabel resizeHeightToFitText];
-    self.distanceLabel.backgroundColor = [UIColor colorWithRed:0.094 green:0.490 blue:0.459 alpha:1];
+    self.distanceLabel.insets = UIEdgeInsetsMake(5, 5, 5, 5);
+    self.distanceLabel.backgroundColor = [UIColor colorWithHexString:XASPositveActionColor];
     
     self.backgroundColor = [UIColor whiteColor];
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
