@@ -42,4 +42,48 @@
     // Configure the view for the selected state
 }
 
+- (void)setOpportunity:(XASOpportunity *)opportunity {
+    
+    self.titleLabel.text = opportunity.name;
+    self.venueLabel.text = opportunity.venue.name;
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@-%@",
+                           opportunity.dayOfWeek,
+                           opportunity.startTime,
+                           opportunity.endTime];
+    self.ratingView.editable = NO;
+    self.ratingView.padding = 0.0f;
+    self.ratingView.rate = opportunity.effortRating.floatValue;
+    
+    XASVenue *venue = [XASVenue venueWithObjectID:opportunity.venue.remoteID];
+    double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
+    if(distanceInMiles > 50) {
+        self.distanceLabel.text = @"> 50 miles";
+    } else {
+        self.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
+    }
+    
+    NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
+    NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
+    NSInteger hour = [components hour];
+    
+    NSDateFormatter *weekdayDateFormat = [[NSDateFormatter alloc] init];
+    [weekdayDateFormat setDateFormat: @"EEEE"];
+    NSString *todayName = [weekdayDateFormat stringFromDate:now];
+    
+    if([opportunity.dayOfWeek isEqualToString:todayName]) {
+        if(startHour - hour > 2) {
+            self.timeLabel.textColor = [UIColor colorWithHexString:XASNegativeActionColor];
+
+        } else {
+            self.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];
+        }
+    } else {
+        self.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];
+    }
+}
+
 @end

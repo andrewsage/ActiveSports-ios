@@ -355,47 +355,7 @@
     NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
 
     XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
-    // Configure the cell...
-    
-    cell.titleLabel.text = opportunity.name;
-    cell.venueLabel.text = opportunity.venue.name;
-    if(self.viewType == XASOpportunitiesViewSearch) {
-        cell.timeLabel.text = [NSString stringWithFormat:@"%@ %@-%@",
-                               opportunity.dayOfWeek,
-                               opportunity.startTime,
-                               opportunity.endTime];
-    } else {
-        cell.timeLabel.text = [NSString stringWithFormat:@"%@-%@",
-                               opportunity.startTime,
-                               opportunity.endTime];
-    }
-    cell.ratingView.editable = NO;
-    cell.ratingView.padding = 0.0f;
-    cell.ratingView.rate = opportunity.effortRating.floatValue;
-    
-    //cell.favouriteImageView.image = [UIImage imageNamed:@"favourite-activity-selected"];
-
-    
-    XASVenue *venue = [XASVenue venueWithObjectID:opportunity.venue.remoteID];
-    double distanceInMiles = venue.distanceInMeters.doubleValue / 1609.344;
-    if(distanceInMiles > 50) {
-        cell.distanceLabel.text = @"> 50 miles";
-    } else {
-        cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f miles", distanceInMiles];
-    }
-    
-    NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
-    NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
-    
-    NSDate *now = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:now];
-    NSInteger hour = [components hour];
-    
-    if(startHour - hour > 2) {
-        cell.timeLabel.textColor = [UIColor colorWithHexString:XASBrandMainColor];
-    }
-
+    cell.opportunity = opportunity;
     
     return cell;
 }
