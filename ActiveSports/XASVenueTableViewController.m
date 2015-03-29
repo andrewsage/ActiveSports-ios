@@ -27,27 +27,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSDate *now = [NSDate date];
-    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
-    [weekday setDateFormat: @"EEEE"];
-    NSString *todayName = [weekday stringFromDate:now];
-
-    
     self.title = self.venue.name;
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[XASOpportunity forVenue:self.venue]];
-    opportuntiesArray = [[NSMutableArray alloc] initWithCapacity:0];
-    for(XASOpportunity *opportunity in array) {
+    
+    NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
+    [searchDictionary setValue:self.venue.remoteID forKey:@"venue"];
         
-        if([opportunity.dayOfWeek isEqualToString:todayName]) {
-            [opportuntiesArray addObject:opportunity];
-        }
-    }
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *weekdayComponents =
+    [gregorian components:NSCalendarUnitWeekday fromDate:today];
+    NSInteger weekday = [weekdayComponents weekday] - 1;
+    
+    [searchDictionary setObject:[NSNumber numberWithInteger:weekday] forKey:@"dayOfWeek"];
+    
+    opportuntiesArray = [NSMutableArray arrayWithArray:[XASOpportunity forSearch:searchDictionary]];
     
     [opportuntiesArray sortUsingComparator:^(XASOpportunity *opportunity1,
                                         XASOpportunity *opportunity2){
@@ -93,10 +87,8 @@
     MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
     [mapItem setName:self.venue.name];
     
-    
     CLLocation *addressLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude
                                                              longitude:coordinate.longitude];
-    
     
     // Create a region centered on the starting point with a 10km span
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(addressLocation.coordinate, 10000, 10000);

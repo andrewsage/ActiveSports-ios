@@ -34,14 +34,11 @@
 - (id) initWithCoder:(NSCoder *) coder {
     self = [super initWithCoder:coder];
     if(self) {
-        
         _viewType = XASOpportunitiesViewAll;
-
     }
     
     return self;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -138,225 +135,38 @@
 
 #pragma mark -
 
-- (void)rebuildContent {
-    NSDate *now = [NSDate date];
-    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
-    [weekday setDateFormat: @"EEEE"];
-    NSString *todayName = [weekday stringFromDate:now];
-    
-    NSInteger numberOfActivities = 0;
-    
-    NSDictionary *dictionary = [XASOpportunity dictionary];
-    for(NSString *key in dictionary.allKeys) {
-        XASOpportunity *opportunity = [dictionary objectForKey:key];
+- (void)buildTimeSortedCollection:(NSArray *)opportunities {
+    for(XASOpportunity *opportunity in opportunities) {
         
-        if([opportunity.dayOfWeek isEqualToString:todayName]
-           || self.viewType == XASOpportunitiesViewSearch || self.viewType == XASOpportunitiesViewSavedSearch || self.viewType == XASOpportunitiesViewFavourites) {
-            
-            BOOL include = YES;
-            NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
-            NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
-            
-            switch (self.viewType) {
-                case XASOpportunitiesViewAll:
-                    break;
-                    
-                case XASOpportunitiesViewVenue:
-                    if([self.venue.remoteID isEqual:opportunity.venue.remoteID] == NO) {
-                        include = NO;
-                    }
-                    break;
-                    
-                case XASOpportunitiesViewLikes: {
-                    
-                    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
-                    
-                    if(preferencesDictionary == nil) {
-                        preferencesDictionary = [NSDictionary dictionary];
-                    }
-                    
-                    NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
-                    if(likes) {
-                        if(likes.boolValue == NO) {
-                            include = NO;
-                        }
-                    }
-                }
-                    break;
-                    
-                case XASOpportunitiesViewFavourites: {
-                    
-                }
-                    break;
-                    
-                case XASOpportunitiesViewSavedSearch:
-                case XASOpportunitiesViewSearch: {
-                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @""];
-                    NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
-                    NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
-                    NSNumber *timeOfDayNumber = [self.searchDictionary objectForKey:@"timeOfDay"];
-                    
-                    NSNumber *minimumExertion = [self.searchDictionary objectForKey:@"minimumExertion"];
-                    NSNumber *maximumExertion = [self.searchDictionary objectForKey:@"maximumExertion"];
-                    
-                    NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
-                    NSString *textSearch = [self.searchDictionary objectForKey:@"text"];
-                    
-                    if(textSearch) {
-                        if([textSearch isEqualToString:@""] == NO) {
-                        
-                            if([opportunity.name rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                                if([opportunity.description rangeOfString:textSearch options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                                    include = NO;
-                                }
-                            }
-                        }
-                    }
-                    
-                    if([self.searchDictionary objectForKey:@"venue"]) {
-                        if([venueID isEqual:opportunity.venue.remoteID] == NO) {
-                            include = NO;
-                        }
-                    }
-                    
-                    if([self.searchDictionary objectForKey:@"tag"]) {
-                        BOOL matches = NO;
-                        for(NSString *tag in [self.searchDictionary objectForKey:@"tag"]) {
-                            if([opportunity.tagsArray containsObject:tag]) {
-                                matches = YES;
-                            }
-                        }
-                        if(matches == NO) {
-                            include = NO;
-                        }
-                    }
-                    
-                    if(minimumExertion.integerValue > 1 || maximumExertion.integerValue < 5) {
-                        if(opportunity.effortRating < minimumExertion && [self.searchDictionary objectForKey:@"minimumExertion"]) {
-                            include = NO;
-                        }
-                        
-                        if(opportunity.effortRating > maximumExertion && [self.searchDictionary objectForKey:@"maximumExertion"]) {
-                            include = NO;
-                        }
-                    }
-                    
-                    if([self.searchDictionary objectForKey:@"timeOfDay"]) {
-                        switch (timeOfDayNumber.integerValue) {
-                            case 0: // Morning 00:00 - 11:59
-                                if(startHour >= 12) {
-                                    include = NO;
-                                }
-                                break;
-                                
-                            case 1: // Afternoon 12:00 - 16:59
-                                if(startHour < 12 || startHour >= 17) {
-                                    include = NO;
-                                }
-                                break;
-                                
-                            case 2: // Evening 17:00 - 23:59
-                                if(startHour < 17) {
-                                    include = NO;
-                                }
-                                break;
-                                
-                            default:
-                                break;
-                        }
-                    }
-                    
-                    if([dayName isEqualToString:@""] == NO) {
-                        if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
-                            include = NO;
-                        }
-                    }
-                }
-                    break;
-                    
-                    
-                case XASOpportunitiesViewToday: {
-                    NSArray *dayNameArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @""];
-                    NSNumber *dayOfWeekNumber = [self.searchDictionary objectForKey:@"dayOfWeek"];
-                    NSString *dayName = [dayNameArray objectAtIndex:dayOfWeekNumber.integerValue];
-                    
-                    
-                    NSString *venueID = [self.searchDictionary objectForKey:@"venue"];
-                    
-                    if([self.searchDictionary objectForKey:@"venue"]) {
-                        if([venueID isEqual:opportunity.venue.remoteID] == NO) {
-                            include = NO;
-                        }
-                    }
-                    
-                    if([self.searchDictionary objectForKey:@"tag"]) {
-                        BOOL matches = NO;
-                        for(NSString *tag in [self.searchDictionary objectForKey:@"tag"]) {
-                            if([opportunity.tagsArray containsObject:tag]) {
-                                matches = YES;
-                            }
-                        }
-                        if(matches == NO) {
-                            include = NO;
-                        }
-                    }
-                    
-                    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
-                    
-                    if(preferencesDictionary == nil) {
-                        preferencesDictionary = [NSDictionary dictionary];
-                    }
-                    
-                    NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
-                    if(likes) {
-                        if(likes.boolValue == NO) {
-                            include = NO;
-                        }
-                    }
-                    
-                    if([dayName isEqualToString:@""] == NO) {
-                        if([opportunity.dayOfWeek isEqualToString:dayName] == NO && [self.searchDictionary objectForKey:@"dayOfWeek"]) {
-                            include = NO;
-                        }
-                    }
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            if(include) {
-                
-                numberOfActivities++;
-                
-                NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[NSNumber numberWithInteger:startHour]];
-                
-                if(objectsArray == nil) {
-                    objectsArray = [NSMutableArray array];
-                }
-                
-                [objectsArray addObject:opportunity];
-                
-                [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
-                                                    XASOpportunity *opportunity2){
-                    
-                    return [opportunity1.name compare:opportunity2.name options:NSCaseInsensitiveSearch];
-                }];
-                
-                
-                [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
-                                                    XASOpportunity *opportunity2){
-                    
-                    return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
-                }];
-                
-                [_collectionsDictionary setObject:objectsArray forKey:[NSNumber numberWithInteger:startHour]];
-            }
+        NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
+        NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
+        
+        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[NSNumber numberWithInteger:startHour]];
+        
+        if(objectsArray == nil) {
+            objectsArray = [NSMutableArray array];
         }
+        
+        [objectsArray addObject:opportunity];
+        
+        [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
+                                            XASOpportunity *opportunity2){
+            
+            return [opportunity1.name compare:opportunity2.name options:NSCaseInsensitiveSearch];
+        }];
+        
+        
+        [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
+                                            XASOpportunity *opportunity2){
+            
+            return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
+        }];
+        
+        [_collectionsDictionary setObject:objectsArray forKey:[NSNumber numberWithInteger:startHour]];
     }
-    
-    
+}
+
+- (void)updateTitle:(NSInteger)numberOfActivities {
     NSMutableAttributedString *headerText = [[NSMutableAttributedString alloc] initWithString:self.title];
     NSMutableAttributedString *bottomText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%ld Activities", (long)numberOfActivities]];
     
@@ -378,6 +188,51 @@
     [label setTextAlignment:NSTextAlignmentCenter];
     label.attributedText = headerText;
     self.navigationItem.titleView = label;
+}
+
+- (void)rebuildContent {
+    
+    NSInteger numberOfActivities = 0;
+    
+    switch (self.viewType) {
+        case XASOpportunitiesViewAll:
+            break;
+            
+        case XASOpportunitiesViewFavourites:
+        {
+            
+            NSArray *opportunities = [XASOpportunity forFavourites];
+            numberOfActivities = opportunities.count;
+            [self buildTimeSortedCollection:opportunities];
+            
+        }
+            break;
+            
+        case XASOpportunitiesViewSearch:
+        case XASOpportunitiesViewSavedSearch:
+        {
+            
+            NSArray *opportunities = [XASOpportunity forSearch:self.searchDictionary];
+            numberOfActivities = opportunities.count;
+            [self buildTimeSortedCollection:opportunities];
+            
+        }
+            break;
+            
+        case XASOpportunitiesViewToday:
+        {
+            
+            NSArray *opportunities = [XASOpportunity forTodayWithSearch:self.searchDictionary];
+            numberOfActivities = opportunities.count;
+            [self buildTimeSortedCollection:opportunities];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self updateTitle:numberOfActivities];
 }
 
 - (NSArray*)sortedKeys {
@@ -693,15 +548,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Preferences
-- (NSString*)preferencesFilepath {
-    
-    
-    NSString *documentsDir = [XASBaseObject cacheDirectory];
-    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
-    
-    return path;
-}
+
 
 
 @end

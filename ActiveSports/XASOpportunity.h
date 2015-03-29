@@ -31,5 +31,8 @@
 - (void)rateInBackground:(NSInteger)rating withBlock:(XASBooleanResultBlock)block;
 + (NSArray*)forVenue:(XASVenue*)venue;
 
++ (NSArray*)forFavourites;
++ (NSArray*)forSearch:(NSDictionary *)searchDictionary;
++ (NSArray*)forTodayWithSearch:(NSDictionary *)searchDictionary;
 
 @end

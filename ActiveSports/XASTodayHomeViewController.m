@@ -280,58 +280,40 @@
 }
 
 - (void)rebuildContent {
-    NSDate *now = [NSDate date];
-    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
-    [weekday setDateFormat: @"EEEE"];
-    NSString *todayName = [weekday stringFromDate:now];
-
-    _collectionsDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    NSDictionary *dictionary = [XASOpportunity dictionary];
-    for(NSString *key in dictionary.allKeys) {
-        XASOpportunity *opportunity = [dictionary objectForKey:key];
-        
-        if([opportunity.dayOfWeek isEqualToString:todayName]) {
-            
-            BOOL include = YES;
-            
-            BOOL matches = NO;
-            for(NSString *tag in _tagsArray) {
-                if([opportunity.tagsArray containsObject:tag]) {
-                    matches = YES;
-                }
-            }
-            if(matches == NO) {
-                include = NO;
-            }
-            
-            NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
-            
-            if(preferencesDictionary == nil) {
-                preferencesDictionary = [NSDictionary dictionary];
-            }
-            
-            NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
-            if(likes) {
-                if(likes.boolValue == NO) {
-                    include = NO;
-                }
-            }
+    NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionary];
+    
+    [searchDictionary setObject:_tagsArray forKey:@"tag"];
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *weekdayComponents =
+    [gregorian components:NSCalendarUnitWeekday fromDate:today];
+    NSInteger weekday = [weekdayComponents weekday] - 1;
+    
+    [searchDictionary setObject:[NSNumber numberWithInteger:weekday] forKey:@"dayOfWeek"];
 
-            if(include) {
-                NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:opportunity.venue.name];
-                
-                if(objectsArray == nil) {
-                    objectsArray = [NSMutableArray array];
-                }
-                
-                [objectsArray addObject:opportunity];
-                
-                [_collectionsDictionary setObject:objectsArray forKey:opportunity.venue.name];
-            }
+    NSArray *opportunities = [XASOpportunity forTodayWithSearch:searchDictionary];
+    
+    _collectionsDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
+
+    for(XASOpportunity *opportunity in opportunities) {
+        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:opportunity.venue.name];
+        
+        if(objectsArray == nil) {
+            objectsArray = [NSMutableArray array];
         }
+        
+        [objectsArray addObject:opportunity];
+        
+        [_collectionsDictionary setObject:objectsArray forKey:opportunity.venue.name];
     }
     
+    NSDate *now = [NSDate date];
+    NSDateFormatter *weekdayDateFormat = [[NSDateFormatter alloc] init];
+    [weekdayDateFormat setDateFormat: @"EEEE"];
+    NSString *todayName = [weekdayDateFormat stringFromDate:now];
     NSDictionary *venues = [XASVenue dictionary];
     
     [self.mapView removeAnnotations:self.mapView.annotations];
@@ -361,8 +343,8 @@
     
     [self zoomToVenues];
     
-    [weekday setDateFormat: @"eee dd"];
-    todayName = [weekday stringFromDate:now];
+    [weekdayDateFormat setDateFormat: @"eee dd"];
+    todayName = [weekdayDateFormat stringFromDate:now];
     
     NSMutableAttributedString *headerText = [[NSMutableAttributedString alloc] initWithString:@"Activities near you\n"];
     NSMutableAttributedString *bottomText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld Activities - This %@ (%@%@)", (long)numberOfActivities, _timeOfDay, todayName, [self daySuffixForDate:now]]];
@@ -387,14 +369,5 @@
     self.navigationItem.titleView = label;
 }
 
-#pragma mark - Preferences
-- (NSString*)preferencesFilepath {
-    
-    
-    NSString *documentsDir = [XASBaseObject cacheDirectory];
-    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
-    
-    return path;
-}
 
 @end
