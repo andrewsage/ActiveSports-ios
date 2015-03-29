@@ -761,12 +761,12 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0y-oq-Jg4" id="iZ0-hb-aXD">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMJ-6U-YSv">
-                                            <rect key="frame" x="16" y="7" width="552" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMJ-6U-YSv">
+                                            <rect key="frame" x="16" y="7" width="524" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="acA-l8-g8v"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -802,8 +802,20 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favourite-activity" translatesAutoresizingMaskIntoConstraints="NO" id="7YI-8T-BwR">
+                                            <rect key="frame" x="548" y="-0.5" width="36" height="36"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="36" id="2UM-jM-Rjk"/>
+                                                <constraint firstAttribute="height" constant="36" id="qJi-qs-zFl"/>
+                                            </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="CMg-wy-rVF" appends="YES" id="ujY-r9-dik"/>
+                                            </connections>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7YI-8T-BwR" secondAttribute="trailing" constant="8" id="3r8-Jf-bPV"/>
                                         <constraint firstItem="uF7-m1-Z7r" firstAttribute="top" secondItem="CPH-WW-wgx" secondAttribute="bottom" constant="8" id="56A-aB-TWI"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="CPH-WW-wgx" secondAttribute="bottom" constant="42.5" id="6eo-vh-Qiu"/>
                                         <constraint firstItem="OBe-0Z-YqU" firstAttribute="leading" secondItem="CPH-WW-wgx" secondAttribute="trailing" constant="8" id="6jc-fd-u1m"/>
@@ -811,21 +823,26 @@
                                         <constraint firstItem="CPH-WW-wgx" firstAttribute="leading" secondItem="iZ0-hb-aXD" secondAttribute="leadingMargin" constant="8" id="H3S-Fo-EAD"/>
                                         <constraint firstItem="BMJ-6U-YSv" firstAttribute="leading" secondItem="iZ0-hb-aXD" secondAttribute="leadingMargin" constant="8" id="MM5-zq-d8y"/>
                                         <constraint firstItem="pNb-Kh-xeF" firstAttribute="trailing" secondItem="iZ0-hb-aXD" secondAttribute="trailingMargin" constant="-8" id="MVN-JO-BzU"/>
+                                        <constraint firstItem="OBe-0Z-YqU" firstAttribute="top" secondItem="7YI-8T-BwR" secondAttribute="bottom" constant="21" id="NEO-G2-BQZ"/>
                                         <constraint firstItem="BMJ-6U-YSv" firstAttribute="centerX" secondItem="iZ0-hb-aXD" secondAttribute="centerX" constant="-8" id="OaN-WJ-ilZ"/>
                                         <constraint firstItem="uF7-m1-Z7r" firstAttribute="top" secondItem="CPH-WW-wgx" secondAttribute="bottom" constant="8" symbolic="YES" id="Q58-YE-fyh"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="OBe-0Z-YqU" secondAttribute="bottom" constant="6" id="Tfd-tP-3lV"/>
                                         <constraint firstItem="OBe-0Z-YqU" firstAttribute="top" secondItem="pNb-Kh-xeF" secondAttribute="bottom" constant="3" id="TsF-wh-DNN"/>
                                         <constraint firstItem="OBe-0Z-YqU" firstAttribute="trailing" secondItem="iZ0-hb-aXD" secondAttribute="trailingMargin" constant="-8" id="XCN-mW-6Dk"/>
+                                        <constraint firstItem="7YI-8T-BwR" firstAttribute="leading" secondItem="BMJ-6U-YSv" secondAttribute="trailing" constant="8" symbolic="YES" id="cIW-w6-YHk"/>
                                         <constraint firstItem="OBe-0Z-YqU" firstAttribute="leading" secondItem="pNb-Kh-xeF" secondAttribute="leading" id="cbp-YO-il3"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="BMJ-6U-YSv" secondAttribute="bottom" constant="66.5" id="dlf-7h-kwa"/>
                                         <constraint firstItem="CPH-WW-wgx" firstAttribute="top" secondItem="BMJ-6U-YSv" secondAttribute="bottom" constant="15" id="ea4-c5-yud"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="OBe-0Z-YqU" secondAttribute="bottom" constant="17" id="gtX-J1-t1i"/>
                                         <constraint firstItem="pNb-Kh-xeF" firstAttribute="top" secondItem="BMJ-6U-YSv" secondAttribute="bottom" constant="12" id="lGt-p0-fmE"/>
+                                        <constraint firstItem="7YI-8T-BwR" firstAttribute="centerY" secondItem="BMJ-6U-YSv" secondAttribute="centerY" id="mop-7U-UP1"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="OaN-WJ-ilZ"/>
                                             <exclude reference="dlf-7h-kwa"/>
                                             <exclude reference="6eo-vh-Qiu"/>
+                                            <exclude reference="NEO-G2-BQZ"/>
                                             <exclude reference="gtX-J1-t1i"/>
                                         </mask>
                                     </variation>
@@ -1138,6 +1155,11 @@
                 <tapGestureRecognizer id="a6U-pt-2j8">
                     <connections>
                         <action selector="addressPressed:" destination="tRh-gW-Ucs" id="S33-XQ-7QS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="CMg-wy-rVF">
+                    <connections>
+                        <action selector="favouriteTapped:" destination="tRh-gW-Ucs" id="U5l-fE-kiC"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2440,6 +2462,7 @@ Designed by Jen Thomson</string>
         <image name="activity-weightloss" width="48" height="43"/>
         <image name="dislike" width="90" height="90"/>
         <image name="drop-rating-big" width="71" height="94"/>
+        <image name="favourite-activity" width="18" height="18"/>
         <image name="home-saved-searches" width="38" height="48"/>
         <image name="icon-home" width="26" height="21"/>
         <image name="icon-home-white" width="26" height="21"/>

@@ -17,6 +17,9 @@
 @interface XASOpportunityViewController () {
     NSMutableArray *_venueNotices;
     BOOL _hideImage;
+    BOOL _favourite;
+    NSMutableDictionary *_preferencesDictionary;
+
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
@@ -105,7 +108,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    
     self.title = self.opportunity.name;
+    
+    _favourite = NO;
     
     _hideImage = NO;
     
@@ -145,6 +156,29 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)favouriteTapped:(id)sender {
+    
+    _favourite = !_favourite;
+    
+    NSNumber *included = [_preferencesDictionary objectForKey:self.opportunity.remoteID];
+    if(included.boolValue) {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:NO] forKey:self.opportunity.remoteID];
+    } else {
+        [_preferencesDictionary setObject:[NSNumber numberWithBool:YES] forKey:self.opportunity.remoteID];
+    }
+    
+    if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
+    } else {
+        NSLog(@"Failed to save dictionary");
+    }
+
+    
+    NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:2 inSection:0]];
+    
+    [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 - (IBAction)homePressed:(id)sender {
     
@@ -564,6 +598,7 @@
                     UILabel *opportunityNameLabel = (UILabel*)[cell viewWithTag:2];
                     UILabel *whenLabel = (UILabel*)[cell viewWithTag:4];
                     UILabel *venueLabel = (UILabel*)[cell viewWithTag:3];
+                    UIImageView *favouriteImageView = (UIImageView*)[cell viewWithTag:5];
                     
                     opportunityNameLabel.text = self.opportunity.name;
                     whenLabel.text = [NSString stringWithFormat:@"%@, %@ - %@",
@@ -572,8 +607,14 @@
                                       self.opportunity.endTime];
                     venueLabel.text = self.opportunity.venue.name;
                     
+                    NSNumber *included = [_preferencesDictionary objectForKey:self.opportunity.remoteID];
+
                     
-                    
+                    if(included.boolValue) {
+                        favouriteImageView.image = [UIImage imageNamed:@"favourite-activity-selected"];
+                    } else {
+                        favouriteImageView.image = [UIImage imageNamed:@"favourite-activity"];
+                    }
                 }
                     
                     break;
@@ -745,5 +786,15 @@
         controller.opportunity = self.opportunity;
     }
 }
+
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"favourites"]];
+    
+    return path;
+}
+
 
 @end

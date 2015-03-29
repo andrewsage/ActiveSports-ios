@@ -289,12 +289,24 @@
 }
 
 + (NSArray*)forFavourites {
+    
+    NSDictionary *favouritesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self favouritesFilepath]];
+    
+    if(favouritesDictionary == nil) {
+        favouritesDictionary = [NSDictionary dictionary];
+    }
+    
     NSMutableArray *opportunitiesArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     NSDictionary *dictionary = [XASOpportunity dictionary];
     for(NSString *key in dictionary.allKeys) {
         XASOpportunity *opportunity = [dictionary objectForKey:key];
-        [opportunitiesArray addObject:opportunity];
+        
+        NSNumber *included = [favouritesDictionary objectForKey:opportunity.remoteID];
+        
+        if(included.boolValue) {
+            [opportunitiesArray addObject:opportunity];
+        }
     }
     
     return opportunitiesArray;
@@ -470,6 +482,14 @@
     
     NSString *documentsDir = [XASBaseObject cacheDirectory];
     NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
+}
+
++ (NSString*)favouritesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"favourites"]];
     
     return path;
 }

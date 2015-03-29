@@ -22,6 +22,7 @@
     
     NSMutableDictionary *_collectionNamesDictionary;
     NSMutableDictionary *_collectionsDictionary;
+    NSMutableDictionary *_preferencesDictionary;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *saveSearchButton;
@@ -42,6 +43,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    
     
     _collectionsDictionary = [NSMutableDictionary dictionary];
     
@@ -121,6 +129,15 @@
         self.tableView.tableHeaderView.hidden = YES;
         self.tableView.tableHeaderView = nil;
     }
+    
+    _preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(_preferencesDictionary == nil) {
+        _preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    
+    [self rebuildContent];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -136,6 +153,9 @@
 #pragma mark -
 
 - (void)buildTimeSortedCollection:(NSArray *)opportunities {
+    
+    [_collectionsDictionary removeAllObjects];
+    
     for(XASOpportunity *opportunity in opportunities) {
         
         NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
@@ -357,29 +377,50 @@
     XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
     cell.opportunity = opportunity;
     
+    NSNumber *included = [_preferencesDictionary objectForKey:opportunity.remoteID];
+    if(included.boolValue) {
+        cell.favouriteImageView.image = [UIImage imageNamed:@"favourite-activity-selected"];
+    } else {
+        cell.favouriteImageView.image = [UIImage imageNamed:@"favourite-activity"];
+    }
+    
     return cell;
 }
 
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return self.viewType == XASOpportunitiesViewFavourites;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+
+        XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
+        [_preferencesDictionary removeObjectForKey:opportunity.remoteID];
+        
+        [objectsArray removeObjectAtIndex:indexPath.row];
+        [_collectionsDictionary setObject:objectsArray forKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+        
+        if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
+        } else {
+            NSLog(@"Failed to save dictionary");
+        }
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        
+        if(objectsArray.count == 0) {
+            [_collectionsDictionary removeObjectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            
+        }
+    }
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -505,9 +546,20 @@
     
     [XASVenue saveDictionary];
     
-    [self.tableView reloadData];
+    // Only reload the table if we are not in edit mode
+    if(self.tableView.editing == NO) {
+        [self.tableView reloadData];
+    }
 }
 
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"favourites"]];
+    
+    return path;
+}
 
 
 
