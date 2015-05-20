@@ -15,6 +15,8 @@
 		49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */; };
 		49236E411A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */; };
 		49236E421A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */; };
+		4926E5761B0C6E8300BCEDA6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4926E5741B0C6E8300BCEDA6 /* Fabric.framework */; };
+		4926E5771B0C6E8300BCEDA6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4926E5751B0C6E8300BCEDA6 /* Crashlytics.framework */; };
 		4926E99C1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
 		4926E99D1A2F52A9006CEEE4 /* XASVenueAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */; };
 		492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 492FFFB81A1A35B00067C4D9 /* XASProfileBuiderViewController.m */; };
@@ -113,6 +115,8 @@
 		49092D7F19FD299D0037ACCD /* XASProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASProfileTableViewController.m; sourceTree = "<group>"; };
 		49236E3F1A4B3F4100936449 /* XASPreferenceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASPreferenceTableViewCell.h; sourceTree = "<group>"; };
 		49236E401A4B3F4100936449 /* XASPreferenceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASPreferenceTableViewCell.m; sourceTree = "<group>"; };
+		4926E5741B0C6E8300BCEDA6 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		4926E5751B0C6E8300BCEDA6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4926E99A1A2F52A9006CEEE4 /* XASVenueAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenueAnnotation.h; sourceTree = "<group>"; };
 		4926E99B1A2F52A9006CEEE4 /* XASVenueAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenueAnnotation.m; sourceTree = "<group>"; };
 		492FFFB71A1A35B00067C4D9 /* XASProfileBuiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASProfileBuiderViewController.h; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				497CA74319F3CA0E003F5F0A /* MapKit.framework in Frameworks */,
+				4926E5771B0C6E8300BCEDA6 /* Crashlytics.framework in Frameworks */,
+				4926E5761B0C6E8300BCEDA6 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +245,8 @@
 		494682DA19E29C4800437B63 = {
 			isa = PBXGroup;
 			children = (
+				4926E5741B0C6E8300BCEDA6 /* Fabric.framework */,
+				4926E5751B0C6E8300BCEDA6 /* Crashlytics.framework */,
 				497CA74219F3CA0E003F5F0A /* MapKit.framework */,
 				494682E519E29C4800437B63 /* ActiveSports */,
 				4946830219E29C4800437B63 /* ActiveSportsTests */,
@@ -412,6 +420,7 @@
 				494682DF19E29C4800437B63 /* Sources */,
 				494682E019E29C4800437B63 /* Frameworks */,
 				494682E119E29C4800437B63 /* Resources */,
+				4926E5731B0C6E4600BCEDA6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -497,6 +506,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4926E5731B0C6E4600BCEDA6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 33e8d98f9cea90bd78030fda8ed3d8bee5d0b4d2 2ce1ac37f11a8c47dc7076f8a3aed30013b05ecfea754b3d6409bec980e0e4cb";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		494682DF19E29C4800437B63 /* Sources */ = {
@@ -708,11 +733,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
 			};
 			name = Debug;
 		};
@@ -722,11 +751,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ActiveSports/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
 			};
 			name = Release;
 		};
