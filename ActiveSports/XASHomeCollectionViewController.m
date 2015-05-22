@@ -225,6 +225,26 @@ static NSString * const reuseIdentifier = @"menuoption";
 
         if(error) {
             NSLog(@"error: %@", error.localizedDescription);
+            
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Download Error"
+                                                  message:[NSString stringWithFormat:@"There was a problem downloading data: %@", error.localizedDescription]
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action) {
+                                       }];
+            
+            [alertController addAction:okAction];
+            
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+
         } else {
             NSLog(@"Data updated");
             [self checkForPreferences];

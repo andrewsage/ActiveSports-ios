@@ -13,6 +13,7 @@
 #import "UIImage+Resize.h"
 #import "UIColor+Expanded.h"
 #import "Constants.h"
+#import "XASProfileBuiderViewController.h"
 
 @interface XASTodayHomeViewController () {
     
@@ -75,6 +76,8 @@
     self.greetingLabel.text = [NSString stringWithFormat:@"Good %@!", _timeOfDay];
     self.mapView.delegate = self;
     
+    
+    [self checkForPreferences];
     [self rebuildContent];
 }
 
@@ -83,6 +86,8 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:XASBrandMainColor];
+
+    [self rebuildContent];
 
     [super viewWillAppear:animated];
 }
@@ -367,6 +372,54 @@
     [label setTextAlignment:NSTextAlignmentCenter];
     label.attributedText = headerText;
     self.navigationItem.titleView = label;
+}
+
+
+- (void)checkForPreferences {
+    
+    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(preferencesDictionary == nil) {
+        preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    
+    if(preferencesDictionary.count == 0) {
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Your activity preferences"
+                                              message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action) {
+                                       
+                                       XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
+                                       [self presentViewController:profileBuilderViewController
+                                                          animated:YES
+                                                        completion:^{
+                                                            
+                                                        }];
+                                   }];
+        
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+        
+    }
+}
+
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
 }
 
 

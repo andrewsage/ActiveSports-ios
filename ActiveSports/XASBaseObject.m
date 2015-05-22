@@ -249,11 +249,12 @@
                                            
                                        case 500:
                                            NSLog(@"Internal Server error: response 500");
+                                           block(nil, error);
                                            break;
                                            
                                        default:
                                            NSLog(@"Connection did receive response: %@", response);
-                                           
+                                           block(nil, error);
                                            break;
                                    }
                                }
