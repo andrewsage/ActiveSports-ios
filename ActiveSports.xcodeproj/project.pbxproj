@@ -47,6 +47,8 @@
 		4946831619E29E9C00437B63 /* XASConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831419E29E9C00437B63 /* XASConnector.m */; };
 		4946831919E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
 		4946831A19E2A38C00437B63 /* XASVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4946831819E2A38C00437B63 /* XASVenue.m */; };
+		4951E5FF1B0F1FF0007B7EBF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E5FE1B0F1FF0007B7EBF /* MBProgressHUD.m */; };
+		4951E6001B0F1FF0007B7EBF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E5FE1B0F1FF0007B7EBF /* MBProgressHUD.m */; };
 		4957795D1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
 		4957795E1A4B09420038569C /* XASPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957795C1A4B09420038569C /* XASPaddedLabel.m */; };
 		495779611A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 495779601A4B1B800038569C /* XASHomeCollectionViewController.m */; };
@@ -153,6 +155,8 @@
 		4946831419E29E9C00437B63 /* XASConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASConnector.m; sourceTree = "<group>"; };
 		4946831719E2A38C00437B63 /* XASVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASVenue.h; sourceTree = "<group>"; };
 		4946831819E2A38C00437B63 /* XASVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASVenue.m; sourceTree = "<group>"; };
+		4951E5FD1B0F1FF0007B7EBF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		4951E5FE1B0F1FF0007B7EBF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		4957795B1A4B09420038569C /* XASPaddedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASPaddedLabel.h; sourceTree = "<group>"; };
 		4957795C1A4B09420038569C /* XASPaddedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASPaddedLabel.m; sourceTree = "<group>"; };
 		4957795F1A4B1B800038569C /* XASHomeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASHomeCollectionViewController.h; sourceTree = "<group>"; };
@@ -266,6 +270,8 @@
 		494682E519E29C4800437B63 /* ActiveSports */ = {
 			isa = PBXGroup;
 			children = (
+				4951E5FD1B0F1FF0007B7EBF /* MBProgressHUD.h */,
+				4951E5FE1B0F1FF0007B7EBF /* MBProgressHUD.m */,
 				498F16491A78017D00875634 /* Extended Classes */,
 				498F163C1A77FB1200875634 /* Constants.h */,
 				498F163D1A77FB1200875634 /* Constants.m */,
@@ -558,6 +564,7 @@
 				495779611A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
 				49AAE7AB1A2CB24A00A2562F /* XASTodayHomeViewController.m in Sources */,
 				493131661A19128A00B1365A /* XASRoundedView.m in Sources */,
+				4951E5FF1B0F1FF0007B7EBF /* MBProgressHUD.m in Sources */,
 				492FFFBD1A1A3A8E0067C4D9 /* XASActivity.m in Sources */,
 				498F16471A77FE8C00875634 /* UIColor+Expanded.m in Sources */,
 				49236E411A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */,
@@ -584,6 +591,7 @@
 				498F163F1A77FB1200875634 /* Constants.m in Sources */,
 				49092D8119FD299D0037ACCD /* XASProfileTableViewController.m in Sources */,
 				4976D8DA1ABF118D00A7C988 /* XASRangeSliderTrackLayer.m in Sources */,
+				4951E6001B0F1FF0007B7EBF /* MBProgressHUD.m in Sources */,
 				4976D8D21ABEF0AE00A7C988 /* XASRangeSlider.m in Sources */,
 				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
@@ -741,7 +749,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -759,7 +767,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "258be7fb-406a-4a49-bdbd-6a8e21468401";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

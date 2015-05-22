@@ -97,7 +97,7 @@
     [encoder encodeObject:_opportunityDescription forKey:@"description"];
     [encoder encodeObject:_effortRating forKey:@"effortRating"];
     [encoder encodeObject:_imageURL forKey:@"imageURL"];
-    [encoder encodeObject:_activityID forKey:@"activityID"];
+    [encoder encodeObject:_activity forKey:@"activity"];
     [encoder encodeObject:_tagsArray forKey:@"tags"];
 }
 
@@ -112,7 +112,7 @@
         _opportunityDescription = [decoder decodeObjectForKey:@"description"];
         _effortRating = [decoder decodeObjectForKey:@"effortRating"];
         _imageURL = [decoder decodeObjectForKey:@"imageURL"];
-        _activityID = [decoder decodeObjectForKey:@"activityID"];
+        _activity = [decoder decodeObjectForKey:@"activity"];
         _tagsArray = [decoder decodeObjectForKey:@"tags"];
     }
     return self;
@@ -131,7 +131,12 @@
     if([self.imageURL isKindOfClass:[NSNull class]] == NO) {
         self.imageURL = [self.imageURL stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
-    self.activityID = [objectDictionary valueForKey:@"activity_id"];
+    NSDictionary *activityDictionary = [objectDictionary valueForKey:@"activity"];
+    if(activityDictionary) {
+        self.activity = [[XASActivity alloc] initWithDictionary:activityDictionary];
+        [[XASActivity dictionary] setObject:self.activity forKey:self.activity.remoteID];
+        [XASActivity saveDictionary];
+    }
     
     self.effortRating = [objectDictionary valueForKey:@"effort_rating"];
     
@@ -453,7 +458,7 @@
             }
         }
     
-        NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activityID];
+        NSNumber *likes = [preferencesDictionary objectForKey:opportunity.activity.remoteID];
         if(likes) {
             if(likes.boolValue == NO) {
                 include = NO;

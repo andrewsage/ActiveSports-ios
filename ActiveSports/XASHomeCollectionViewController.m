@@ -11,8 +11,12 @@
 #import "XASMenuCollectionViewCell.h"
 #import "XASRegion.h"
 #import "XASOpportunity.h"
+#import "MBProgressHUD.h"
+#import "XASProfileBuiderViewController.h"
 
-@interface XASHomeCollectionViewController ()
+@interface XASHomeCollectionViewController () {
+    MBProgressHUD *HUD;
+}
 
 @end
 
@@ -20,10 +24,75 @@
 
 static NSString * const reuseIdentifier = @"menuoption";
 
+- (void)checkForPreferences {
+
+    NSDictionary *preferencesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self preferencesFilepath]];
+    
+    if(preferencesDictionary == nil) {
+        preferencesDictionary = [NSMutableDictionary dictionary];
+    }
+    
+    if(preferencesDictionary.count == 0) {
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Your activity preferences"
+                                              message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action) {
+                                       
+                                       XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
+                                       [self presentViewController:profileBuilderViewController
+                                                          animated:YES
+                                                        completion:^{
+                                                            
+                                                        }];
+                                   }];
+        
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+        
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home-bg"]];
+    
+    // Display a welcome message and get the data if we don't have any
+    NSDictionary *dictionary = [XASOpportunity dictionary];
+    if(dictionary.count == 0) {
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Welcome"
+                                              message:@"Thank you for using the Active Aberdeen app. Before we begin we will need to download activity information from our server."
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action) {
+                                       [self updateData];
+                                   }];
+        
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    } else {
+        [self checkForPreferences];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,6 +211,27 @@ static NSString * const reuseIdentifier = @"menuoption";
 
 #pragma mark <UICollectionViewDelegate>
 
+- (void)updateData {
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Downloading data";
+    
+    XASRegion *region = [[XASRegion alloc] init];
+    region.remoteID = @"4";
+    
+    [XASOpportunity fetchAllInBackgroundFor:region withBlock:^(NSArray *objects, NSError *error) {
+        
+        [hud hide:YES];
+
+        if(error) {
+            NSLog(@"error: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Data updated");
+            [self checkForPreferences];
+        }
+    }];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (indexPath.row) {
@@ -181,17 +271,7 @@ static NSString * const reuseIdentifier = @"menuoption";
         
         NSLog(@"Update data requested");
         
-        XASRegion *region = [[XASRegion alloc] init];
-        region.remoteID = @"4";
-        
-        [XASOpportunity fetchAllInBackgroundFor:region withBlock:^(NSArray *objects, NSError *error) {
-            
-            if(error) {
-                NSLog(@"error: %@", error.localizedDescription);
-            } else {
-                NSLog(@"Data updated");
-            }
-        }];
+        [self updateData];
     }
 }
 
@@ -223,5 +303,14 @@ static NSString * const reuseIdentifier = @"menuoption";
 	
 }
 */
+
+#pragma mark - Preferences
+- (NSString*)preferencesFilepath {
+    
+    NSString *documentsDir = [XASBaseObject cacheDirectory];
+    NSString *path = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"profile"]];
+    
+    return path;
+}
 
 @end

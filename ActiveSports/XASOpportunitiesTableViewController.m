@@ -63,6 +63,7 @@
     
     [locationManager startUpdatingLocation];
     
+    /*
     self.refreshControl = [[UIRefreshControl alloc] init];
     
     UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
@@ -79,6 +80,7 @@
     self.refreshControl.attributedTitle = attributedText;
     
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+     */
     
     switch (self.viewType) {
         case XASOpportunitiesViewAll:

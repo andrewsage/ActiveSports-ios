@@ -28,7 +28,7 @@
 
     
     XASConnector *connector = [XASConnector sharedInstance];
-    connector.debugMode = NO;
+    connector.debugMode = YES;//NO;
     //connector.serverAPIBaseURL = @"http://localhost:3000";
     connector.serverAPIBaseURL = @"http://matchthecity.org";
     //connector.serverAPIBaseURL = @"http://192.168.1.128:3000";

@@ -8,18 +8,19 @@
 
 #import "XASBaseObject.h"
 #import "XASVenue.h"
+#import "XASActivity.h"
 
 @interface XASOpportunity : XASBaseObject
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) XASVenue *venue;
+@property (nonatomic, strong) XASActivity *activity;
 @property (nonatomic, copy) NSString *startTime;
 @property (nonatomic, copy) NSString *endTime;
 @property (nonatomic, copy) NSString *dayOfWeek;
 @property (nonatomic, copy) NSString *opportunityDescription;
 @property (nonatomic, copy) NSNumber *effortRating;
 @property (nonatomic, copy) NSString *imageURL;
-@property (nonatomic, copy) NSString *activityID;
 @property (nonatomic, copy) NSMutableArray *tagsArray;
 
 @property (nonatomic, retain) NSNumber * distanceInMeters;

@@ -72,6 +72,7 @@
     self.resetButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [self.resetButton sizeToFit];
     
+    /*
     [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         if(error) {
             NSLog(@"Error downloading activitiy list %@", error);
@@ -80,6 +81,8 @@
         }
     }];
 
+     */
+    
     [self dataLoaded];
 }
 
