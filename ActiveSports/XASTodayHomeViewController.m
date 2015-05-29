@@ -207,7 +207,10 @@
         [pinView addSubview:numberView];
         
         pinView.canShowCallout = YES;
-        pinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        // TODO: Set button icon
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pinView.rightCalloutAccessoryView = button;
 
         
         return pinView;

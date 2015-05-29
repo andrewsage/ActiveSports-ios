@@ -139,7 +139,24 @@
     [self.opportunity rateInBackground:rate.intValue
                              withBlock:^(BOOL succeeded, NSError *error) {
                                  if(error) {
-                                     NSLog(@"Error rating: %@", error.localizedDescription);
+                                     UIAlertController *alertController = [UIAlertController
+                                                                           alertControllerWithTitle:@"Rating Error"
+                                                                           message:[NSString stringWithFormat:@"There was a problem sending your rating: %@", error.localizedDescription]
+                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                     
+                                     UIAlertAction *okAction = [UIAlertAction
+                                                                actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                                                style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction *action) {
+                                                                }];
+                                     
+                                     [alertController addAction:okAction];
+                                     
+                                     [self presentViewController:alertController
+                                                        animated:YES
+                                                      completion:^{
+                                                          
+                                                      }];
                                  }
                                  
                                  [self.navigationController popViewControllerAnimated:YES];
