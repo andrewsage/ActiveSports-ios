@@ -99,6 +99,7 @@
     [encoder encodeObject:_imageURL forKey:@"imageURL"];
     [encoder encodeObject:_activity forKey:@"activity"];
     [encoder encodeObject:_tagsArray forKey:@"tags"];
+    [encoder encodeObject:_dayOfWeekNumber forKey:@"dayOfWeekNumber"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -114,6 +115,7 @@
         _imageURL = [decoder decodeObjectForKey:@"imageURL"];
         _activity = [decoder decodeObjectForKey:@"activity"];
         _tagsArray = [decoder decodeObjectForKey:@"tags"];
+        _dayOfWeekNumber = [decoder decodeObjectForKey:@"dayOfWeekNumber"];
     }
     return self;
 }
@@ -150,9 +152,17 @@
     NSArray *tagListArray = [objectDictionary objectForKey:@"tag_list"];
     if(tagListArray) {
         self.tagsArray = [NSMutableArray arrayWithArray:tagListArray];
-        
     }
     
+    NSArray *daysArray = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
+    NSInteger dayIndex = -1;
+    for(NSString *dayName in daysArray) {
+        dayIndex++;
+        if([dayName rangeOfString:self.dayOfWeek].location != NSNotFound) {
+            break;
+        }
+    }
+    self.dayOfWeekNumber = [NSNumber numberWithInteger:dayIndex];
 }
 
 - (void)rateInBackground:(NSInteger)rating withBlock:(XASBooleanResultBlock)block {

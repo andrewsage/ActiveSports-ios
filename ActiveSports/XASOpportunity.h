@@ -22,6 +22,7 @@
 @property (nonatomic, copy) NSNumber *effortRating;
 @property (nonatomic, copy) NSString *imageURL;
 @property (nonatomic, copy) NSMutableArray *tagsArray;
+@property (nonatomic, copy) NSNumber *dayOfWeekNumber;
 
 @property (nonatomic, retain) NSNumber * distanceInMeters;
 

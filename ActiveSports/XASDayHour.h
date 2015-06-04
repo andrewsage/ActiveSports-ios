@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XASDayHour : NSObject
+@interface XASDayHour : NSObject <NSCopying>
 
-@property NSInteger dayOfWeek;
-@property NSInteger hour;
+@property (nonatomic, copy) NSNumber *dayOfWeek;
+@property (nonatomic, copy) NSNumber *hourOfDay;
+
+- (NSString*)asString;
 
 @end

@@ -21,8 +21,7 @@
     CLLocationManager *locationManager;
     CLLocation *mCurrentLocation;
     
-    NSMutableDictionary *_collectionNamesDictionary;
-    NSMutableDictionary *_collectionsDictionary;
+    NSMapTable *_collectionsMapTable;
     NSMutableDictionary *_preferencesDictionary;
 }
 
@@ -51,8 +50,7 @@
         _preferencesDictionary = [NSMutableDictionary dictionary];
     }
     
-    
-    _collectionsDictionary = [NSMutableDictionary dictionary];
+    _collectionsMapTable = [NSMapTable new];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.937 green:0.937 blue:0.937 alpha:1];
     
@@ -63,25 +61,6 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     [locationManager startUpdatingLocation];
-    
-    /*
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    
-    UIFont *boldFont = [UIFont fontWithName:@"Arial-BoldMT"
-                                       size:14];
-    
-    NSDictionary *boldTextAttributes = @{NSFontAttributeName : boldFont};
-    
-    
-    NSMutableAttributedString *attributedText =
-    [[NSMutableAttributedString alloc] initWithString:@"Pull down to refresh content"
-                                           attributes:boldTextAttributes];
-
-    
-    self.refreshControl.attributedTitle = attributedText;
-    
-    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-     */
     
     switch (self.viewType) {
         case XASOpportunitiesViewAll:
@@ -116,7 +95,7 @@
             break;
     }
     
-    [self rebuildContent];
+    //[self rebuildContent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -157,28 +136,35 @@
 
 - (void)buildTimeSortedCollection:(NSArray *)opportunities {
     
-    [_collectionsDictionary removeAllObjects];
+    if(_collectionsMapTable == nil) {
+        _collectionsMapTable = [NSMapTable new];
+    }
+    [_collectionsMapTable removeAllObjects];
     
     for(XASOpportunity *opportunity in opportunities) {
         
         NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
         NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
-        NSString *key = [NSString stringWithFormat:@"%@ %02ld:00",
-                         opportunity.dayOfWeek,
-                         startHour];
-        
+
         XASDayHour *dayHour = [[XASDayHour alloc] init];
-        dayHour.hour = startHour;
-        dayHour.dayOfWeek = 1;
-    
-        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:dayHour];
+        dayHour.hourOfDay = [NSNumber numberWithInteger:startHour];
+        dayHour.dayOfWeek = [NSNumber numberWithInteger:opportunity.dayOfWeekNumber.integerValue];
+        
+        // Find a XASDayHour key that matches the hour and day we have
+        for(XASDayHour *dayHourKey in [_collectionsMapTable keyEnumerator].allObjects) {
+            if([dayHour isEqual:dayHourKey]) {
+                dayHour = dayHourKey;
+                break;
+            }
+        }
+        
+        NSMutableArray *objectsArray = [_collectionsMapTable objectForKey:dayHour];
         
         if(objectsArray == nil) {
             objectsArray = [NSMutableArray array];
         }
         
         [objectsArray addObject:opportunity];
-        
         [objectsArray sortUsingComparator:^(XASOpportunity *opportunity1,
                                             XASOpportunity *opportunity2){
             
@@ -191,9 +177,8 @@
             
             return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
         }];
-        
-        [_collectionsDictionary setObject:objectsArray forKey:dayHour];
-    }
+        [_collectionsMapTable setObject:objectsArray forKey:dayHour];
+     }
 }
 
 - (void)updateTitle:(NSInteger)numberOfActivities {
@@ -266,12 +251,12 @@
 }
 
 - (NSArray*)sortedKeys {
-    NSMutableArray *keysArray = [NSMutableArray arrayWithArray:_collectionsDictionary.allKeys];
-    [keysArray sortUsingComparator:^NSComparisonResult(XASDayHour *obj1, XASDayHour *obj2) {
-        return obj1.hour < obj2.hour;
-    }];
     
-    return keysArray;
+    NSSortDescriptor *daySD = [NSSortDescriptor sortDescriptorWithKey:@"dayOfWeek" ascending:YES];
+    NSSortDescriptor *hourSD = [NSSortDescriptor sortDescriptorWithKey:@"hourOfDay" ascending:YES];
+    NSMutableArray *sortedArray = [NSMutableArray arrayWithArray:[[_collectionsMapTable keyEnumerator].allObjects sortedArrayUsingDescriptors:@[daySD, hourSD]]];
+    
+    return sortedArray;
 }
 
 #pragma mark - Actions
@@ -333,39 +318,40 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if(_collectionsDictionary.count == 0) {
+    if(_collectionsMapTable.count == 0) {
         return 1;
     }
 
-    return _collectionsDictionary.count;
+    return _collectionsMapTable.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    if(_collectionsDictionary.count == 0) {
+    if(_collectionsMapTable.count == 0) {
         return nil;
     }
     
-    
-    NSString *heading = [[self sortedKeys] objectAtIndex:section];
+    XASDayHour *dayHour = [[self sortedKeys] objectAtIndex:section];
+
+    NSString *heading = [NSString stringWithFormat:@"%@", [dayHour asString]];
     
     return heading;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    if(_collectionsDictionary.count == 0) {
+    if(_collectionsMapTable.count == 0) {
         return 1;
     }
     
-    NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:section]];
+    NSArray *objectsArray = [_collectionsMapTable objectForKey:[[self sortedKeys] objectAtIndex:section]];
     return objectsArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(_collectionsDictionary.count == 0) {
+    if(_collectionsMapTable.count == 0) {
         UITableViewCell *cell = [[UITableViewCell alloc] init];
         if(self.viewType == XASOpportunitiesViewSearch) {
             cell.textLabel.text = @"No activites match your search criteria. Please try again with other options.";
@@ -381,7 +367,7 @@
     
     XASOpportunityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"opportunity" forIndexPath:indexPath];
     
-    NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+    NSArray *objectsArray = [_collectionsMapTable objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
 
     XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
     cell.opportunity = opportunity;
@@ -408,13 +394,13 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+        NSMutableArray *objectsArray = [_collectionsMapTable objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
 
         XASOpportunity *opportunity = [objectsArray objectAtIndex:indexPath.row];
         [_preferencesDictionary removeObjectForKey:opportunity.remoteID];
         
         [objectsArray removeObjectAtIndex:indexPath.row];
-        [_collectionsDictionary setObject:objectsArray forKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+        [_collectionsMapTable setObject:objectsArray forKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
         
         if([NSKeyedArchiver archiveRootObject:_preferencesDictionary toFile:[self preferencesFilepath]]) {
         } else {
@@ -424,7 +410,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         if(objectsArray.count == 0) {
-            [_collectionsDictionary removeObjectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+            [_collectionsMapTable removeObjectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
             
         }
@@ -461,7 +447,7 @@
         
         NSIndexPath *currentSelection = [self.tableView indexPathForSelectedRow];
         
-        NSArray *objectsArray = [_collectionsDictionary objectForKey:[[self sortedKeys] objectAtIndex:currentSelection.section]];
+        NSArray *objectsArray = [_collectionsMapTable objectForKey:[[self sortedKeys] objectAtIndex:currentSelection.section]];
         
         XASOpportunity *opportunity = [objectsArray objectAtIndex:currentSelection.row];
         controller.opportunity = opportunity;
