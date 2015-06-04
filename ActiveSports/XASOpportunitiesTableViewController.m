@@ -14,6 +14,7 @@
 #import "XASOpportunityViewController.h"
 #import "UIColor+Expanded.h"
 #import "Constants.h"
+#import "XASDayHour.h"
 
 
 @interface XASOpportunitiesTableViewController () {
@@ -162,8 +163,15 @@
         
         NSArray *startTimeComponents = [opportunity.startTime componentsSeparatedByString:@":"];
         NSInteger startHour = [[startTimeComponents objectAtIndex:0] integerValue];
+        NSString *key = [NSString stringWithFormat:@"%@ %02ld:00",
+                         opportunity.dayOfWeek,
+                         startHour];
         
-        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:[NSNumber numberWithInteger:startHour]];
+        XASDayHour *dayHour = [[XASDayHour alloc] init];
+        dayHour.hour = startHour;
+        dayHour.dayOfWeek = 1;
+    
+        NSMutableArray *objectsArray = [_collectionsDictionary objectForKey:dayHour];
         
         if(objectsArray == nil) {
             objectsArray = [NSMutableArray array];
@@ -184,7 +192,7 @@
             return [opportunity1.startTime compare:opportunity2.startTime options:NSCaseInsensitiveSearch];
         }];
         
-        [_collectionsDictionary setObject:objectsArray forKey:[NSNumber numberWithInteger:startHour]];
+        [_collectionsDictionary setObject:objectsArray forKey:dayHour];
     }
 }
 
@@ -259,8 +267,8 @@
 
 - (NSArray*)sortedKeys {
     NSMutableArray *keysArray = [NSMutableArray arrayWithArray:_collectionsDictionary.allKeys];
-    [keysArray sortUsingComparator:^(NSNumber *number1, NSNumber *number2) {
-        return [number1 compare:number2];
+    [keysArray sortUsingComparator:^NSComparisonResult(XASDayHour *obj1, XASDayHour *obj2) {
+        return obj1.hour < obj2.hour;
     }];
     
     return keysArray;
@@ -338,9 +346,8 @@
         return nil;
     }
     
-    NSNumber *hour = [[self sortedKeys] objectAtIndex:section];
-
-    NSString *heading = [NSString stringWithFormat:@"%02ld:00", (long)hour.integerValue];
+    
+    NSString *heading = [[self sortedKeys] objectAtIndex:section];
     
     return heading;
 }

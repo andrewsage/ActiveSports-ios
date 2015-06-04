@@ -96,6 +96,8 @@
 		49D607FB1A1FA5D100D33961 /* XASSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D607F91A1FA5D100D33961 /* XASSearchViewController.m */; };
 		49D931811A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
 		49D931821A0CE90800B17587 /* XASRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D931801A0CE90800B17587 /* XASRateViewController.m */; };
+		49F8CC141B18BA83009AC395 /* XASDayHour.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8CC131B18BA83009AC395 /* XASDayHour.m */; };
+		49F8CC151B18BA83009AC395 /* XASDayHour.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8CC131B18BA83009AC395 /* XASDayHour.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +206,8 @@
 		49D607F91A1FA5D100D33961 /* XASSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASSearchViewController.m; sourceTree = "<group>"; };
 		49D9317F1A0CE90800B17587 /* XASRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASRateViewController.h; sourceTree = "<group>"; };
 		49D931801A0CE90800B17587 /* XASRateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASRateViewController.m; sourceTree = "<group>"; };
+		49F8CC121B18BA83009AC395 /* XASDayHour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XASDayHour.h; sourceTree = "<group>"; };
+		49F8CC131B18BA83009AC395 /* XASDayHour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XASDayHour.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +327,8 @@
 				49C99FAC1AB4FDB200A9C885 /* XASVenueTableViewController.h */,
 				49C99FAD1AB4FDB200A9C885 /* XASVenueTableViewController.m */,
 				49677CE01AC8829D002E0A4F /* Range Slider */,
+				49F8CC121B18BA83009AC395 /* XASDayHour.h */,
+				49F8CC131B18BA83009AC395 /* XASDayHour.m */,
 			);
 			path = ActiveSports;
 			sourceTree = "<group>";
@@ -549,6 +555,7 @@
 				492FFFB91A1A35B00067C4D9 /* XASProfileBuiderViewController.m in Sources */,
 				494682EC19E29C4800437B63 /* AppDelegate.m in Sources */,
 				494682E919E29C4800437B63 /* main.m in Sources */,
+				49F8CC141B18BA83009AC395 /* XASDayHour.m in Sources */,
 				494682F219E29C4800437B63 /* ViewController.m in Sources */,
 				494682EF19E29C4800437B63 /* ActiveSports.xcdatamodeld in Sources */,
 				497CA73819F2E557003F5F0A /* XASOpportunitiesTableViewController.m in Sources */,
@@ -596,6 +603,7 @@
 				496AF5181A233D7000F605F4 /* XASProgressView.m in Sources */,
 				49081A951A05500D00941AC1 /* XASOpportunityViewController.m in Sources */,
 				498B83B41AC215BE00345399 /* XASVenueOwner.m in Sources */,
+				49F8CC151B18BA83009AC395 /* XASDayHour.m in Sources */,
 				49236E421A4B3F4100936449 /* XASPreferenceTableViewCell.m in Sources */,
 				4957796A1A4B21890038569C /* XASMenuCollectionViewCell.m in Sources */,
 				495779621A4B1B800038569C /* XASHomeCollectionViewController.m in Sources */,
