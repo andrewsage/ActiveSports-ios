@@ -1381,7 +1381,7 @@
             <objects>
                 <collectionViewController id="sv3-Lo-8IC" customClass="XASHomeCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="rrw-Oc-m9z">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ey7-Tg-OhA">
                             <size key="itemSize" width="160" height="120"/>
@@ -1478,6 +1478,7 @@
                             <outlet property="delegate" destination="sv3-Lo-8IC" id="JmM-l1-D8g"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="9pB-d8-KxH"/>
                     <connections>
                         <segue destination="f6z-vd-frT" kind="show" identifier="today" id="voa-SY-4X7"/>
@@ -2452,7 +2453,7 @@ Designed by Jen Thomson</string>
         <image name="save-search-inactive" width="36" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bJG-WJ-FRu"/>
+        <segue reference="2rC-7t-6XZ"/>
         <segue reference="4Po-Sh-Com"/>
     </inferredMetricsTieBreakers>
 </document>

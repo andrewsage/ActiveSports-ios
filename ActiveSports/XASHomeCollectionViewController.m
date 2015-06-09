@@ -17,6 +17,7 @@
 @interface XASHomeCollectionViewController () {
     MBProgressHUD *HUD;
     BOOL mCheckedForUpdated;
+    BOOL mCheckedForPreferences;
     BOOL mHasData;
 }
 
@@ -34,34 +35,37 @@ static NSString * const reuseIdentifier = @"menuoption";
         preferencesDictionary = [NSMutableDictionary dictionary];
     }
     
-    if(preferencesDictionary.count == 0) {
-        if([XASActivity dictionary].count > 0) {
-            UIAlertController *alertController = [UIAlertController
-                                                  alertControllerWithTitle:@"Your activity preferences"
-                                                  message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
-                                                  preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *okAction = [UIAlertAction
-                                       actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction *action) {
-                                           
-                                           XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
-                                           [self presentViewController:profileBuilderViewController
-                                                              animated:YES
-                                                            completion:^{
-                                                                
-                                                            }];
-                                       }];
-            
-            [alertController addAction:okAction];
-            
-            [self presentViewController:alertController
-                               animated:YES
-                             completion:^{
-                                 
-                             }];
-            
+    if(mCheckedForPreferences == NO) {
+        if(preferencesDictionary.count == 0) {
+            if([XASActivity dictionary].count > 0) {
+                mCheckedForPreferences = YES;
+                UIAlertController *alertController = [UIAlertController
+                                                      alertControllerWithTitle:@"Your activity preferences"
+                                                      message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
+                                                      preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *okAction = [UIAlertAction
+                                           actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                           style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction *action) {
+                                               
+                                               XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
+                                               [self presentViewController:profileBuilderViewController
+                                                                  animated:YES
+                                                                completion:^{
+                                                                    
+                                                                }];
+                                           }];
+                
+                [alertController addAction:okAction];
+                
+                [self presentViewController:alertController
+                                   animated:YES
+                                 completion:^{
+                                     
+                                 }];
+                
+            }
         }
     }
 }
@@ -72,6 +76,7 @@ static NSString * const reuseIdentifier = @"menuoption";
     self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home-bg"]];
     
     mCheckedForUpdated = NO;
+    mCheckedForPreferences = NO;
     mHasData = NO;
 }
 
@@ -133,6 +138,7 @@ static NSString * const reuseIdentifier = @"menuoption";
                              }];
         } else {
             mHasData = YES;
+            [self.collectionView reloadData];
             [self checkForPreferences];
         }
     }
@@ -199,6 +205,9 @@ static NSString * const reuseIdentifier = @"menuoption";
     if(mHasData == NO && indexPath.row < 6) {
         cell.iconImageView.alpha = 0.5;
         cell.titleLabel.alpha = 0.5;
+    } else {
+        cell.iconImageView.alpha = 1.0;
+        cell.titleLabel.alpha = 1.0;
     }
     
     if(indexPath.row % 2 == 0) {
