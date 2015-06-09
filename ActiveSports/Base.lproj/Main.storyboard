@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hHh-Xp-yfb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hHh-Xp-yfb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1925,7 +1925,7 @@ Designed by Jen Thomson</string>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Swimming?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AF5-V3-dpr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Activity name?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AF5-V3-dpr">
                                         <rect key="frame" x="20" y="75" width="248" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="a7e-dh-64Y"/>
@@ -2058,9 +2058,11 @@ Designed by Jen Thomson</string>
                     <connections>
                         <outlet property="activityLabel" destination="AF5-V3-dpr" id="mdQ-PO-EuK"/>
                         <outlet property="detailsBackgroundView" destination="HYh-Jp-VIP" id="5Dj-qq-klH"/>
+                        <outlet property="noButton" destination="NaI-U1-VaT" id="yFQ-KZ-TN1"/>
                         <outlet property="progressLabel" destination="UUt-Dp-Jod" id="B3f-ma-GfO"/>
                         <outlet property="progressView" destination="Vua-VN-YrR" id="zDu-Qj-vM0"/>
                         <outlet property="skipButton" destination="qlr-DD-jIE" id="ccf-d7-3og"/>
+                        <outlet property="yesButton" destination="LEC-tj-ppE" id="4Si-Zu-hec"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKj-rR-j3g" userLabel="First Responder" sceneMemberID="firstResponder"/>

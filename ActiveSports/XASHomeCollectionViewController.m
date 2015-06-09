@@ -16,6 +16,8 @@
 
 @interface XASHomeCollectionViewController () {
     MBProgressHUD *HUD;
+    BOOL mCheckedForUpdated;
+    BOOL mHasData;
 }
 
 @end
@@ -33,32 +35,34 @@ static NSString * const reuseIdentifier = @"menuoption";
     }
     
     if(preferencesDictionary.count == 0) {
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Your activity preferences"
-                                              message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
-                                              preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       
-                                       XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
-                                       [self presentViewController:profileBuilderViewController
-                                                          animated:YES
-                                                        completion:^{
-                                                            
-                                                        }];
-                                   }];
-        
-        [alertController addAction:okAction];
-        
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:^{
-                             
-                         }];
-        
+        if([XASActivity dictionary].count > 0) {
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Your activity preferences"
+                                                  message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action) {
+                                           
+                                           XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
+                                           [self presentViewController:profileBuilderViewController
+                                                              animated:YES
+                                                            completion:^{
+                                                                
+                                                            }];
+                                       }];
+            
+            [alertController addAction:okAction];
+            
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+            
+        }
     }
 }
 
@@ -67,32 +71,8 @@ static NSString * const reuseIdentifier = @"menuoption";
     
     self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home-bg"]];
     
-    // Display a welcome message and get the data if we don't have any
-    NSDictionary *dictionary = [XASOpportunity dictionary];
-    if(dictionary.count == 0) {
-        
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Welcome"
-                                              message:@"Thank you for using the Active Aberdeen app. Before we begin we will need to download activity information from our server."
-                                              preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       [self updateData];
-                                   }];
-        
-        [alertController addAction:okAction];
-        
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:^{
-                             
-                         }];
-    } else {
-        [self checkForPreferences];
-    }
+    mCheckedForUpdated = NO;
+    mHasData = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,6 +90,52 @@ static NSString * const reuseIdentifier = @"menuoption";
 
     
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    // Display a welcome message and get the data if we don't have any
+    if(mCheckedForUpdated == NO) {
+        NSDictionary *dictionary = [XASOpportunity dictionary];
+        if(dictionary.count == 0) {
+            
+            mCheckedForUpdated = YES;
+            
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Welcome"
+                                                  message:@"Thank you for using the Active Aberdeen app. Before we begin we will need to download activity information from our server."
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action) {
+                                           [self updateData];
+                                       }];
+            
+            
+            UIAlertAction *cancelAction = [UIAlertAction
+                                           actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                           style:UIAlertActionStyleCancel
+                                           handler:^(UIAlertAction *action) {
+                                               [self checkForPreferences];
+                                           }];
+            
+            [alertController addAction:okAction];
+            [alertController addAction:cancelAction];
+            
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+        } else {
+            mHasData = YES;
+            [self checkForPreferences];
+        }
+    }
 }
 
 #pragma mark - Navigation
@@ -158,7 +184,7 @@ static NSString * const reuseIdentifier = @"menuoption";
                                 @"home-fave-activities",
                                 @"home-activity-prefs",
                                 @"home-venues",
-                                @"home-about",
+                                @"home-update",
                                 @"home-about"];
     
     XASMenuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -169,6 +195,11 @@ static NSString * const reuseIdentifier = @"menuoption";
     cell.bottomBorderLayer.frame = CGRectMake(0.0f, cell.frame.size.height - 1.0f, cell.frame.size.width, 1.0f);
     cell.bottomBorderLayer.backgroundColor = [UIColor colorWithWhite:0.5f
                                                      alpha:0.5f].CGColor;
+    
+    if(mHasData == NO && indexPath.row < 6) {
+        cell.iconImageView.alpha = 0.5;
+        cell.titleLabel.alpha = 0.5;
+    }
     
     if(indexPath.row % 2 == 0) {
         cell.rightBorderLayer.frame = CGRectMake(cell.frame.size.width - 1.0f, 0.0f, 1.0f, cell.frame.size.height);
@@ -247,6 +278,8 @@ static NSString * const reuseIdentifier = @"menuoption";
 
         } else {
             NSLog(@"Data updated");
+            mHasData = YES;
+            [self.collectionView reloadData];
             [self checkForPreferences];
         }
     }];
@@ -256,27 +289,47 @@ static NSString * const reuseIdentifier = @"menuoption";
     
     switch (indexPath.row) {
         case 0:
-            [self performSegueWithIdentifier:@"today" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"today" sender:self];
+            }
             break;
             
         case 1:
-            [self performSegueWithIdentifier:@"search" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"search" sender:self];
+            }
             break;
             
         case 2:
-            [self performSegueWithIdentifier:@"savedsearches" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"savedsearches" sender:self];
+            }
             break;
             
         case 3:
-            [self performSegueWithIdentifier:@"favourites" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"favourites" sender:self];
+            }
             break;
             
         case 4:
-            [self performSegueWithIdentifier:@"preferences" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"preferences" sender:self];
+            }
             break;
             
         case 5:
-            [self performSegueWithIdentifier:@"venues" sender:self];
+            if(mHasData) {
+                [self performSegueWithIdentifier:@"venues" sender:self];
+            }
+            break;
+            
+        case 6: {
+            NSLog(@"Update data requested");
+            
+            [self updateData];
+
+        }
             break;
             
         case 7:
@@ -285,13 +338,6 @@ static NSString * const reuseIdentifier = @"menuoption";
             
         default:
             break;
-    }
-    
-    if(indexPath.row == 6) {
-        
-        NSLog(@"Update data requested");
-        
-        [self updateData];
     }
 }
 

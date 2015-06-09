@@ -387,32 +387,34 @@
     }
     
     if(preferencesDictionary.count == 0) {
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Your activity preferences"
-                                              message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
-                                              preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       
-                                       XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
-                                       [self presentViewController:profileBuilderViewController
-                                                          animated:YES
-                                                        completion:^{
-                                                            
-                                                        }];
-                                   }];
-        
-        [alertController addAction:okAction];
-        
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:^{
-                             
-                         }];
-        
+            if([XASActivity dictionary].count > 0) {
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Your activity preferences"
+                                                  message:@"In order to help us recommend activities that are more relevant to you we would like to ask you some questions."
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Continue", @"OK action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action) {
+                                           
+                                           XASProfileBuiderViewController *profileBuilderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileBuilderViewController"];
+                                           [self presentViewController:profileBuilderViewController
+                                                              animated:YES
+                                                            completion:^{
+                                                                
+                                                            }];
+                                       }];
+            
+            [alertController addAction:okAction];
+            
+            [self presentViewController:alertController
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+            
+        }
     }
 }
 

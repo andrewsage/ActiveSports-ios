@@ -210,10 +210,10 @@
                                
                                if(error) {
                                    NSLog(@"Connection failed: %@", error.localizedDescription);
-                                   NSLog(@"We sent to: %@", response.URL);
+                                   NSLog(@"We sent to: %@", request.URL);
                                    block(nil, error);
                                } else {
-                                   NSLog(@"We sent to: %@", response.URL);
+                                   NSLog(@"We sent to: %@", request.URL);
                                    
                                    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
                                    NSInteger responseStatusCode = [httpResponse statusCode];

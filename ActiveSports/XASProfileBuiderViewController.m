@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet XASProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
 @property (weak, nonatomic) IBOutlet UIView *detailsBackgroundView;
+@property (weak, nonatomic) IBOutlet UIButton *yesButton;
+@property (weak, nonatomic) IBOutlet UIButton *noButton;
 
 @end
 
@@ -50,19 +52,7 @@
     _currentActivityIndex = 0;
     _activitiesArray = [NSMutableArray arrayWithCapacity:0];
     
-    if([XASActivity dictionary].allKeys.count == 0) {
-    
-        [XASActivity fetchAllInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
-            if(error) {
-                NSLog(@"error: %@", error.localizedDescription);
-            } else {
-                [self buildArray];
-            }
-        }];
-    } else {
-        [self buildArray];
-    }
+    [self buildArray];
 }
 
 
@@ -106,6 +96,12 @@
                 self.progressView.percentage = progress;
             }
         }
+    } else {
+        self.yesButton.hidden = YES;
+        self.noButton.hidden = YES;
+        self.activityLabel.text = @"No activity data has been downloaded";
+        self.progressLabel.text = @"0% complete";
+        self.progressView.percentage = 0.0;
     }
 }
 
