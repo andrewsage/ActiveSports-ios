@@ -270,7 +270,7 @@
                                                                           attribute:NSLayoutAttributeLeading
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:sectionHeaderView
-                                                                          attribute:NSLayoutAttributeLeft
+                                                                          attribute:NSLayoutAttributeTrailing
                                                                          multiplier:1.0
                                                                            constant:10.0]];
             
